@@ -731,6 +731,31 @@
           },
           "xpReward": 15,
           "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson5_level6",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 6,
+          "type": "code",
+          "questions": [
+            {
+              "id": "cpp_q24",
+              "content": "写出 if 语句的条件体：如果 score 大于等于 60，输出 \"pass\"：",
+              "codeSnippet": ["int score = 75;", "if (score >= 60) {"],
+              "options": [],
+              "acceptedAnswers": ["std::cout << \"pass\";", "cout << \"pass\";", "std::cout<<\"pass\";", "cout<<\"pass\";"],
+              "difficulty": "medium",
+              "explanation": "在 if 语句的花括号内写输出语句。std::cout << \"pass\"; 使用流操作符 << 将字符串输出到标准输出。",
+              "relatedConcepts": ["if_statement", "cout", "output"],
+              "estimatedSeconds": 35
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
         }
       ]
     }

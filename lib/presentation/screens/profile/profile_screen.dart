@@ -166,6 +166,14 @@ class ProfileScreen extends StatelessWidget {
                     subtitle: AppLocalizations.of(context)!.profileAIModelSubtitle,
                     onTap: () => context.push('/model-settings'),
                   ),
+                  const SizedBox(height: 12),
+                  _buildSettingsItem(
+                    context,
+                    icon: Icons.settings_outlined,
+                    title: AppLocalizations.of(context)!.profileSettings,
+                    subtitle: AppLocalizations.of(context)!.profileSettingsSubtitle,
+                    onTap: () => context.push('/settings'),
+                  ),
                 ],
               ),
             );

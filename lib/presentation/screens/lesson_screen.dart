@@ -13,6 +13,7 @@ import '../../domain/entities/question.dart';
 import '../../domain/entities/user.dart';
 import '../../data/services/achievement_service.dart';
 import '../../data/services/daily_task_service.dart';
+import '../../data/services/notification_service.dart';
 import '../../domain/repositories/i_learning_repository.dart';
 import '../blocs/game/game_bloc.dart';
 import '../blocs/game/game_event.dart';
@@ -54,6 +55,8 @@ class _LessonScreenState extends State<LessonScreen>
   bool _isLoading = true;
   String? _fillBlankAnswer;
   final _fillBlankController = TextEditingController();
+  String? _codeAnswer;
+  final _codeAnswerController = TextEditingController();
   List<Option> _sortOrder = [];
 
   // Animation state
@@ -70,6 +73,7 @@ class _LessonScreenState extends State<LessonScreen>
   @override
   void dispose() {
     _fillBlankController.dispose();
+    _codeAnswerController.dispose();
     super.dispose();
   }
 
@@ -172,6 +176,8 @@ class _LessonScreenState extends State<LessonScreen>
                       _buildFillBlankInput(),
                     if (question.type == LevelType.sort)
                       _buildSortInput(),
+                    if (question.type == LevelType.code)
+                      _buildCodeEditor(),
                     if (!_showResult) ...[
                       const SizedBox(height: 16),
                       _buildAIHelpButton(),
@@ -225,6 +231,171 @@ class _LessonScreenState extends State<LessonScreen>
           });
         },
       ),
+    );
+  }
+
+  Widget _buildCodeEditor() {
+    final question = _questions[_currentQuestionIndex];
+    final snippet = question.codeSnippet ?? [];
+    final showCorrectAnswer = _showResult && !_isCorrect;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Read-only code snippet context above the editor
+        if (snippet.isNotEmpty)
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E2E),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = 0; i < snippet.length; i++)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 32,
+                        child: Text(
+                          '${i + 1}',
+                          style: const TextStyle(
+                            fontFamily: 'JetBrains Mono',
+                            fontSize: 14,
+                            color: Color(0xFF6C7086),
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          snippet[i],
+                          style: const TextStyle(
+                            fontFamily: 'JetBrains Mono',
+                            fontSize: 14,
+                            color: Color(0xFFCDD6F4),
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        if (snippet.isNotEmpty) const SizedBox(height: 12),
+        // Editable code editor area
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: const Color(0xFF1E1E2E),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: _showResult
+                  ? (_isCorrect ? AppColors.success : AppColors.error)
+                  : (_codeAnswer != null
+                      ? AppColors.primary
+                      : const Color(0xFF313244)),
+              width: 2,
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Line numbers column
+              Container(
+                padding: const EdgeInsets.only(
+                    top: 16, bottom: 16, left: 12, right: 4),
+                child: Column(
+                  children: List.generate(
+                    (_codeAnswerController.text.split('\n').length)
+                        .clamp(5, 12),
+                    (i) => Text(
+                      '${snippet.length + i + 1}',
+                      style: const TextStyle(
+                        fontFamily: 'JetBrains Mono',
+                        fontSize: 14,
+                        color: Color(0xFF6C7086),
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Text editor
+              Expanded(
+                child: TextField(
+                  controller: _codeAnswerController,
+                  enabled: !_showResult,
+                  maxLines: 12,
+                  minLines: 5,
+                  decoration: const InputDecoration(
+                    hintText: '// 在这里写代码...',
+                    hintStyle: TextStyle(
+                      color: Color(0xFF6C7086),
+                      fontFamily: 'JetBrains Mono',
+                    ),
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  ),
+                  style: const TextStyle(
+                    fontFamily: 'JetBrains Mono',
+                    fontSize: 14,
+                    color: Color(0xFFCDD6F4),
+                    height: 1.5,
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _codeAnswer =
+                          value.trim().isEmpty ? null : value.trim();
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Show correct answer after wrong answer
+        if (showCorrectAnswer) ...[
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E2E),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.success, width: 1),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '正确答案：',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.success,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  question.acceptedAnswers.first,
+                  style: const TextStyle(
+                    fontFamily: 'JetBrains Mono',
+                    fontSize: 14,
+                    color: Color(0xFFA6E3A1),
+                    height: 1.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ],
     );
   }
 
@@ -630,7 +801,8 @@ class _LessonScreenState extends State<LessonScreen>
                     ),
                   ),
                 if (!_isCorrect &&
-                    _questions[_currentQuestionIndex].type == LevelType.fillBlank)
+                    (_questions[_currentQuestionIndex].type == LevelType.fillBlank ||
+                     _questions[_currentQuestionIndex].type == LevelType.code))
                   Text(
                     AppLocalizations.of(context)!.lessonCorrectAnswer(_questions[_currentQuestionIndex].acceptedAnswers.first),
                     style: const TextStyle(
@@ -697,6 +869,8 @@ class _LessonScreenState extends State<LessonScreen>
     final bool hasAnswer;
     if (question.type == LevelType.fillBlank) {
       hasAnswer = _fillBlankAnswer != null;
+    } else if (question.type == LevelType.code) {
+      hasAnswer = _codeAnswer != null;
     } else if (question.type == LevelType.sort) {
       hasAnswer = _sortOrder.isNotEmpty;
     } else {
@@ -753,6 +927,11 @@ class _LessonScreenState extends State<LessonScreen>
     if (question.type == LevelType.fillBlank) {
       correct = question.acceptedAnswers.any(
         (a) => a.trim().toLowerCase() == (_fillBlankAnswer ?? '').trim().toLowerCase(),
+      );
+    } else if (question.type == LevelType.code) {
+      final userCode = (_codeAnswer ?? '').trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase();
+      correct = question.acceptedAnswers.any(
+        (a) => a.trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase() == userCode,
       );
     } else if (question.type == LevelType.sort) {
       final userOrder = _sortOrder.map((o) => o.letter).join();
@@ -881,6 +1060,8 @@ class _LessonScreenState extends State<LessonScreen>
         _selectedAnswer = null;
         _fillBlankAnswer = null;
         _fillBlankController.clear();
+        _codeAnswer = null;
+        _codeAnswerController.clear();
         _showResult = false;
         _animateResult = false;
         _showXpPopup = false;
@@ -937,6 +1118,9 @@ class _LessonScreenState extends State<LessonScreen>
 
       // Check and unlock achievements
       _checkAchievements();
+
+      // Schedule streak warning notification (30h after now, 6h before grace period expires)
+      NotificationService().scheduleStreakWarning(DateTime.now());
     }
 
     // Check if level-up happened, show celebration first if so

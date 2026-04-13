@@ -10,6 +10,8 @@ import 'data/services/progress_service.dart';
 import 'data/services/daily_task_service.dart';
 import 'data/services/achievement_service.dart';
 import 'data/services/model_download_service.dart';
+import 'data/services/notification_service.dart';
+import 'data/services/stats_service.dart';
 import 'data/repositories/game_repository_impl.dart';
 import 'data/repositories/learning_repository_impl.dart';
 import 'data/repositories/ai_repository_impl.dart';
@@ -23,6 +25,11 @@ import 'presentation/blocs/model/model_event.dart';
 import 'presentation/blocs/ai_tutor/ai_tutor_bloc.dart';
 
 final getIt = GetIt.instance;
+
+/// Global ValueNotifier that drives locale changes across the app.
+/// Read from StorageService on startup; written when the user switches
+/// language in the Settings screen.
+final ValueNotifier<Locale?> localeNotifier = ValueNotifier<Locale?>(null);
 
 Future<void> setupDependencies() async {
   // Storage
@@ -69,6 +76,18 @@ Future<void> setupDependencies() async {
     ),
   );
 
+  // Notification Service
+  getIt.registerSingleton<NotificationService>(NotificationService());
+
+  // Stats Service
+  getIt.registerLazySingleton<StatsService>(
+    () => StatsService(
+      learningRepo: getIt<ILearningRepository>(),
+      gameRepo: getIt<IGameRepository>(),
+      storage: getIt<StorageService>(),
+    ),
+  );
+
   // BLoCs
   getIt.registerFactory<GameBloc>(
     () => GameBloc(gameRepo: getIt<IGameRepository>())..add(LoadUserProgress()),
@@ -84,8 +103,34 @@ Future<void> setupDependencies() async {
   );
 }
 
-class JellyBuddyApp extends StatelessWidget {
+class JellyBuddyApp extends StatefulWidget {
   const JellyBuddyApp({super.key});
+
+  @override
+  State<JellyBuddyApp> createState() => _JellyBuddyAppState();
+}
+
+class _JellyBuddyAppState extends State<JellyBuddyApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Seed the notifier from persisted preference.
+    final stored = getIt<StorageService>().getString('app_locale');
+    if (stored != null) {
+      localeNotifier.value = Locale(stored);
+    }
+    localeNotifier.addListener(_onLocaleChanged);
+  }
+
+  @override
+  void dispose() {
+    localeNotifier.removeListener(_onLocaleChanged);
+    super.dispose();
+  }
+
+  void _onLocaleChanged() {
+    setState(() {}); // rebuild MaterialApp with new locale
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +145,7 @@ class JellyBuddyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        locale: localeNotifier.value,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.primary,

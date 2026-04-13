@@ -778,18 +778,18 @@
           "id": "python_l1_boss_level2",
           "lessonId": "python_l1_boss",
           "order": 2,
-          "type": "fillBlank",
+          "type": "code",
           "questions": [
             {
-              "id": "boss_q2",
-              "content": "\u8bf7\u5199\u51fa\u4ee3\u7801\uff1a\u521b\u5efa\u4e00\u4e2a\u5305\u542b 1 \u5230 5 \u7684\u5217\u8868\uff0c\u5e76\u83b7\u53d6\u5176\u957f\u5ea6\uff1a",
-              "codeSnippet": ["nums = [1, 2, 3, 4, 5]", "print(len(nums))"],
+              "id": "boss_code1",
+              "content": "\u5199\u4e00\u4e2a\u51fd\u6570\uff0c\u63a5\u53d7\u4e24\u4e2a\u53c2\u6570\u5e76\u8fd4\u56de\u5b83\u4eec\u7684\u548c\uff1a",
+              "codeSnippet": ["def add(a, b):", "    # \u5728\u8fd9\u91cc\u5199\u8fd4\u56de\u8bed\u53e5"],
               "options": [],
-              "acceptedAnswers": ["len([1, 2, 3, 4, 5])", "len(nums)"],
+              "acceptedAnswers": ["return a + b", "return a+b", "return (a + b)", "return (a+b)"],
               "difficulty": "medium",
-              "explanation": "len() \u51fd\u6570\u8fd4\u56de\u5217\u8868\u7684\u5143\u7d20\u4e2a\u6570\uff0c[1, 2, 3, 4, 5] \u5305\u542b 5 \u4e2a\u5143\u7d20\u3002",
-              "relatedConcepts": ["list_creation", "len_function"],
-              "estimatedSeconds": 30
+              "explanation": "\u5728\u51fd\u6570\u4f53\u5185\u4f7f\u7528 return \u8bed\u53e5\u8fd4\u56de\u8ba1\u7b97\u7ed3\u679c\u3002return a + b \u4f1a\u5c06 a \u548c b \u76f8\u52a0\u540e\u8fd4\u56de\u7ed9\u8c03\u7528\u8005\u3002",
+              "relatedConcepts": ["function_definition", "return_statement"],
+              "estimatedSeconds": 40
             }
           ],
           "passCondition": {
@@ -893,18 +893,18 @@
           "id": "python_l1_boss_level6",
           "lessonId": "python_l1_boss",
           "order": 6,
-          "type": "fillBlank",
+          "type": "code",
           "questions": [
             {
-              "id": "boss_q6",
-              "content": "\u8bf7\u5199\u51fa\u8ba1\u7b97 2 \u7684 10 \u6b21\u65b9\u7684 Python \u8868\u8fbe\u5f0f\uff1a",
-              "codeSnippet": ["result = 2 ** 10", "print(result)  # 1024"],
+              "id": "boss_code2",
+              "content": "\u5199\u4e00\u4e2a\u5224\u65ad\u5947\u5076\u6570\u7684\u8868\u8fbe\u5f0f\uff0c\u5982\u679c n \u662f\u5076\u6570\u8fd4\u56de True\uff1a",
+              "codeSnippet": ["def is_even(n):", "    # \u5728\u8fd9\u91cc\u5199\u8fd4\u56de\u8bed\u53e5"],
               "options": [],
-              "acceptedAnswers": ["2 ** 10", "2**10", "2 **10", "2** 10"],
+              "acceptedAnswers": ["return n % 2 == 0", "return n%2==0", "return n % 2==0", "return n%2 == 0", "return (n % 2 == 0)", "return (n%2==0)"],
               "difficulty": "medium",
-              "explanation": "** \u662f Python \u7684\u5e42\u8fd0\u7b97\u7b26\uff0c2 ** 10 \u8868\u793a 2 \u7684 10 \u6b21\u65b9\uff0c\u7ed3\u679c\u4e3a 1024\u3002",
-              "relatedConcepts": ["exponentiation", "power"],
-              "estimatedSeconds": 25
+              "explanation": "% \u662f\u53d6\u4f59\u8fd0\u7b97\u7b26\uff0cn % 2 == 0 \u5224\u65ad n \u9664\u4ee5 2 \u7684\u4f59\u6570\u662f\u5426\u4e3a 0\uff0c\u5982\u679c\u662f\u5219\u8bf4\u660e\u662f\u5076\u6570\u3002",
+              "relatedConcepts": ["modulo_operator", "boolean_expression"],
+              "estimatedSeconds": 40
             }
           ],
           "passCondition": {

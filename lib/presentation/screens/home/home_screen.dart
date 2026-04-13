@@ -195,6 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         _buildDailyTasksSection(),
                         const SizedBox(height: 24),
 
+                        // Stats button
+                        _buildStatsButton(),
+                        const SizedBox(height: 24),
+
                         // Review button
                         _buildReviewButton(),
                         const SizedBox(height: 24),
@@ -241,6 +245,69 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatsButton() {
+    return GestureDetector(
+      onTap: () => context.push('/stats'),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 20,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Center(
+                child: Text('\u{1F4CA}', style: TextStyle(fontSize: 22)),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '\u{1F4CA} ${AppLocalizations.of(context)!.homeStatsTitle}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    AppLocalizations.of(context)!.homeStatsSubtitle,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right,
+              color: AppColors.textHint,
+            ),
+          ],
         ),
       ),
     );

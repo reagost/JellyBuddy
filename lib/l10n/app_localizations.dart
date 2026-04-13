@@ -697,6 +697,222 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'本地 AI 模型，保护隐私，离线学习'**
   String get onboardingSubtitle3;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'设置'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsGeneral.
+  ///
+  /// In zh, this message translates to:
+  /// **'通用'**
+  String get settingsGeneral;
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In zh, this message translates to:
+  /// **'语言'**
+  String get settingsLanguage;
+
+  /// No description provided for @settingsLanguageSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'切换应用显示语言'**
+  String get settingsLanguageSubtitle;
+
+  /// No description provided for @settingsDarkMode.
+  ///
+  /// In zh, this message translates to:
+  /// **'深色模式'**
+  String get settingsDarkMode;
+
+  /// No description provided for @settingsDarkModeSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'切换深色/浅色主题'**
+  String get settingsDarkModeSubtitle;
+
+  /// No description provided for @settingsLearning.
+  ///
+  /// In zh, this message translates to:
+  /// **'学习'**
+  String get settingsLearning;
+
+  /// No description provided for @settingsResetProgress.
+  ///
+  /// In zh, this message translates to:
+  /// **'重置学习进度'**
+  String get settingsResetProgress;
+
+  /// No description provided for @settingsResetProgressSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'清除所有课程进度和成绩'**
+  String get settingsResetProgressSubtitle;
+
+  /// No description provided for @settingsResetProgressConfirm.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要重置所有学习进度吗？此操作不可撤销。'**
+  String get settingsResetProgressConfirm;
+
+  /// No description provided for @settingsResetProgressDone.
+  ///
+  /// In zh, this message translates to:
+  /// **'学习进度已重置'**
+  String get settingsResetProgressDone;
+
+  /// No description provided for @settingsExportProgress.
+  ///
+  /// In zh, this message translates to:
+  /// **'导出学习进度'**
+  String get settingsExportProgress;
+
+  /// No description provided for @settingsExportProgressSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'导出你的学习数据'**
+  String get settingsExportProgressSubtitle;
+
+  /// No description provided for @settingsComingSoon.
+  ///
+  /// In zh, this message translates to:
+  /// **'即将推出'**
+  String get settingsComingSoon;
+
+  /// No description provided for @settingsAbout.
+  ///
+  /// In zh, this message translates to:
+  /// **'关于'**
+  String get settingsAbout;
+
+  /// No description provided for @settingsVersion.
+  ///
+  /// In zh, this message translates to:
+  /// **'应用版本'**
+  String get settingsVersion;
+
+  /// No description provided for @settingsSlogan.
+  ///
+  /// In zh, this message translates to:
+  /// **'AI 驱动游戏化学习'**
+  String get settingsSlogan;
+
+  /// No description provided for @settingsLicenses.
+  ///
+  /// In zh, this message translates to:
+  /// **'开源许可证'**
+  String get settingsLicenses;
+
+  /// No description provided for @settingsLicensesSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看第三方库许可证'**
+  String get settingsLicensesSubtitle;
+
+  /// No description provided for @settingsGithub.
+  ///
+  /// In zh, this message translates to:
+  /// **'GitHub'**
+  String get settingsGithub;
+
+  /// No description provided for @settingsGithubUrl.
+  ///
+  /// In zh, this message translates to:
+  /// **'https://github.com/user/JellyBuddy'**
+  String get settingsGithubUrl;
+
+  /// No description provided for @settingsDangerZone.
+  ///
+  /// In zh, this message translates to:
+  /// **'危险操作'**
+  String get settingsDangerZone;
+
+  /// No description provided for @settingsClearAllData.
+  ///
+  /// In zh, this message translates to:
+  /// **'清除所有数据'**
+  String get settingsClearAllData;
+
+  /// No description provided for @settingsClearAllDataSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'恢复出厂设置，删除所有数据'**
+  String get settingsClearAllDataSubtitle;
+
+  /// No description provided for @settingsClearAllDataConfirm.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要清除所有数据吗？这将删除所有学习进度、设置和缓存。此操作不可撤销。'**
+  String get settingsClearAllDataConfirm;
+
+  /// No description provided for @settingsClearAllDataDone.
+  ///
+  /// In zh, this message translates to:
+  /// **'所有数据已清除'**
+  String get settingsClearAllDataDone;
+
+  /// No description provided for @settingsCancel.
+  ///
+  /// In zh, this message translates to:
+  /// **'取消'**
+  String get settingsCancel;
+
+  /// No description provided for @settingsConfirm.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定'**
+  String get settingsConfirm;
+
+  /// No description provided for @settingsReset.
+  ///
+  /// In zh, this message translates to:
+  /// **'重置'**
+  String get settingsReset;
+
+  /// No description provided for @settingsClearAll.
+  ///
+  /// In zh, this message translates to:
+  /// **'清除全部'**
+  String get settingsClearAll;
+
+  /// No description provided for @settingsLanguageZh.
+  ///
+  /// In zh, this message translates to:
+  /// **'中文'**
+  String get settingsLanguageZh;
+
+  /// No description provided for @settingsLanguageEn.
+  ///
+  /// In zh, this message translates to:
+  /// **'English'**
+  String get settingsLanguageEn;
+
+  /// No description provided for @profileSettings.
+  ///
+  /// In zh, this message translates to:
+  /// **'设置'**
+  String get profileSettings;
+
+  /// No description provided for @profileSettingsSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'语言、数据管理等'**
+  String get profileSettingsSubtitle;
+
+  /// No description provided for @homeStatsTitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'学习统计'**
+  String get homeStatsTitle;
+
+  /// No description provided for @homeStatsSubtitle.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看你的学习进度和成绩'**
+  String get homeStatsSubtitle;
 }
 
 class _AppLocalizationsDelegate

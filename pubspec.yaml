@@ -44,6 +44,9 @@ dependencies:
   # Icons
   cupertino_icons: ^1.0.6
 
+  # Local Notifications
+  flutter_local_notifications: ^18.0.0
+
   # Local LLM inference
   jelly_llm:
     path: packages/jelly_llm

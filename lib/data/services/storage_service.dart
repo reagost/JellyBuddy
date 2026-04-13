@@ -17,4 +17,8 @@ class StorageService {
   Future<void> remove(String key) async {
     await _settingsBox.delete(key);
   }
+
+  Future<void> clearAll() async {
+    await _settingsBox.clear();
+  }
 }

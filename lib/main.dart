@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'app.dart';
+import 'data/services/notification_service.dart';
 import 'presentation/widgets/common/error_widget.dart';
 
 void main() async {
@@ -25,5 +26,11 @@ void main() async {
   ErrorWidget.builder = AppErrorWidget.builder();
 
   await setupDependencies();
+
+  // Initialize local notifications and schedule daily reminder
+  final notificationService = NotificationService();
+  await notificationService.init();
+  await notificationService.scheduleDailyReminder();
+
   runApp(const JellyBuddyApp());
 }

@@ -333,4 +333,113 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get onboardingSubtitle3 => '本地 AI 模型，保护隐私，离线学习';
+
+  @override
+  String get settingsTitle => '设置';
+
+  @override
+  String get settingsGeneral => '通用';
+
+  @override
+  String get settingsLanguage => '语言';
+
+  @override
+  String get settingsLanguageSubtitle => '切换应用显示语言';
+
+  @override
+  String get settingsDarkMode => '深色模式';
+
+  @override
+  String get settingsDarkModeSubtitle => '切换深色/浅色主题';
+
+  @override
+  String get settingsLearning => '学习';
+
+  @override
+  String get settingsResetProgress => '重置学习进度';
+
+  @override
+  String get settingsResetProgressSubtitle => '清除所有课程进度和成绩';
+
+  @override
+  String get settingsResetProgressConfirm => '确定要重置所有学习进度吗？此操作不可撤销。';
+
+  @override
+  String get settingsResetProgressDone => '学习进度已重置';
+
+  @override
+  String get settingsExportProgress => '导出学习进度';
+
+  @override
+  String get settingsExportProgressSubtitle => '导出你的学习数据';
+
+  @override
+  String get settingsComingSoon => '即将推出';
+
+  @override
+  String get settingsAbout => '关于';
+
+  @override
+  String get settingsVersion => '应用版本';
+
+  @override
+  String get settingsSlogan => 'AI 驱动游戏化学习';
+
+  @override
+  String get settingsLicenses => '开源许可证';
+
+  @override
+  String get settingsLicensesSubtitle => '查看第三方库许可证';
+
+  @override
+  String get settingsGithub => 'GitHub';
+
+  @override
+  String get settingsGithubUrl => 'https://github.com/user/JellyBuddy';
+
+  @override
+  String get settingsDangerZone => '危险操作';
+
+  @override
+  String get settingsClearAllData => '清除所有数据';
+
+  @override
+  String get settingsClearAllDataSubtitle => '恢复出厂设置，删除所有数据';
+
+  @override
+  String get settingsClearAllDataConfirm =>
+      '确定要清除所有数据吗？这将删除所有学习进度、设置和缓存。此操作不可撤销。';
+
+  @override
+  String get settingsClearAllDataDone => '所有数据已清除';
+
+  @override
+  String get settingsCancel => '取消';
+
+  @override
+  String get settingsConfirm => '确定';
+
+  @override
+  String get settingsReset => '重置';
+
+  @override
+  String get settingsClearAll => '清除全部';
+
+  @override
+  String get settingsLanguageZh => '中文';
+
+  @override
+  String get settingsLanguageEn => 'English';
+
+  @override
+  String get profileSettings => '设置';
+
+  @override
+  String get profileSettingsSubtitle => '语言、数据管理等';
+
+  @override
+  String get homeStatsTitle => '学习统计';
+
+  @override
+  String get homeStatsSubtitle => '查看你的学习进度和成绩';
 }

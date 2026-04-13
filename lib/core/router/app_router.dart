@@ -5,8 +5,10 @@ import '../../presentation/screens/onboarding/onboarding_screen.dart';
 import '../../presentation/screens/shell_screen.dart';
 import '../../presentation/screens/lesson_screen.dart';
 import '../../presentation/screens/settings/model_settings_screen.dart';
+import '../../presentation/screens/settings/settings_screen.dart';
 import '../../presentation/screens/ai_tutor/ai_tutor_screen.dart';
 import '../../presentation/screens/review/review_screen.dart';
+import '../../presentation/screens/stats/stats_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -16,6 +18,8 @@ class AppRoutes {
   static const String aiTutor = '/ai-tutor';
   static const String achievements = '/achievements';
   static const String review = '/review';
+  static const String stats = '/stats';
+  static const String settings = '/settings';
 }
 
 final appRouter = GoRouter(
@@ -55,6 +59,14 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/review',
       builder: (context, state) => const ReviewScreen(),
+    ),
+    GoRoute(
+      path: '/stats',
+      builder: (context, state) => const StatsScreen(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsScreen(),
     ),
   ],
 );

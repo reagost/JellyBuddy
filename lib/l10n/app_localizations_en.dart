@@ -341,4 +341,115 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingSubtitle3 =>
       'Local AI model, privacy-first, learn without internet';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsLanguageSubtitle => 'Switch app display language';
+
+  @override
+  String get settingsDarkMode => 'Dark Mode';
+
+  @override
+  String get settingsDarkModeSubtitle => 'Toggle dark/light theme';
+
+  @override
+  String get settingsLearning => 'Learning';
+
+  @override
+  String get settingsResetProgress => 'Reset Learning Progress';
+
+  @override
+  String get settingsResetProgressSubtitle =>
+      'Clear all course progress and scores';
+
+  @override
+  String get settingsResetProgressConfirm =>
+      'Are you sure you want to reset all learning progress? This cannot be undone.';
+
+  @override
+  String get settingsResetProgressDone => 'Learning progress has been reset';
+
+  @override
+  String get settingsExportProgress => 'Export Progress';
+
+  @override
+  String get settingsExportProgressSubtitle => 'Export your learning data';
+
+  @override
+  String get settingsComingSoon => 'Coming Soon';
+
+  @override
+  String get settingsAbout => 'About';
+
+  @override
+  String get settingsVersion => 'App Version';
+
+  @override
+  String get settingsSlogan => 'AI-powered gamified learning';
+
+  @override
+  String get settingsLicenses => 'Open Source Licenses';
+
+  @override
+  String get settingsLicensesSubtitle => 'View third-party library licenses';
+
+  @override
+  String get settingsGithub => 'GitHub';
+
+  @override
+  String get settingsGithubUrl => 'https://github.com/user/JellyBuddy';
+
+  @override
+  String get settingsDangerZone => 'Danger Zone';
+
+  @override
+  String get settingsClearAllData => 'Clear All Data';
+
+  @override
+  String get settingsClearAllDataSubtitle => 'Factory reset — delete all data';
+
+  @override
+  String get settingsClearAllDataConfirm =>
+      'Are you sure you want to clear all data? This will delete all learning progress, settings, and cache. This cannot be undone.';
+
+  @override
+  String get settingsClearAllDataDone => 'All data has been cleared';
+
+  @override
+  String get settingsCancel => 'Cancel';
+
+  @override
+  String get settingsConfirm => 'Confirm';
+
+  @override
+  String get settingsReset => 'Reset';
+
+  @override
+  String get settingsClearAll => 'Clear All';
+
+  @override
+  String get settingsLanguageZh => 'Chinese';
+
+  @override
+  String get settingsLanguageEn => 'English';
+
+  @override
+  String get profileSettings => 'Settings';
+
+  @override
+  String get profileSettingsSubtitle => 'Language, data management, etc.';
+
+  @override
+  String get homeStatsTitle => 'Learning Stats';
+
+  @override
+  String get homeStatsSubtitle => 'View your learning progress and scores';
 }
