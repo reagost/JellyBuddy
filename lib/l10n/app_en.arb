@@ -1,0 +1,186 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "JellyBuddy",
+
+  "tabHome": "Home",
+  "tabCourses": "Courses",
+  "tabAITutor": "AI Tutor",
+  "tabProfile": "Profile",
+
+  "splashSubtitle": "AI-Powered Gamified Learning",
+
+  "homeStreakDays": "{days}-Day Streak",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "homeStartLearning": "Pick a lesson to start learning!",
+  "homeDailyTasks": "Daily Tasks",
+  "homePythonLessons": "Python Lessons",
+  "homeReviewBook": "Review Book",
+  "homeReviewSubtitle": "Review wrong answers and reinforce concepts",
+  "homeHeartsRecovering": "Hearts recovering...",
+  "homeRecoverySoon": "Recovering soon",
+  "homeRecoveryTime": "Estimated {hours}h {minutes}m until 1 heart recovers",
+  "@homeRecoveryTime": {
+    "placeholders": {
+      "hours": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "homeRecoveryMinutes": "Estimated {minutes}m until 1 heart recovers",
+  "@homeRecoveryMinutes": {
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "homeFailedToLoadCourse": "Failed to load course data",
+  "homeLessonQuestions": "{count} questions  +{xp} XP",
+  "@homeLessonQuestions": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "xp": { "type": "int" }
+    }
+  },
+  "homeLessonResult": "{score}%  {correct}/{total} correct  +{xp} XP",
+  "@homeLessonResult": {
+    "placeholders": {
+      "score": { "type": "int" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "xp": { "type": "int" }
+    }
+  },
+
+  "lessonConfirmAnswer": "Confirm",
+  "lessonNextQuestion": "Next",
+  "lessonComplete": "Done",
+  "lessonCorrect": "Correct!",
+  "lessonIncorrect": "Wrong",
+  "lessonExplanation": "Explanation",
+  "lessonHeartsEmpty": "No Hearts Left",
+  "lessonAskAI": "Ask AI",
+  "lessonInputHint": "Type your answer...",
+  "lessonDragToSort": "Drag to reorder",
+  "lessonCorrectOrder": "Correct order:",
+  "lessonCorrectAnswer": "Correct answer: {answer}",
+  "@lessonCorrectAnswer": {
+    "placeholders": {
+      "answer": { "type": "String" }
+    }
+  },
+  "lessonBossChallenge": "BOSS Challenge",
+  "lessonExitTitle": "Quit Lesson?",
+  "lessonExitContent": "You won't earn any rewards. Continue the challenge?",
+  "lessonContinueChallenge": "Keep Going",
+  "lessonExit": "Quit",
+  "lessonReturnHome": "Back to Home",
+  "lessonHeartsDepletedMsg": "You've run out of hearts. Wait for recovery. 1 heart recovers every {hours} hours.",
+  "@lessonHeartsDepletedMsg": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  },
+  "lessonChallengeFailed": "Challenge Failed",
+  "lessonBossSuccess": "BOSS Challenge Cleared!",
+  "lessonPerfectClear": "Perfect Clear!",
+  "lessonCongrats": "Well Done!",
+  "lessonNeedReview": "Review this chapter again",
+  "lessonScoreResult": "{correct}/{total} correct  ({score}%)",
+  "@lessonScoreResult": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "score": { "type": "int" }
+    }
+  },
+  "lessonReturnReview": "Back to Review",
+  "lessonContinue": "Continue",
+  "lessonStatLife": "Lives",
+  "lessonStatDiamond": "Diamonds",
+  "lessonAchievementUnlocked": "Achievement unlocked: {name}",
+  "@lessonAchievementUnlocked": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "profileLevelProgress": "Level Progress",
+  "profileAchievements": "Achievements",
+  "profileAIModelManagement": "AI Model Management",
+  "profileAIModelSubtitle": "Download & load local AI models",
+  "profileStreakDays": "Streak Days",
+  "profileDiamonds": "Diamonds",
+  "profileHearts": "Hearts",
+
+  "modelManagementTitle": "AI Model Management",
+  "modelAvailable": "Available Models",
+  "modelNoModels": "No models available",
+  "modelInferenceEngine": "AI Inference Engine",
+  "modelReady": "Model ready",
+  "modelLoading": "Loading model...",
+  "modelDownloading": "Downloading model...",
+  "modelGenerating": "Generating response...",
+  "modelError": "Model loading failed",
+  "modelUninitialized": "No model loaded",
+  "modelDownloadProgress": "Downloading: {percent}",
+  "@modelDownloadProgress": {
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+  "modelCurrentFile": "Current file: {file}",
+  "@modelCurrentFile": {
+    "placeholders": {
+      "file": { "type": "String" }
+    }
+  },
+  "modelDownloadSource": "Source: {source}",
+  "@modelDownloadSource": {
+    "placeholders": {
+      "source": { "type": "String" }
+    }
+  },
+  "modelCancelDownload": "Cancel Download",
+  "modelDownloadButton": "Download",
+  "modelLoadButton": "Load",
+  "modelUnloadButton": "Unload",
+  "modelLoaded": "Loaded",
+
+  "coursesTitle": "All Courses",
+  "coursesNoCourses": "No courses available",
+  "coursesLessonCount": "{count} lessons",
+  "@coursesLessonCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "reviewTitle": "Review Book",
+  "reviewEmpty": "No wrong answers, keep going!",
+  "reviewEmptySubtitle": "Complete more lessons to test your knowledge",
+  "reviewCorrectAnswer": "Correct Answer",
+  "reviewDifficultyEasy": "Easy",
+  "reviewDifficultyMedium": "Medium",
+  "reviewDifficultyHard": "Hard",
+
+  "aiTutorTitle": "Code Buddy",
+  "aiTutorClearChat": "Clear Chat",
+  "aiTutorClearConfirm": "Are you sure you want to clear all chat history?",
+  "aiTutorCancel": "Cancel",
+  "aiTutorClear": "Clear",
+  "aiTutorWelcome": "Hi! I'm Code Buddy, your programming tutor. What would you like to ask?",
+  "aiTutorInputHint": "Type your question...",
+
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingStart": "Get Started",
+  "onboardingTitle1": "Learn to Code Like Playing a Game",
+  "onboardingSubtitle1": "Complete levels, solve problems, earn XP — make learning fun",
+  "onboardingTitle2": "Code Buddy is Always Here",
+  "onboardingSubtitle2": "Stuck? Your AI tutor explains step by step",
+  "onboardingTitle3": "Anytime, Anywhere, Offline",
+  "onboardingSubtitle3": "Local AI model, privacy-first, learn without internet"
+}

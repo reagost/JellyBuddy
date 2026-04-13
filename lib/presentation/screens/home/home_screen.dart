@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -16,6 +17,7 @@ import '../../widgets/game/hearts_display.dart';
 import '../../widgets/game/xp_progress_bar.dart';
 import '../../widgets/game/streak_counter.dart';
 import '../../widgets/game/diamond_display.dart';
+import '../../widgets/common/skeleton_loader.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -145,16 +147,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '连续学习 ${state.progress.streak} 天',
+                                      AppLocalizations.of(context)!.homeStreakDays(state.progress.streak),
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    const Text(
-                                      '选择一个关卡开始学习！',
-                                      style: TextStyle(
+                                    Text(
+                                      AppLocalizations.of(context)!.homeStartLearning,
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         color: Colors.white70,
                                       ),
@@ -198,9 +200,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 24),
 
                         // Lessons Section
-                        const Text(
-                          '📚 Python 关卡',
-                          style: TextStyle(
+                        Text(
+                          '\u{1F4DA} ${AppLocalizations.of(context)!.homePythonLessons}',
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: AppColors.textPrimary,
@@ -211,12 +213,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (state.progress.hearts == 0)
                           _buildHeartsRecoveryBanner(state),
 
-                        if (_isLoading)
-                          const Center(child: CircularProgressIndicator())
-                        else if (_course != null)
-                          ...(_buildLessonList(state))
-                        else
-                          const Text('Failed to load course data'),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: _isLoading
+                              ? const Column(
+                                  key: ValueKey('skeleton'),
+                                  children: [
+                                    SkeletonLessonCard(),
+                                    SkeletonLessonCard(),
+                                    SkeletonLessonCard(),
+                                  ],
+                                )
+                              : _course != null
+                                  ? Column(
+                                      key: const ValueKey('lessons'),
+                                      children: _buildLessonList(state),
+                                    )
+                                  : Text(
+                                      AppLocalizations.of(context)!.homeFailedToLoadCourse,
+                                      key: const ValueKey('error'),
+                                    ),
+                        ),
                       ],
                     ),
                   ),
@@ -259,22 +276,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(width: 12),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '\u{1F4DD} 错题本',
-                    style: TextStyle(
+                    '\u{1F4DD} ${AppLocalizations.of(context)!.homeReviewBook}',
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Text(
-                    '复习做错的题目，巩固知识点',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.homeReviewSubtitle,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: AppColors.textSecondary,
                     ),
@@ -293,6 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildHeartsRecoveryBanner(GameState state) {
+    final l10n = AppLocalizations.of(context)!;
     String recoveryText = '';
     final lastLost = state.progress.lastHeartLostAt;
     if (lastLost != null) {
@@ -301,13 +319,13 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       final remaining = recoveryTime.difference(DateTime.now());
       if (remaining.isNegative) {
-        recoveryText = '即将恢复';
+        recoveryText = l10n.homeRecoverySoon;
       } else {
         final hours = remaining.inHours;
         final minutes = remaining.inMinutes % 60;
         recoveryText = hours > 0
-            ? '预计 $hours 小时 $minutes 分钟后恢复 1 颗生命'
-            : '预计 $minutes 分钟后恢复 1 颗生命';
+            ? l10n.homeRecoveryTime(hours, minutes)
+            : l10n.homeRecoveryMinutes(minutes);
       }
     }
 
@@ -329,9 +347,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '\u2764\uFE0F 生命值恢复中...',
-                  style: TextStyle(
+                Text(
+                  '\u2764\uFE0F ${l10n.homeHeartsRecovering}',
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: AppColors.error,
@@ -359,9 +377,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '\u{1F3AF} 今日任务',
-          style: TextStyle(
+        Text(
+          '\u{1F3AF} ${AppLocalizations.of(context)!.homeDailyTasks}',
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
@@ -579,7 +597,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 4),
                     if (isCompleted && result != null)
                       Text(
-                        '${result.score}%  ${result.correctCount}/${result.totalCount} 正确  +${lesson.xpReward} XP',
+                        AppLocalizations.of(context)!.homeLessonResult(result.score, result.correctCount, result.totalCount, lesson.xpReward),
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColors.primary,
@@ -588,7 +606,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     else
                       Text(
-                        '$questionCount 题  +${lesson.xpReward} XP',
+                        AppLocalizations.of(context)!.homeLessonQuestions(questionCount, lesson.xpReward),
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColors.textSecondary,

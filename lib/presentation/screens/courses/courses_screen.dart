@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -40,7 +41,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('全部课程'),
+        title: Text(AppLocalizations.of(context)!.coursesTitle),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -48,7 +49,35 @@ class _CoursesScreenState extends State<CoursesScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _courses.isEmpty
-              ? const Center(child: Text('暂无课程'))
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.menu_book_outlined,
+                        size: 80,
+                        color: AppColors.textHint.withValues(alpha: 0.5),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        '\u6682\u65E0\u8BFE\u7A0B\u6570\u636E',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        '\u8BFE\u7A0B\u5185\u5BB9\u6B63\u5728\u51C6\u5907\u4E2D',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               : ListView.builder(
                   padding: const EdgeInsets.all(20),
                   itemCount: _courses.length,
@@ -107,7 +136,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${course.lessons.length} 个关卡',
+                    AppLocalizations.of(context)!.coursesLessonCount(course.lessons.length),
                     style: const TextStyle(
                       fontSize: 12,
                       color: AppColors.primary,

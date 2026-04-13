@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -80,7 +81,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('📝 错题本'),
+        title: Text('\u{1F4DD} ${AppLocalizations.of(context)!.reviewTitle}'),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -110,18 +111,18 @@ class _ReviewScreenState extends State<ReviewScreen> {
             color: AppColors.success.withValues(alpha: 0.5),
           ),
           const SizedBox(height: AppSpacing.md),
-          const Text(
-            '没有错题，继续保持！',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.reviewEmpty,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: AppColors.textPrimary,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          const Text(
-            '完成更多关卡来检验你的学习成果',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.reviewEmptySubtitle,
+            style: const TextStyle(
               fontSize: 14,
               color: AppColors.textSecondary,
             ),
@@ -238,9 +239,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        '正确答案',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.reviewCorrectAnswer,
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: AppColors.success,
@@ -340,18 +341,19 @@ class _ReviewScreenState extends State<ReviewScreen> {
   }
 
   Widget _buildDifficultyBadge(Difficulty difficulty) {
+    final l10n = AppLocalizations.of(context)!;
     Color color;
     String label;
     switch (difficulty) {
       case Difficulty.easy:
         color = AppColors.easy;
-        label = '简单';
+        label = l10n.reviewDifficultyEasy;
       case Difficulty.medium:
         color = AppColors.medium;
-        label = '中等';
+        label = l10n.reviewDifficultyMedium;
       case Difficulty.hard:
         color = AppColors.hard;
-        label = '困难';
+        label = l10n.reviewDifficultyHard;
     }
 
     return Container(

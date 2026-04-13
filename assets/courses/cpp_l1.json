@@ -1,0 +1,738 @@
+{
+  "id": "cpp",
+  "name": "C++",
+  "icon": "⚙️",
+  "totalLessons": 5,
+  "metadata": {
+    "description": "C++ 编程入门",
+    "tags": ["编程", "C++", "入门"],
+    "version": 1
+  },
+  "lessons": [
+    {
+      "id": "cpp_l1_lesson1",
+      "courseId": "cpp",
+      "title": "你好，C++！",
+      "level": 1,
+      "order": 1,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "cpp_l1_lesson1_level1",
+          "lessonId": "cpp_l1_lesson1",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q1",
+              "content": "C++ 程序的入口函数是什么？",
+              "codeSnippet": ["#include <iostream>", "int main() {", "    std::cout << \"Hello\";", "    return 0;", "}"],
+              "options": [
+                {"letter": "A", "content": "void start()", "isCorrect": false},
+                {"letter": "B", "content": "int main()", "isCorrect": true},
+                {"letter": "C", "content": "def main()", "isCorrect": false},
+                {"letter": "D", "content": "function main()", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "C++ 程序从 main() 函数开始执行，返回类型为 int。return 0 表示程序正常结束。",
+              "relatedConcepts": ["main_function", "entry_point"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson1_level2",
+          "lessonId": "cpp_l1_lesson1",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q2",
+              "content": "下列哪个头文件用于输入输出操作？",
+              "codeSnippet": ["#include <iostream>", "std::cout << \"你好\" << std::endl;"],
+              "options": [
+                {"letter": "A", "content": "<stdio>", "isCorrect": false},
+                {"letter": "B", "content": "<iostream>", "isCorrect": true},
+                {"letter": "C", "content": "<conio>", "isCorrect": false},
+                {"letter": "D", "content": "<output>", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "#include <iostream> 是 C++ 标准输入输出流头文件，提供 cin、cout 等功能。",
+              "relatedConcepts": ["include", "iostream", "header_files"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson1_level3",
+          "lessonId": "cpp_l1_lesson1",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q3",
+              "content": "C++ 中每条语句末尾必须加什么符号？",
+              "codeSnippet": ["int x = 10;", "std::cout << x;"],
+              "options": [
+                {"letter": "A", "content": "冒号 :", "isCorrect": false},
+                {"letter": "B", "content": "句号 .", "isCorrect": false},
+                {"letter": "C", "content": "分号 ;", "isCorrect": true},
+                {"letter": "D", "content": "不需要任何符号", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "C++ 中每条语句必须以分号 ; 结尾，这与 Python 不同。忘记分号是初学者最常见的错误之一。",
+              "relatedConcepts": ["semicolon", "syntax"],
+              "estimatedSeconds": 15
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson1_level4",
+          "lessonId": "cpp_l1_lesson1",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "cpp_q4",
+              "content": "请写出声明一个整型变量 age 并赋值为 20 的代码：",
+              "codeSnippet": ["// 提示：C++ 声明变量需要指定类型"],
+              "options": [],
+              "acceptedAnswers": ["int age = 20;", "int age=20;", "int age = 20"],
+              "difficulty": "easy",
+              "explanation": "C++ 中声明变量需要先写类型名（如 int），然后是变量名和赋值。语句末尾加分号。",
+              "relatedConcepts": ["variable_declaration", "int"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "cpp_l1_lesson2",
+      "courseId": "cpp",
+      "title": "数据类型",
+      "level": 1,
+      "order": 2,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "cpp_l1_lesson2_level1",
+          "lessonId": "cpp_l1_lesson2",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q5",
+              "content": "以下哪个类型用于存储单个字符？",
+              "codeSnippet": ["char grade = 'A';", "std::cout << grade;"],
+              "options": [
+                {"letter": "A", "content": "string", "isCorrect": false},
+                {"letter": "B", "content": "char", "isCorrect": true},
+                {"letter": "C", "content": "int", "isCorrect": false},
+                {"letter": "D", "content": "letter", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "char 类型用于存储单个字符，使用单引号 '' 包裹。string 用于存储字符串（多个字符）。",
+              "relatedConcepts": ["char", "data_types"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson2_level2",
+          "lessonId": "cpp_l1_lesson2",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q6",
+              "content": "float 和 double 的主要区别是什么？",
+              "codeSnippet": ["float f = 3.14f;", "double d = 3.14;", "std::cout << sizeof(f) << \" \" << sizeof(d);"],
+              "options": [
+                {"letter": "A", "content": "没有区别", "isCorrect": false},
+                {"letter": "B", "content": "float 精度更高", "isCorrect": false},
+                {"letter": "C", "content": "double 精度更高，占用更多内存", "isCorrect": true},
+                {"letter": "D", "content": "float 只能存正数", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "medium",
+              "explanation": "float 占 4 字节（约 7 位有效数字），double 占 8 字节（约 15 位有效数字）。double 精度更高但占用更多内存。",
+              "relatedConcepts": ["float", "double", "precision"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson2_level3",
+          "lessonId": "cpp_l1_lesson2",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q7",
+              "content": "sizeof(int) 通常返回什么值？",
+              "codeSnippet": ["#include <iostream>", "int main() {", "    std::cout << sizeof(int);", "    return 0;", "}"],
+              "options": [
+                {"letter": "A", "content": "1", "isCorrect": false},
+                {"letter": "B", "content": "2", "isCorrect": false},
+                {"letter": "C", "content": "4", "isCorrect": true},
+                {"letter": "D", "content": "8", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "medium",
+              "explanation": "在大多数现代平台上，int 占 4 字节（32 位）。sizeof 运算符返回数据类型占用的字节数。",
+              "relatedConcepts": ["sizeof", "int", "memory"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson2_level4",
+          "lessonId": "cpp_l1_lesson2",
+          "order": 4,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q8",
+              "content": "如何将整数 42 转换为 double 类型？",
+              "codeSnippet": ["int n = 42;", "double d = static_cast<double>(n);"],
+              "options": [
+                {"letter": "A", "content": "double(n)", "isCorrect": false},
+                {"letter": "B", "content": "static_cast<double>(n)", "isCorrect": true},
+                {"letter": "C", "content": "n.toDouble()", "isCorrect": false},
+                {"letter": "D", "content": "convert(n, double)", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "static_cast<目标类型>(表达式) 是 C++ 推荐的类型转换方式，比 C 风格的强制转换更安全。",
+              "relatedConcepts": ["type_casting", "static_cast"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson2_level5",
+          "lessonId": "cpp_l1_lesson2",
+          "order": 5,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "cpp_q9",
+              "content": "请写出声明一个 bool 变量 isReady 并赋值为 true 的代码：",
+              "codeSnippet": [],
+              "options": [],
+              "acceptedAnswers": ["bool isReady = true;", "bool isReady=true;", "bool isReady = true"],
+              "difficulty": "easy",
+              "explanation": "bool 类型只有两个值：true 和 false。在 C++ 中，true 和 false 是关键字。",
+              "relatedConcepts": ["bool", "boolean"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "cpp_l1_lesson3",
+      "courseId": "cpp",
+      "title": "运算符",
+      "level": 1,
+      "order": 3,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "cpp_l1_lesson3_level1",
+          "lessonId": "cpp_l1_lesson3",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q10",
+              "content": "17 % 5 的结果是什么？",
+              "codeSnippet": ["int result = 17 % 5;", "std::cout << result;"],
+              "options": [
+                {"letter": "A", "content": "3", "isCorrect": false},
+                {"letter": "B", "content": "2", "isCorrect": true},
+                {"letter": "C", "content": "3.4", "isCorrect": false},
+                {"letter": "D", "content": "5", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "% 是取余运算符。17 除以 5 等于 3 余 2，所以 17 % 5 = 2。",
+              "relatedConcepts": ["modulo", "arithmetic_operators"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson3_level2",
+          "lessonId": "cpp_l1_lesson3",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q11",
+              "content": "以下哪个是 C++ 中的逻辑与运算符？",
+              "codeSnippet": ["if (x > 0 && x < 100) {", "    std::cout << \"valid\";", "}"],
+              "options": [
+                {"letter": "A", "content": "and", "isCorrect": false},
+                {"letter": "B", "content": "&", "isCorrect": false},
+                {"letter": "C", "content": "&&", "isCorrect": true},
+                {"letter": "D", "content": "AND", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "&& 是逻辑与运算符，|| 是逻辑或运算符，! 是逻辑非运算符。& 是位运算与，不同于逻辑与。",
+              "relatedConcepts": ["logical_operators", "and_operator"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson3_level3",
+          "lessonId": "cpp_l1_lesson3",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q12",
+              "content": "== 和 = 在 C++ 中有什么区别？",
+              "codeSnippet": ["int x = 5;      // 赋值", "if (x == 5) {}  // 比较"],
+              "options": [
+                {"letter": "A", "content": "没有区别", "isCorrect": false},
+                {"letter": "B", "content": "= 是赋值，== 是相等比较", "isCorrect": true},
+                {"letter": "C", "content": "= 是比较，== 是赋值", "isCorrect": false},
+                {"letter": "D", "content": "== 只用于字符串比较", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "= 是赋值运算符，将右边的值赋给左边的变量；== 是比较运算符，判断两边的值是否相等。",
+              "relatedConcepts": ["assignment", "comparison_operators"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson3_level4",
+          "lessonId": "cpp_l1_lesson3",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "cpp_q13",
+              "content": "请写出判断变量 x 不等于 0 的比较表达式：",
+              "codeSnippet": ["int x = 5;", "if (/* 你的答案 */) {", "    std::cout << \"非零\";", "}"],
+              "options": [],
+              "acceptedAnswers": ["x != 0", "x!=0", "x !=0", "x!= 0"],
+              "difficulty": "easy",
+              "explanation": "!= 是不等于运算符，判断两个值是否不相等。x != 0 在 x 不为 0 时返回 true。",
+              "relatedConcepts": ["comparison_operators", "not_equal"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "cpp_l1_lesson4",
+      "courseId": "cpp",
+      "title": "数组与字符串",
+      "level": 1,
+      "order": 4,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "cpp_l1_lesson4_level1",
+          "lessonId": "cpp_l1_lesson4",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q14",
+              "content": "如何声明一个包含 5 个整数的数组？",
+              "codeSnippet": ["int nums[5] = {1, 2, 3, 4, 5};"],
+              "options": [
+                {"letter": "A", "content": "int nums(5);", "isCorrect": false},
+                {"letter": "B", "content": "int nums[5];", "isCorrect": true},
+                {"letter": "C", "content": "array<int> nums;", "isCorrect": false},
+                {"letter": "D", "content": "int[5] nums;", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "C++ 中使用 类型名 数组名[大小] 的语法声明数组。int nums[5] 声明一个可容纳 5 个整数的数组。",
+              "relatedConcepts": ["array_declaration", "fixed_size_array"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson4_level2",
+          "lessonId": "cpp_l1_lesson4",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q15",
+              "content": "给定 int arr[3] = {10, 20, 30}，arr[2] 的值是什么？",
+              "codeSnippet": ["int arr[3] = {10, 20, 30};", "std::cout << arr[2];"],
+              "options": [
+                {"letter": "A", "content": "10", "isCorrect": false},
+                {"letter": "B", "content": "20", "isCorrect": false},
+                {"letter": "C", "content": "30", "isCorrect": true},
+                {"letter": "D", "content": "越界错误", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "数组索引从 0 开始。arr[0] = 10，arr[1] = 20，arr[2] = 30。",
+              "relatedConcepts": ["array_index", "zero_based"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson4_level3",
+          "lessonId": "cpp_l1_lesson4",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q16",
+              "content": "如何获取 std::string 的长度？",
+              "codeSnippet": ["#include <string>", "std::string name = \"Hello\";", "std::cout << name.length();"],
+              "options": [
+                {"letter": "A", "content": "name.size", "isCorrect": false},
+                {"letter": "B", "content": "len(name)", "isCorrect": false},
+                {"letter": "C", "content": "name.length()", "isCorrect": true},
+                {"letter": "D", "content": "sizeof(name)", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "std::string 提供 .length() 和 .size() 两个方法来获取字符串长度，两者功能相同。注意 sizeof 返回的是对象本身的内存大小，不是字符串长度。",
+              "relatedConcepts": ["string_length", "string_methods"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson4_level4",
+          "lessonId": "cpp_l1_lesson4",
+          "order": 4,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q17",
+              "content": "\"Hello\".substr(1, 3) 的结果是什么？",
+              "codeSnippet": ["std::string s = \"Hello\";", "std::cout << s.substr(1, 3);"],
+              "options": [
+                {"letter": "A", "content": "\"Hel\"", "isCorrect": false},
+                {"letter": "B", "content": "\"ell\"", "isCorrect": true},
+                {"letter": "C", "content": "\"ello\"", "isCorrect": false},
+                {"letter": "D", "content": "\"el\"", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "substr(pos, len) 从位置 pos 开始截取 len 个字符。位置 1 是 'e'，取 3 个字符得到 \"ell\"。",
+              "relatedConcepts": ["substr", "string_methods"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson4_level5",
+          "lessonId": "cpp_l1_lesson4",
+          "order": 5,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "cpp_q18",
+              "content": "请写出声明一个 std::string 变量 name 并赋值为 \"World\" 的代码：",
+              "codeSnippet": ["#include <string>"],
+              "options": [],
+              "acceptedAnswers": ["std::string name = \"World\";", "std::string name=\"World\";", "std::string name = \"World\""],
+              "difficulty": "easy",
+              "explanation": "使用 std::string 类型声明字符串变量，值用双引号包裹。需要 #include <string> 头文件。",
+              "relatedConcepts": ["string", "variable_declaration"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "cpp_l1_lesson5",
+      "courseId": "cpp",
+      "title": "条件语句",
+      "level": 1,
+      "order": 5,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "cpp_l1_lesson5_level1",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q19",
+              "content": "C++ 中 if 语句的正确语法是？",
+              "codeSnippet": ["if (score >= 90) {", "    std::cout << \"优秀\";", "} else {", "    std::cout << \"继续努力\";", "}"],
+              "options": [
+                {"letter": "A", "content": "if score >= 90:", "isCorrect": false},
+                {"letter": "B", "content": "if (condition) { } else { }", "isCorrect": true},
+                {"letter": "C", "content": "if condition then else", "isCorrect": false},
+                {"letter": "D", "content": "when (condition) { }", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "C++ 的 if 语句条件用小括号 () 包裹，代码块用花括号 {} 包裹。与 Python 的冒号和缩进不同。",
+              "relatedConcepts": ["if_statement", "syntax"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson5_level2",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q20",
+              "content": "switch 语句中，如果没有 break 会发生什么？",
+              "codeSnippet": ["switch (x) {", "    case 1:", "        std::cout << \"一\";", "    case 2:", "        std::cout << \"二\";", "        break;", "}"],
+              "options": [
+                {"letter": "A", "content": "编译错误", "isCorrect": false},
+                {"letter": "B", "content": "只执行匹配的 case", "isCorrect": false},
+                {"letter": "C", "content": "会继续执行下一个 case（穿透）", "isCorrect": true},
+                {"letter": "D", "content": "跳出 switch 块", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "medium",
+              "explanation": "没有 break 时，switch 会发生「穿透」（fall-through），继续执行后续 case 的代码，直到遇到 break 或 switch 结束。",
+              "relatedConcepts": ["switch", "break", "fall_through"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson5_level3",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q21",
+              "content": "三元运算符 a ? b : c 的含义是什么？",
+              "codeSnippet": ["int x = 10;", "std::string result = (x > 5) ? \"大\" : \"小\";"],
+              "options": [
+                {"letter": "A", "content": "如果 a 为真返回 b，否则返回 c", "isCorrect": true},
+                {"letter": "B", "content": "如果 a 为真返回 c，否则返回 b", "isCorrect": false},
+                {"letter": "C", "content": "a 和 b 和 c 相乘", "isCorrect": false},
+                {"letter": "D", "content": "这不是合法的 C++ 语法", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["A"],
+              "difficulty": "medium",
+              "explanation": "三元运算符 条件 ? 值1 : 值2 是 if-else 的简写形式。条件为真返回值1，为假返回值2。",
+              "relatedConcepts": ["ternary_operator", "conditional_expression"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson5_level4",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 4,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "cpp_q22",
+              "content": "以下代码的输出是什么？\nint score = 75;\nif (score >= 90) {\n    cout << \"A\";\n} else if (score >= 80) {\n    cout << \"B\";\n} else if (score >= 70) {\n    cout << \"C\";\n} else {\n    cout << \"D\";\n}",
+              "codeSnippet": ["int score = 75;", "if (score >= 90) {", "    cout << \"A\";", "} else if (score >= 80) {", "    cout << \"B\";", "} else if (score >= 70) {", "    cout << \"C\";", "} else {", "    cout << \"D\";", "}"],
+              "options": [
+                {"letter": "A", "content": "A", "isCorrect": false},
+                {"letter": "B", "content": "B", "isCorrect": false},
+                {"letter": "C", "content": "C", "isCorrect": true},
+                {"letter": "D", "content": "D", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "medium",
+              "explanation": "score = 75，不满足 >= 90，不满足 >= 80，但满足 >= 70，所以输出 \"C\"。else if 链从上到下依次判断。",
+              "relatedConcepts": ["else_if", "conditional_chain"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "cpp_l1_lesson5_level5",
+          "lessonId": "cpp_l1_lesson5",
+          "order": 5,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "cpp_q23",
+              "content": "请用三元运算符写出：如果 age >= 18 返回 \"成年\"，否则返回 \"未成年\"：",
+              "codeSnippet": ["int age = 20;", "std::string status = /* 你的答案 */;"],
+              "options": [],
+              "acceptedAnswers": ["(age >= 18) ? \"成年\" : \"未成年\"", "age >= 18 ? \"成年\" : \"未成年\""],
+              "difficulty": "medium",
+              "explanation": "三元运算符的语法是 条件 ? 真值 : 假值。这里 age >= 18 为条件，满足返回 \"成年\"，否则返回 \"未成年\"。",
+              "relatedConcepts": ["ternary_operator", "conditional_expression"],
+              "estimatedSeconds": 35
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    }
+  ]
+}

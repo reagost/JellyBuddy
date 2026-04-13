@@ -290,6 +290,36 @@
           },
           "xpReward": 15,
           "diamondReward": 0
+        },
+        {
+          "id": "javascript_l1_lesson2_level6",
+          "lessonId": "javascript_l1_lesson2",
+          "order": 6,
+          "type": "sort",
+          "questions": [
+            {
+              "id": "js_q9b",
+              "content": "将以下代码行按正确顺序排列，使其输出 \"Hello, Alice! Welcome.\"：",
+              "codeSnippet": [],
+              "options": [
+                {"letter": "A", "content": "const name = \"Alice\";", "isCorrect": false},
+                {"letter": "B", "content": "const greeting = `Hello, ${name}!`;", "isCorrect": false},
+                {"letter": "C", "content": "const message = greeting + \" Welcome.\";", "isCorrect": false},
+                {"letter": "D", "content": "console.log(message);", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["ABCD"],
+              "difficulty": "medium",
+              "explanation": "先声明变量 name，然后用模板字符串创建 greeting，接着拼接完整消息，最后输出。变量必须先声明后使用。",
+              "relatedConcepts": ["template_literals", "string_concatenation", "execution_order"],
+              "estimatedSeconds": 40
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
         }
       ]
     },
@@ -446,6 +476,36 @@
             "allowSkip": false
           },
           "xpReward": 15,
+          "diamondReward": 0
+        },
+        {
+          "id": "javascript_l1_lesson3_level6",
+          "lessonId": "javascript_l1_lesson3",
+          "order": 6,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "js_q14b",
+              "content": "NaN === NaN 的结果是什么？",
+              "codeSnippet": ["console.log(NaN === NaN);", "console.log(isNaN(\"hello\"));"],
+              "options": [
+                {"letter": "A", "content": "true", "isCorrect": false},
+                {"letter": "B", "content": "false", "isCorrect": true},
+                {"letter": "C", "content": "NaN", "isCorrect": false},
+                {"letter": "D", "content": "报错", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "NaN 是 JavaScript 中唯一一个不等于自身的值。NaN === NaN 返回 false。要判断一个值是否为 NaN，应使用 isNaN() 或 Number.isNaN()。",
+              "relatedConcepts": ["NaN", "isNaN", "special_values"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
           "diamondReward": 0
         }
       ]

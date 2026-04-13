@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it/get_it.dart';
 import '../../core/theme/app_colors.dart';
@@ -79,9 +80,9 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'AI 驱动游戏化学习',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.splashSubtitle,
+                style: const TextStyle(
                   fontSize: 18,
                   color: AppColors.textSecondary,
                 ),

@@ -1,0 +1,186 @@
+{
+  "@@locale": "zh",
+
+  "appTitle": "JellyBuddy",
+
+  "tabHome": "首页",
+  "tabCourses": "课程",
+  "tabAITutor": "AI 助手",
+  "tabProfile": "我的",
+
+  "splashSubtitle": "AI 驱动游戏化学习",
+
+  "homeStreakDays": "连续学习 {days} 天",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "homeStartLearning": "选择一个关卡开始学习！",
+  "homeDailyTasks": "今日任务",
+  "homePythonLessons": "Python 关卡",
+  "homeReviewBook": "错题本",
+  "homeReviewSubtitle": "复习做错的题目，巩固知识点",
+  "homeHeartsRecovering": "生命值恢复中...",
+  "homeRecoverySoon": "即将恢复",
+  "homeRecoveryTime": "预计 {hours} 小时 {minutes} 分钟后恢复 1 颗生命",
+  "@homeRecoveryTime": {
+    "placeholders": {
+      "hours": { "type": "int" },
+      "minutes": { "type": "int" }
+    }
+  },
+  "homeRecoveryMinutes": "预计 {minutes} 分钟后恢复 1 颗生命",
+  "@homeRecoveryMinutes": {
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "homeFailedToLoadCourse": "课程数据加载失败",
+  "homeLessonQuestions": "{count} 题  +{xp} XP",
+  "@homeLessonQuestions": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "xp": { "type": "int" }
+    }
+  },
+  "homeLessonResult": "{score}%  {correct}/{total} 正确  +{xp} XP",
+  "@homeLessonResult": {
+    "placeholders": {
+      "score": { "type": "int" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "xp": { "type": "int" }
+    }
+  },
+
+  "lessonConfirmAnswer": "确认答案",
+  "lessonNextQuestion": "下一题",
+  "lessonComplete": "完成",
+  "lessonCorrect": "正确！",
+  "lessonIncorrect": "错误",
+  "lessonExplanation": "解析",
+  "lessonHeartsEmpty": "生命值耗尽",
+  "lessonAskAI": "求助 AI",
+  "lessonInputHint": "输入你的答案...",
+  "lessonDragToSort": "拖动调整顺序",
+  "lessonCorrectOrder": "正确顺序:",
+  "lessonCorrectAnswer": "正确答案: {answer}",
+  "@lessonCorrectAnswer": {
+    "placeholders": {
+      "answer": { "type": "String" }
+    }
+  },
+  "lessonBossChallenge": "BOSS 挑战",
+  "lessonExitTitle": "退出关卡？",
+  "lessonExitContent": "退出将不会获得任何奖励，继续挑战吗？",
+  "lessonContinueChallenge": "继续挑战",
+  "lessonExit": "退出",
+  "lessonReturnHome": "返回首页",
+  "lessonHeartsDepletedMsg": "你的生命值已用完，需要等待恢复。每 {hours} 小时恢复 1 颗生命。",
+  "@lessonHeartsDepletedMsg": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  },
+  "lessonChallengeFailed": "挑战失败",
+  "lessonBossSuccess": "BOSS 挑战成功！",
+  "lessonPerfectClear": "完美通关！",
+  "lessonCongrats": "恭喜完成！",
+  "lessonNeedReview": "需要重新学习本章节",
+  "lessonScoreResult": "{correct}/{total} 正确  ({score}%)",
+  "@lessonScoreResult": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "score": { "type": "int" }
+    }
+  },
+  "lessonReturnReview": "返回复习",
+  "lessonContinue": "继续",
+  "lessonStatLife": "生命",
+  "lessonStatDiamond": "钻石",
+  "lessonAchievementUnlocked": "成就解锁：{name}",
+  "@lessonAchievementUnlocked": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "profileLevelProgress": "升级进度",
+  "profileAchievements": "成就",
+  "profileAIModelManagement": "AI 模型管理",
+  "profileAIModelSubtitle": "下载、加载本地大模型",
+  "profileStreakDays": "连击天数",
+  "profileDiamonds": "钻石",
+  "profileHearts": "生命值",
+
+  "modelManagementTitle": "AI 模型管理",
+  "modelAvailable": "可用模型",
+  "modelNoModels": "暂无可用模型",
+  "modelInferenceEngine": "AI 推理引擎",
+  "modelReady": "模型已就绪",
+  "modelLoading": "正在加载模型...",
+  "modelDownloading": "正在下载模型...",
+  "modelGenerating": "正在生成回答...",
+  "modelError": "模型加载失败",
+  "modelUninitialized": "未加载模型",
+  "modelDownloadProgress": "下载中: {percent}",
+  "@modelDownloadProgress": {
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+  "modelCurrentFile": "当前文件: {file}",
+  "@modelCurrentFile": {
+    "placeholders": {
+      "file": { "type": "String" }
+    }
+  },
+  "modelDownloadSource": "下载源: {source}",
+  "@modelDownloadSource": {
+    "placeholders": {
+      "source": { "type": "String" }
+    }
+  },
+  "modelCancelDownload": "取消下载",
+  "modelDownloadButton": "下载",
+  "modelLoadButton": "加载",
+  "modelUnloadButton": "卸载",
+  "modelLoaded": "已加载",
+
+  "coursesTitle": "全部课程",
+  "coursesNoCourses": "暂无课程",
+  "coursesLessonCount": "{count} 个关卡",
+  "@coursesLessonCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "reviewTitle": "错题本",
+  "reviewEmpty": "没有错题，继续保持！",
+  "reviewEmptySubtitle": "完成更多关卡来检验你的学习成果",
+  "reviewCorrectAnswer": "正确答案",
+  "reviewDifficultyEasy": "简单",
+  "reviewDifficultyMedium": "中等",
+  "reviewDifficultyHard": "困难",
+
+  "aiTutorTitle": "Code Buddy",
+  "aiTutorClearChat": "清空对话",
+  "aiTutorClearConfirm": "确定要清空所有聊天记录吗？",
+  "aiTutorCancel": "取消",
+  "aiTutorClear": "清空",
+  "aiTutorWelcome": "你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？",
+  "aiTutorInputHint": "输入你的问题...",
+
+  "onboardingSkip": "跳过",
+  "onboardingNext": "下一步",
+  "onboardingStart": "开始学习",
+  "onboardingTitle1": "像玩游戏一样学编程",
+  "onboardingSubtitle1": "闯关、答题、赚经验值，让学习变得有趣",
+  "onboardingTitle2": "Code Buddy 随时帮你",
+  "onboardingSubtitle2": "遇到难题？AI 助手为你分步讲解",
+  "onboardingTitle3": "随时随地，无需网络",
+  "onboardingSubtitle3": "本地 AI 模型，保护隐私，离线学习"
+}

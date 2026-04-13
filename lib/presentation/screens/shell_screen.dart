@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import 'home/home_screen.dart';
 import 'courses/courses_screen.dart';
@@ -35,22 +36,22 @@ class _ShellScreenState extends State<ShellScreen> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textHint,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: '首页',
+            icon: const Icon(Icons.home_rounded),
+            label: AppLocalizations.of(context)!.tabHome,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school_rounded),
-            label: '课程',
+            icon: const Icon(Icons.school_rounded),
+            label: AppLocalizations.of(context)!.tabCourses,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.smart_toy_rounded),
-            label: 'AI 助手',
+            icon: const Icon(Icons.smart_toy_rounded),
+            label: AppLocalizations.of(context)!.tabAITutor,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: '我的',
+            icon: const Icon(Icons.person_rounded),
+            label: AppLocalizations.of(context)!.tabProfile,
           ),
         ],
       ),

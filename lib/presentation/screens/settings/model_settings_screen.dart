@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:jelly_llm/jelly_llm.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../blocs/model/model_bloc.dart';
@@ -14,7 +15,7 @@ class ModelSettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('AI 模型管理'),
+        title: Text(AppLocalizations.of(context)!.modelManagementTitle),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -25,13 +26,13 @@ class ModelSettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             children: [
               // Engine Status Card
-              _buildStatusCard(state),
+              _buildStatusCard(context, state),
               const SizedBox(height: 24),
 
               // Available Models
-              const Text(
-                '可用模型',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.modelAvailable,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -45,7 +46,7 @@ class ModelSettingsScreen extends StatelessWidget {
               if (state.isChecking)
                 const Center(child: CircularProgressIndicator())
               else if (state.availableModels.isEmpty)
-                const Center(child: Text('暂无可用模型'))
+                Center(child: Text(AppLocalizations.of(context)!.modelNoModels))
               else
                 ...state.availableModels.map((model) =>
                     _buildModelCard(context, model, state)),
@@ -53,14 +54,53 @@ class ModelSettingsScreen extends StatelessWidget {
               if (state.error != null) ...[
                 const SizedBox(height: 16),
                 Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.error.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.error.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppColors.error.withValues(alpha: 0.3),
+                    ),
                   ),
-                  child: Text(
-                    state.error!,
-                    style: const TextStyle(color: AppColors.error),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.error_outline,
+                            color: AppColors.error,
+                            size: 24,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              state.error!.length > 100
+                                  ? '${state.error!.substring(0, 100)}...'
+                                  : state.error!,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: AppColors.error,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            context.read<ModelBloc>().add(CheckModels());
+                          },
+                          icon: const Icon(Icons.refresh, size: 18),
+                          label: const Text('\u91CD\u8BD5'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.error,
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -71,34 +111,35 @@ class ModelSettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusCard(ModelBlocState state) {
+  Widget _buildStatusCard(BuildContext context, ModelBlocState state) {
+    final l10n = AppLocalizations.of(context)!;
     String statusText;
     Color statusColor;
     IconData statusIcon;
 
     switch (state.engineState) {
       case LlmEngineState.ready:
-        statusText = '模型已就绪';
+        statusText = l10n.modelReady;
         statusColor = AppColors.success;
         statusIcon = Icons.check_circle;
       case LlmEngineState.loading:
-        statusText = '正在加载模型...';
+        statusText = l10n.modelLoading;
         statusColor = AppColors.primary;
         statusIcon = Icons.hourglass_bottom;
       case LlmEngineState.downloading:
-        statusText = '正在下载模型...';
+        statusText = l10n.modelDownloading;
         statusColor = AppColors.primary;
         statusIcon = Icons.download;
       case LlmEngineState.generating:
-        statusText = '正在生成回答...';
+        statusText = l10n.modelGenerating;
         statusColor = AppColors.primary;
         statusIcon = Icons.auto_awesome;
       case LlmEngineState.error:
-        statusText = '模型加载失败';
+        statusText = l10n.modelError;
         statusColor = AppColors.error;
         statusIcon = Icons.error;
       case LlmEngineState.uninitialized:
-        statusText = '未加载模型';
+        statusText = l10n.modelUninitialized;
         statusColor = AppColors.textHint;
         statusIcon = Icons.cloud_off;
     }
@@ -132,9 +173,9 @@ class ModelSettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'AI 推理引擎',
-                  style: TextStyle(
+                Text(
+                  l10n.modelInferenceEngine,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -158,6 +199,7 @@ class ModelSettingsScreen extends StatelessWidget {
   }
 
   Widget _buildDownloadProgressCard(BuildContext context, ModelBlocState state) {
+    final l10n = AppLocalizations.of(context)!;
     final progress = state.downloadProgress;
     final fraction = state.downloadFraction;
     final percentText = fraction != null
@@ -187,7 +229,7 @@ class ModelSettingsScreen extends StatelessWidget {
               const Icon(Icons.download, color: AppColors.primary, size: 22),
               const SizedBox(width: 8),
               Text(
-                '下载中: $percentText',
+                l10n.modelDownloadProgress(percentText),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -209,7 +251,7 @@ class ModelSettingsScreen extends StatelessWidget {
           const SizedBox(height: 10),
           if (progress?.currentFile != null)
             Text(
-              '当前文件: ${progress!.currentFile}',
+              l10n.modelCurrentFile(progress!.currentFile!),
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -220,7 +262,7 @@ class ModelSettingsScreen extends StatelessWidget {
           if (progress?.sourceLabel != null) ...[
             const SizedBox(height: 4),
             Text(
-              '下载源: ${progress!.sourceLabel}',
+              l10n.modelDownloadSource(progress!.sourceLabel!),
               style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -238,7 +280,7 @@ class ModelSettingsScreen extends StatelessWidget {
                 }
               },
               icon: const Icon(Icons.close, size: 18),
-              label: const Text('取消下载'),
+              label: Text(l10n.modelCancelDownload),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.error,
                 side: const BorderSide(color: AppColors.error),
@@ -251,6 +293,7 @@ class ModelSettingsScreen extends StatelessWidget {
   }
 
   Widget _buildModelCard(BuildContext context, ModelInfo model, ModelBlocState state) {
+    final l10n = AppLocalizations.of(context)!;
     final isLoaded = state.loadedModelId == model.id && state.engineState == LlmEngineState.ready;
 
     return Container(
@@ -298,9 +341,9 @@ class ModelSettingsScreen extends StatelessWidget {
                 ),
               ),
               if (isLoaded)
-                const Chip(
-                  label: Text('已加载', style: TextStyle(fontSize: 12)),
-                  backgroundColor: Color(0xFFE8F5E9),
+                Chip(
+                  label: Text(l10n.modelLoaded, style: const TextStyle(fontSize: 12)),
+                  backgroundColor: const Color(0xFFE8F5E9),
                   side: BorderSide.none,
                 ),
             ],
@@ -315,7 +358,7 @@ class ModelSettingsScreen extends StatelessWidget {
                         ? null
                         : () => context.read<ModelBloc>().add(DownloadModel(model.id)),
                     icon: const Icon(Icons.download, size: 18),
-                    label: const Text('下载'),
+                    label: Text(l10n.modelDownloadButton),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
@@ -329,7 +372,7 @@ class ModelSettingsScreen extends StatelessWidget {
                         ? null
                         : () => context.read<ModelBloc>().add(LoadModel(model.id)),
                     icon: const Icon(Icons.play_arrow, size: 18),
-                    label: const Text('加载'),
+                    label: Text(l10n.modelLoadButton),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
@@ -341,7 +384,7 @@ class ModelSettingsScreen extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: () => context.read<ModelBloc>().add(UnloadModel()),
                     icon: const Icon(Icons.stop, size: 18),
-                    label: const Text('卸载'),
+                    label: Text(l10n.modelUnloadButton),
                   ),
                 ),
               if (model.isDownloaded) ...[

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_colors.dart';
@@ -208,9 +209,9 @@ class _LessonScreenState extends State<LessonScreen>
       child: TextField(
         controller: _fillBlankController,
         enabled: !_showResult,
-        decoration: const InputDecoration(
-          hintText: '输入你的答案...',
-          hintStyle: TextStyle(color: AppColors.textHint),
+        decoration: InputDecoration(
+          hintText: AppLocalizations.of(context)!.lessonInputHint,
+          hintStyle: const TextStyle(color: AppColors.textHint),
           border: InputBorder.none,
         ),
         style: const TextStyle(
@@ -238,12 +239,12 @@ class _LessonScreenState extends State<LessonScreen>
           end: Alignment.centerRight,
         ),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '\u{1F48E} BOSS \u6311\u6218',
-            style: TextStyle(
+            '\u{1F48E} ${AppLocalizations.of(context)!.lessonBossChallenge}',
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -261,11 +262,11 @@ class _LessonScreenState extends State<LessonScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (!_showResult)
-          const Padding(
-            padding: EdgeInsets.only(bottom: 8),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              '\u{1F447} \u62D6\u52A8\u8C03\u6574\u987A\u5E8F',
-              style: TextStyle(
+              '\u{1F447} ${AppLocalizations.of(context)!.lessonDragToSort}',
+              style: const TextStyle(
                 fontSize: 14,
                 color: AppColors.textSecondary,
                 fontWeight: FontWeight.w500,
@@ -322,9 +323,9 @@ class _LessonScreenState extends State<LessonScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '\u6B63\u786E\u987A\u5E8F:',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.lessonCorrectOrder,
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppColors.success,
@@ -612,7 +613,7 @@ class _LessonScreenState extends State<LessonScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _isCorrect ? '正确！' : '错误',
+                  _isCorrect ? AppLocalizations.of(context)!.lessonCorrect : AppLocalizations.of(context)!.lessonIncorrect,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -631,7 +632,7 @@ class _LessonScreenState extends State<LessonScreen>
                 if (!_isCorrect &&
                     _questions[_currentQuestionIndex].type == LevelType.fillBlank)
                   Text(
-                    '正确答案: ${_questions[_currentQuestionIndex].acceptedAnswers.first}',
+                    AppLocalizations.of(context)!.lessonCorrectAnswer(_questions[_currentQuestionIndex].acceptedAnswers.first),
                     style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.textSecondary,
@@ -665,13 +666,13 @@ class _LessonScreenState extends State<LessonScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 20),
-              SizedBox(width: 8),
+              const Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 20),
+              const SizedBox(width: 8),
               Text(
-                '解析',
-                style: TextStyle(
+                AppLocalizations.of(context)!.lessonExplanation,
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
                 ),
@@ -717,11 +718,13 @@ class _LessonScreenState extends State<LessonScreen>
       child: SafeArea(
         child: _showResult
             ? AppButton(
-                label: _currentQuestionIndex < _questions.length - 1 ? '下一题' : '完成',
+                label: _currentQuestionIndex < _questions.length - 1
+                    ? AppLocalizations.of(context)!.lessonNextQuestion
+                    : AppLocalizations.of(context)!.lessonComplete,
                 onPressed: _goToNext,
               )
             : AppButton(
-                label: '确认答案',
+                label: AppLocalizations.of(context)!.lessonConfirmAnswer,
                 onPressed: hasAnswer ? _submitAnswer : null,
               ),
       ),
@@ -813,18 +816,18 @@ class _LessonScreenState extends State<LessonScreen>
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        title: const Column(
+        title: Column(
           children: [
-            Text(
+            const Text(
               '\u{1F494}',
               style: TextStyle(fontSize: 48),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              '生命值耗尽',
+              AppLocalizations.of(context)!.lessonHeartsEmpty,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
@@ -833,7 +836,7 @@ class _LessonScreenState extends State<LessonScreen>
           ],
         ),
         content: Text(
-          '你的生命值已用完，需要等待恢复。每 ${GameConstants.heartsRecoveryHours} 小时恢复 1 颗生命。',
+          AppLocalizations.of(context)!.lessonHeartsDepletedMsg(GameConstants.heartsRecoveryHours),
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 15,
@@ -857,9 +860,9 @@ class _LessonScreenState extends State<LessonScreen>
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
-                '返回首页',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.lessonReturnHome,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -1000,7 +1003,7 @@ class _LessonScreenState extends State<LessonScreen>
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('\u{1F3C6} 成就解锁：${achievement.nameZh}'),
+            content: Text('\u{1F3C6} ${AppLocalizations.of(context)!.lessonAchievementUnlocked(achievement.nameZh)}'),
             backgroundColor: AppColors.success,
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 3),
@@ -1015,12 +1018,13 @@ class _LessonScreenState extends State<LessonScreen>
   Widget _buildCompletionSheet(int score, bool isPerfect, int totalXp) {
     final bossFailed = _isBoss && score < 70;
 
+    final l10n = AppLocalizations.of(context)!;
     // Build stat items list for staggered animation
     final statItems = <Widget>[
-      if (!_isBoss) _buildStatItem('\u2764\uFE0F', '$_hearts/5', '\u751F\u547D'),
+      if (!_isBoss) _buildStatItem('\u2764\uFE0F', '$_hearts/5', l10n.lessonStatLife),
       _buildStatItem('\u26A1', '+$totalXp', 'XP'),
       if (isPerfect || _isBoss)
-        _buildStatItem('\u{1F48E}', '+${_lesson?.diamondReward ?? 1}', '\u94BB\u77F3'),
+        _buildStatItem('\u{1F48E}', '+${_lesson?.diamondReward ?? 1}', l10n.lessonStatDiamond),
     ];
 
     return Container(
@@ -1060,10 +1064,10 @@ class _LessonScreenState extends State<LessonScreen>
             // Title: fadeIn + slideUp (200ms delay)
             Text(
               bossFailed
-                  ? '\u6311\u6218\u5931\u8D25'
+                  ? l10n.lessonChallengeFailed
                   : (_isBoss
-                      ? 'BOSS \u6311\u6218\u6210\u529F\uFF01'
-                      : (isPerfect ? '\u5B8C\u7F8E\u901A\u5173\uFF01' : '\u606D\u559C\u5B8C\u6210\uFF01')),
+                      ? l10n.lessonBossSuccess
+                      : (isPerfect ? l10n.lessonPerfectClear : l10n.lessonCongrats)),
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -1077,8 +1081,8 @@ class _LessonScreenState extends State<LessonScreen>
             // Score: fadeIn (400ms delay)
             Text(
               bossFailed
-                  ? '\u9700\u8981\u91CD\u65B0\u5B66\u4E60\u672C\u7AE0\u8282'
-                  : '$_correctCount/${_questions.length} \u6B63\u786E  ($score%)',
+                  ? l10n.lessonNeedReview
+                  : l10n.lessonScoreResult(_correctCount, _questions.length, score),
               style: TextStyle(
                 fontSize: bossFailed ? 16 : 18,
                 color: bossFailed ? AppColors.textSecondary : AppColors.textSecondary,
@@ -1101,7 +1105,7 @@ class _LessonScreenState extends State<LessonScreen>
             const SizedBox(height: 24),
             // Continue button: fadeIn + slideUp (1000ms delay)
             AppButton(
-              label: bossFailed ? '\u8FD4\u56DE\u590D\u4E60' : '\u7EE7\u7EED',
+              label: bossFailed ? l10n.lessonReturnReview : l10n.lessonContinue,
               onPressed: () {
                 Navigator.pop(context); // close sheet
                 Navigator.pop(context); // back to home
@@ -1145,9 +1149,9 @@ class _LessonScreenState extends State<LessonScreen>
       child: TextButton.icon(
         onPressed: _showAIHelp,
         icon: const Icon(Icons.lightbulb_outline, color: AppColors.primary),
-        label: const Text(
-          '求助 AI',
-          style: TextStyle(
+        label: Text(
+          AppLocalizations.of(context)!.lessonAskAI,
+          style: const TextStyle(
             color: AppColors.primary,
             fontWeight: FontWeight.w600,
           ),
@@ -1182,20 +1186,20 @@ class _LessonScreenState extends State<LessonScreen>
   void _showExitDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('退出关卡？'),
-        content: const Text('退出将不会获得任何奖励，继续挑战吗？'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.lessonExitTitle),
+        content: Text(AppLocalizations.of(context)!.lessonExitContent),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('继续挑战'),
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(AppLocalizations.of(context)!.lessonContinueChallenge),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(ctx);
               Navigator.pop(context);
             },
-            child: const Text('退出'),
+            child: Text(AppLocalizations.of(context)!.lessonExit),
           ),
         ],
       ),

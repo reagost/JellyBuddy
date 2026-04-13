@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it/get_it.dart';
 import '../../../core/theme/app_colors.dart';
@@ -17,21 +18,21 @@ class _OnboardingPageData {
   });
 }
 
-const _pages = [
+List<_OnboardingPageData> _getPages(AppLocalizations l10n) => [
   _OnboardingPageData(
     emoji: '🎮',
-    title: '像玩游戏一样学编程',
-    subtitle: '闯关、答题、赚经验值，让学习变得有趣',
+    title: l10n.onboardingTitle1,
+    subtitle: l10n.onboardingSubtitle1,
   ),
   _OnboardingPageData(
     emoji: '🤖',
-    title: 'Code Buddy 随时帮你',
-    subtitle: '遇到难题？AI 助手为你分步讲解',
+    title: l10n.onboardingTitle2,
+    subtitle: l10n.onboardingSubtitle2,
   ),
   _OnboardingPageData(
     emoji: '📱',
-    title: '随时随地，无需网络',
-    subtitle: '本地 AI 模型，保护隐私，离线学习',
+    title: l10n.onboardingTitle3,
+    subtitle: l10n.onboardingSubtitle3,
   ),
 ];
 
@@ -53,8 +54,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     context.go('/');
   }
 
+  static const _pageCount = 3;
+
   void _nextPage() {
-    if (_currentPage < _pages.length - 1) {
+    if (_currentPage < _pageCount - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -72,6 +75,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final pages = _getPages(l10n);
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -84,9 +89,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: _completeOnboarding,
-                  child: const Text(
-                    '跳过',
-                    style: TextStyle(
+                  child: Text(
+                    l10n.onboardingSkip,
+                    style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.textSecondary,
                     ),
@@ -99,14 +104,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: _pages.length,
+                itemCount: pages.length,
                 onPageChanged: (index) {
                   setState(() {
                     _currentPage = index;
                   });
                 },
                 itemBuilder: (context, index) {
-                  final page = _pages[index];
+                  final page = pages[index];
                   return _OnboardingPage(data: page);
                 },
               ),
@@ -121,7 +126,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                      _pages.length,
+                      pages.length,
                       (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -157,9 +162,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                         child: Text(
-                          _currentPage == _pages.length - 1
-                              ? '开始学习'
-                              : '下一步',
+                          _currentPage == pages.length - 1
+                              ? l10n.onboardingStart
+                              : l10n.onboardingNext,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

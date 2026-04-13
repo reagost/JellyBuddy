@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jelly_llm/jelly_llm.dart';
 import 'core/router/app_router.dart';
@@ -97,6 +98,8 @@ class JellyBuddyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'JellyBuddy',
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.primary,

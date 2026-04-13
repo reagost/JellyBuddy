@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -86,15 +87,15 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Expanded(child: _buildStatCard('⚡', '${progress.totalXp}', 'XP')),
                       const SizedBox(width: 12),
-                      Expanded(child: _buildStatCard('🔥', '${progress.streak}', '连击天数')),
+                      Expanded(child: _buildStatCard('🔥', '${progress.streak}', AppLocalizations.of(context)!.profileStreakDays)),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Expanded(child: _buildStatCard('💎', '${progress.diamonds}', '钻石')),
+                      Expanded(child: _buildStatCard('💎', '${progress.diamonds}', AppLocalizations.of(context)!.profileDiamonds)),
                       const SizedBox(width: 12),
-                      Expanded(child: _buildStatCard('❤️', '${progress.hearts}/5', '生命值')),
+                      Expanded(child: _buildStatCard('❤️', '${progress.hearts}/5', AppLocalizations.of(context)!.profileHearts)),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -120,9 +121,9 @@ class ProfileScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              '升级进度',
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.profileLevelProgress,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textPrimary,
@@ -161,8 +162,8 @@ class ProfileScreen extends StatelessWidget {
                   _buildSettingsItem(
                     context,
                     icon: Icons.smart_toy_outlined,
-                    title: 'AI 模型管理',
-                    subtitle: '下载、加载本地大模型',
+                    title: AppLocalizations.of(context)!.profileAIModelManagement,
+                    subtitle: AppLocalizations.of(context)!.profileAIModelSubtitle,
                     onTap: () => context.push('/model-settings'),
                   ),
                 ],
@@ -202,9 +203,9 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '成就',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.profileAchievements,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,

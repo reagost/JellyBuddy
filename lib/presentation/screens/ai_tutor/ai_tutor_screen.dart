@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../blocs/ai_tutor/ai_tutor_bloc.dart';
@@ -96,9 +97,9 @@ class _AITutorScreenState extends State<AITutorScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Code Buddy',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.aiTutorTitle,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
@@ -109,7 +110,7 @@ class _AITutorScreenState extends State<AITutorScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_outline, color: AppColors.textSecondary),
-            tooltip: '\u6E05\u7A7A\u5BF9\u8BDD',
+            tooltip: AppLocalizations.of(context)!.aiTutorClearChat,
             onPressed: () {
               _showClearDialog();
             },
@@ -175,19 +176,19 @@ class _AITutorScreenState extends State<AITutorScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Code Buddy',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.aiTutorTitle,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              '\u4F60\u597D\uFF01\u6211\u662F Code Buddy\uFF0C\u4F60\u7684\u7F16\u7A0B\u5B66\u4E60\u52A9\u624B\u3002\u6709\u4EC0\u4E48\u95EE\u9898\u60F3\u95EE\u6211\u5417\uFF1F',
+            Text(
+              AppLocalizations.of(context)!.aiTutorWelcome,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: AppColors.textSecondary,
                 height: 1.5,
@@ -301,7 +302,7 @@ class _AITutorScreenState extends State<AITutorScreen> {
               textInputAction: TextInputAction.send,
               onSubmitted: (_) => _sendMessage(),
               decoration: InputDecoration(
-                hintText: '\u8F93\u5165\u4F60\u7684\u95EE\u9898...',
+                hintText: AppLocalizations.of(context)!.aiTutorInputHint,
                 hintStyle: const TextStyle(color: AppColors.textHint),
                 filled: true,
                 fillColor: AppColors.surfaceVariant,
@@ -352,21 +353,21 @@ class _AITutorScreenState extends State<AITutorScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('\u6E05\u7A7A\u5BF9\u8BDD'),
-        content: const Text('\u786E\u5B9A\u8981\u6E05\u7A7A\u6240\u6709\u804A\u5929\u8BB0\u5F55\u5417\uFF1F'),
+        title: Text(AppLocalizations.of(context)!.aiTutorClearChat),
+        content: Text(AppLocalizations.of(context)!.aiTutorClearConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('\u53D6\u6D88'),
+            child: Text(AppLocalizations.of(context)!.aiTutorCancel),
           ),
           TextButton(
             onPressed: () {
               context.read<AITutorBloc>().add(ClearConversation());
               Navigator.pop(ctx);
             },
-            child: const Text(
-              '\u6E05\u7A7A',
-              style: TextStyle(color: AppColors.error),
+            child: Text(
+              AppLocalizations.of(context)!.aiTutorClear,
+              style: const TextStyle(color: AppColors.error),
             ),
           ),
         ],

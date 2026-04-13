@@ -125,7 +125,7 @@
             {
               "id": "q4",
               "content": "下面哪个是正确的字符串定义方式？",
-              "codeSnippet": ["msg = 'Hello'", 'msg = "Hello"', 'msg = """Hello"""'],
+              "codeSnippet": ["msg = 'Hello'", "msg = \"Hello\"", "msg = \"\"\"Hello\"\"\""],
               "options": [
                 {"letter": "A", "content": "只能使用单引号", "isCorrect": false},
                 {"letter": "B", "content": "只能使用双引号", "isCorrect": false},
@@ -217,7 +217,7 @@
               "content": "请写出将字符串 'hello' 转换为大写的代码：",
               "codeSnippet": ["text = 'hello'", "print(text.upper())"],
               "options": [],
-              "acceptedAnswers": ["'hello'.upper()", '"hello".upper()', "text.upper()"],
+              "acceptedAnswers": ["'hello'.upper()", "\"hello\".upper()", "text.upper()"],
               "difficulty": "medium",
               "explanation": "字符串方法 .upper() 可以将字符串所有字符转换为大写字母。",
               "relatedConcepts": ["string_methods", "upper"],
@@ -387,6 +387,36 @@
           },
           "xpReward": 10,
           "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson3_level6",
+          "lessonId": "python_l1_lesson3",
+          "order": 6,
+          "type": "sort",
+          "questions": [
+            {
+              "id": "q12b",
+              "content": "将以下代码行按正确顺序排列，使其计算并输出半径为 3 的圆的面积：",
+              "codeSnippet": [],
+              "options": [
+                {"letter": "A", "content": "r = 3", "isCorrect": false},
+                {"letter": "B", "content": "pi = 3.14", "isCorrect": false},
+                {"letter": "C", "content": "area = pi * r ** 2", "isCorrect": false},
+                {"letter": "D", "content": "print(area)", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["ABCD", "BACD"],
+              "difficulty": "medium",
+              "explanation": "先定义变量 r 和 pi（顺序可互换），然后用公式 pi * r ** 2 计算面积，最后打印结果。",
+              "relatedConcepts": ["execution_order", "variable_assignment", "arithmetic"],
+              "estimatedSeconds": 40
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
         }
       ]
     },
@@ -514,6 +544,36 @@
           },
           "xpReward": 15,
           "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson4_level5",
+          "lessonId": "python_l1_lesson4",
+          "order": 5,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q16b",
+              "content": "给定 nums = [10, 20, 30, 40, 50]，nums[1:4] 的结果是什么？",
+              "codeSnippet": ["nums = [10, 20, 30, 40, 50]", "print(nums[1:4])"],
+              "options": [
+                {"letter": "A", "content": "[10, 20, 30, 40]", "isCorrect": false},
+                {"letter": "B", "content": "[20, 30, 40]", "isCorrect": true},
+                {"letter": "C", "content": "[20, 30, 40, 50]", "isCorrect": false},
+                {"letter": "D", "content": "[10, 20, 30]", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "列表切片 nums[1:4] 从索引 1 开始（包含），到索引 4 结束（不包含），所以结果是 [20, 30, 40]。",
+              "relatedConcepts": ["list_slicing", "indexing"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
         }
       ]
     },
@@ -535,7 +595,7 @@
           "questions": [
             {
               "id": "q17",
-              "content": "Python 中表示"如果...否则"的语法是？",
+              "content": "Python 中表示「如果...否则」的语法是？",
               "codeSnippet": ["if condition:", "    # code", "else:", "    # code"],
               "options": [
                 {"letter": "A", "content": "if condition { } else { }", "isCorrect": false},
@@ -565,7 +625,7 @@
           "questions": [
             {
               "id": "q18",
-              "content": "以下哪个比较运算符表示"大于等于"？",
+              "content": "以下哪个比较运算符表示「大于等于」？",
               "codeSnippet": ["x >= 5"],
               "options": [
                 {"letter": "A", "content": ">", "isCorrect": false},
@@ -595,7 +655,7 @@
           "questions": [
             {
               "id": "q19",
-              "content": "如何表示"x 大于 0 且小于 10"？",
+              "content": "如何表示「x 大于 0 且小于 10」？",
               "codeSnippet": ["if x > 0 and x < 10:"],
               "options": [
                 {"letter": "A", "content": "x > 0 & x < 10", "isCorrect": false},
