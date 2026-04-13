@@ -1,0 +1,70 @@
+group 'com.jellybuddy.jelly_llm'
+version '0.1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.jellybuddy.jelly_llm'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 34
+
+        // NDK / CMake configuration for llama.cpp
+        ndk {
+            abiFilters 'arm64-v8a'  // Only build for 64-bit ARM (most Android devices)
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags '-std=c++17 -O3 -DNDEBUG'
+                arguments '-DANDROID_STL=c++_shared'
+            }
+        }
+    }
+
+    // Point to CMakeLists.txt for llama.cpp build
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+            version '3.22.1'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.0'
+}

@@ -1,0 +1,860 @@
+{
+  "id": "python",
+  "name": "Python",
+  "icon": "🐍",
+  "totalLessons": 6,
+  "metadata": {
+    "description": "Python 编程入门",
+    "tags": ["编程", "Python", "入门"],
+    "version": 1
+  },
+  "lessons": [
+    {
+      "id": "python_l1_lesson1",
+      "courseId": "python",
+      "title": "你好，Python！",
+      "level": 1,
+      "order": 1,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "python_l1_lesson1_level1",
+          "lessonId": "python_l1_lesson1",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q1",
+              "content": "下列哪个是合法的 Python 变量名？",
+              "codeSnippet": ["name = \"Alice\"", "age = 25"],
+              "options": [
+                {"letter": "A", "content": "2name", "isCorrect": false},
+                {"letter": "B", "content": "name2", "isCorrect": true},
+                {"letter": "C", "content": "my-name", "isCorrect": false},
+                {"letter": "D", "content": "my name", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "变量名必须以字母或下划线开头，后续字符可以是字母、数字、下划线。name2 符合规则。",
+              "relatedConcepts": ["variable_naming"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson1_level2",
+          "lessonId": "python_l1_lesson1",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q2",
+              "content": "Python 中，type(3.14) 会返回什么类型？",
+              "codeSnippet": ["x = 3.14", "print(type(x))"],
+              "options": [
+                {"letter": "A", "content": "int", "isCorrect": false},
+                {"letter": "B", "content": "float", "isCorrect": true},
+                {"letter": "C", "content": "double", "isCorrect": false},
+                {"letter": "D", "content": "decimal", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "3.14 带有小数点，是浮点数（float）类型。Python 不区分单精度和双精度。",
+              "relatedConcepts": ["data_types", "float"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson1_level3",
+          "lessonId": "python_l1_lesson1",
+          "order": 3,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "q3",
+              "content": "请写出创建一个名为 score 的变量，值为 95 的代码：",
+              "codeSnippet": [],
+              "options": [],
+              "acceptedAnswers": ["score = 95", "score=95"],
+              "difficulty": "easy",
+              "explanation": "变量赋值使用等号，左边是变量名，右边是值。注意等号两边可以有空格也可以没有。",
+              "relatedConcepts": ["variable_assignment"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "python_l1_lesson2",
+      "courseId": "python",
+      "title": "字符串基础",
+      "level": 1,
+      "order": 2,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "python_l1_lesson2_level1",
+          "lessonId": "python_l1_lesson2",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q4",
+              "content": "下面哪个是正确的字符串定义方式？",
+              "codeSnippet": ["msg = 'Hello'", 'msg = "Hello"', 'msg = """Hello"""'],
+              "options": [
+                {"letter": "A", "content": "只能使用单引号", "isCorrect": false},
+                {"letter": "B", "content": "只能使用双引号", "isCorrect": false},
+                {"letter": "C", "content": "单引号和双引号都可以", "isCorrect": true},
+                {"letter": "D", "content": "必须使用三引号", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "Python 中字符串可以用单引号或双引号定义，两者是等价的。三引号用于多行字符串。",
+              "relatedConcepts": ["string_basics", "quotes"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson2_level2",
+          "lessonId": "python_l1_lesson2",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q5",
+              "content": "执行 print('Hello' + 'World') 会输出什么？",
+              "codeSnippet": ["print('Hello' + 'World')"],
+              "options": [
+                {"letter": "A", "content": "HelloWorld", "isCorrect": true},
+                {"letter": "B", "content": "Hello World", "isCorrect": false},
+                {"letter": "C", "content": "Hello+World", "isCorrect": false},
+                {"letter": "D", "content": "错误", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["A"],
+              "difficulty": "easy",
+              "explanation": "加号用于字符串拼接，会将两个字符串直接连接在一起，没有任何分隔符。",
+              "relatedConcepts": ["string_concatenation"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson2_level3",
+          "lessonId": "python_l1_lesson2",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q6",
+              "content": "如何获取字符串 'Python' 的长度？",
+              "codeSnippet": ["text = 'Python'", "len(text)"],
+              "options": [
+                {"letter": "A", "content": "text.length", "isCorrect": false},
+                {"letter": "B", "content": "len(text)", "isCorrect": true},
+                {"letter": "C", "content": "text.len()", "isCorrect": false},
+                {"letter": "D", "content": "size(text)", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "len() 是 Python 内置函数，可以获取字符串、列表等序列类型的长度。",
+              "relatedConcepts": ["len_function", "string_length"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson2_level4",
+          "lessonId": "python_l1_lesson2",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "q7",
+              "content": "请写出将字符串 'hello' 转换为大写的代码：",
+              "codeSnippet": ["text = 'hello'", "print(text.upper())"],
+              "options": [],
+              "acceptedAnswers": ["'hello'.upper()", '"hello".upper()', "text.upper()"],
+              "difficulty": "medium",
+              "explanation": "字符串方法 .upper() 可以将字符串所有字符转换为大写字母。",
+              "relatedConcepts": ["string_methods", "upper"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "python_l1_lesson3",
+      "courseId": "python",
+      "title": "数字与运算",
+      "level": 1,
+      "order": 3,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "python_l1_lesson3_level1",
+          "lessonId": "python_l1_lesson3",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q8",
+              "content": "10 / 3 的结果是什么？",
+              "codeSnippet": ["result = 10 / 3", "print(result)"],
+              "options": [
+                {"letter": "A", "content": "3", "isCorrect": false},
+                {"letter": "B", "content": "3.0", "isCorrect": true},
+                {"letter": "C", "content": "3.3333333333333335", "isCorrect": false},
+                {"letter": "D", "content": "4", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "在 Python 3 中，除法 / 总是返回浮点数。所以 10 / 3 = 3.0。",
+              "relatedConcepts": ["division", "float"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson3_level2",
+          "lessonId": "python_l1_lesson3",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q9",
+              "content": "10 // 3 的结果是什么？",
+              "codeSnippet": ["result = 10 // 3", "print(result)"],
+              "options": [
+                {"letter": "A", "content": "3.0", "isCorrect": false},
+                {"letter": "B", "content": "3", "isCorrect": true},
+                {"letter": "C", "content": "3.3333333333333335", "isCorrect": false},
+                {"letter": "D", "content": "4", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "// 是整除运算符，返回整数部分。10 // 3 = 3，余数被丢弃。",
+              "relatedConcepts": ["floor_division", "integer"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson3_level3",
+          "lessonId": "python_l1_lesson3",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q10",
+              "content": "2 ** 3 表示什么？",
+              "codeSnippet": ["result = 2 ** 3", "print(result)"],
+              "options": [
+                {"letter": "A", "content": "2 * 3", "isCorrect": false},
+                {"letter": "B", "content": "2 + 3", "isCorrect": false},
+                {"letter": "C", "content": "2 的 3 次方", "isCorrect": true},
+                {"letter": "D", "content": "2 的立方根", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": "** 是 Python 的幂运算符，2 ** 3 表示 2 的 3 次方，即 2 × 2 × 2 = 8。",
+              "relatedConcepts": ["exponentiation", "power"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson3_level4",
+          "lessonId": "python_l1_lesson3",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "q11",
+              "content": "请计算：15 除以 4 的余数是多少？（请写出表达式）",
+              "codeSnippet": ["result = 15 % 4", "print(result)"],
+              "options": [],
+              "acceptedAnswers": ["15 % 4", "15%4"],
+              "difficulty": "medium",
+              "explanation": "% 是取模（取余）运算符，返回除法的余数。15 ÷ 4 = 3 余 3，所以余数是 3。",
+              "relatedConcepts": ["modulo", "remainder"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson3_level5",
+          "lessonId": "python_l1_lesson3",
+          "order": 5,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q12",
+              "content": "以下哪个选项能正确计算圆的面积（半径为 5，π 取 3.14）？",
+              "codeSnippet": ["r = 5", "area = 3.14 * r ** 2"],
+              "options": [
+                {"letter": "A", "content": "3.14 * r * 2", "isCorrect": false},
+                {"letter": "B", "content": "3.14 * r ** 2", "isCorrect": true},
+                {"letter": "C", "content": "3.14 * r ^ 2", "isCorrect": false},
+                {"letter": "D", "content": "(3.14 * r) ** 2", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "圆的面积公式是 πr²。使用 ** 运算符计算 r 的平方，然后乘以 π。",
+              "relatedConcepts": ["operator_precedence", "geometry"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "python_l1_lesson4",
+      "courseId": "python",
+      "title": "列表入门",
+      "level": 1,
+      "order": 4,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "python_l1_lesson4_level1",
+          "lessonId": "python_l1_lesson4",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q13",
+              "content": "如何创建一个包含数字 1, 2, 3 的列表？",
+              "codeSnippet": ["nums = [1, 2, 3]"],
+              "options": [
+                {"letter": "A", "content": "nums = (1, 2, 3)", "isCorrect": false},
+                {"letter": "B", "content": "nums = [1, 2, 3]", "isCorrect": true},
+                {"letter": "C", "content": "nums = {1, 2, 3}", "isCorrect": false},
+                {"letter": "D", "content": "nums = 1, 2, 3", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "Python 中列表使用方括号 [] 创建，元素之间用逗号分隔。",
+              "relatedConcepts": ["list_creation", "list_syntax"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson4_level2",
+          "lessonId": "python_l1_lesson4",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q14",
+              "content": "给定 fruits = ['apple', 'banana', 'orange']，fruits[0] 返回什么？",
+              "codeSnippet": ["fruits = ['apple', 'banana', 'orange']", "print(fruits[0])"],
+              "options": [
+                {"letter": "A", "content": "banana", "isCorrect": false},
+                {"letter": "B", "content": "apple", "isCorrect": true},
+                {"letter": "C", "content": "orange", "isCorrect": false},
+                {"letter": "D", "content": "错误", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "列表索引从 0 开始，所以 fruits[0] 返回第一个元素 'apple'。",
+              "relatedConcepts": ["list_index", "zero_based"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson4_level3",
+          "lessonId": "python_l1_lesson4",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q15",
+              "content": "如何向列表添加元素 'grape'？",
+              "codeSnippet": ["fruits.append('grape')"],
+              "options": [
+                {"letter": "A", "content": "fruits.add('grape')", "isCorrect": false},
+                {"letter": "B", "content": "fruits.append('grape')", "isCorrect": true},
+                {"letter": "C", "content": "fruits.insert('grape')", "isCorrect": false},
+                {"letter": "D", "content": "fruits.push('grape')", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "append() 是列表的方法，用于在末尾添加新元素。",
+              "relatedConcepts": ["list_methods", "append"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson4_level4",
+          "lessonId": "python_l1_lesson4",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "q16",
+              "content": "请写出获取列表 [5, 10, 15, 20] 长度的代码：",
+              "codeSnippet": ["nums = [5, 10, 15, 20]", "print(len(nums))"],
+              "options": [],
+              "acceptedAnswers": ["len([5, 10, 15, 20])", "len(nums)"],
+              "difficulty": "easy",
+              "explanation": "len() 函数可以获取列表的长度，返回列表中元素的个数。",
+              "relatedConcepts": ["len_function", "list_length"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "python_l1_lesson5",
+      "courseId": "python",
+      "title": "条件语句",
+      "level": 1,
+      "order": 5,
+      "isBoss": false,
+      "xpReward": 50,
+      "diamondReward": 1,
+      "levels": [
+        {
+          "id": "python_l1_lesson5_level1",
+          "lessonId": "python_l1_lesson5",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q17",
+              "content": "Python 中表示"如果...否则"的语法是？",
+              "codeSnippet": ["if condition:", "    # code", "else:", "    # code"],
+              "options": [
+                {"letter": "A", "content": "if condition { } else { }", "isCorrect": false},
+                {"letter": "B", "content": "if condition: else:", "isCorrect": true},
+                {"letter": "C", "content": "if condition then else", "isCorrect": false},
+                {"letter": "D", "content": "when condition else", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "Python 使用 if...else 结构，关键字后跟冒号，else 也必须带冒号。",
+              "relatedConcepts": ["if_statement", "else"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson5_level2",
+          "lessonId": "python_l1_lesson5",
+          "order": 2,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q18",
+              "content": "以下哪个比较运算符表示"大于等于"？",
+              "codeSnippet": ["x >= 5"],
+              "options": [
+                {"letter": "A", "content": ">", "isCorrect": false},
+                {"letter": "B", "content": "<", "isCorrect": false},
+                {"letter": "C", "content": ">=", "isCorrect": true},
+                {"letter": "D", "content": "=><", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["C"],
+              "difficulty": "easy",
+              "explanation": ">= 表示大于等于，> 表示大于，< 表示小于。",
+              "relatedConcepts": ["comparison_operators"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson5_level3",
+          "lessonId": "python_l1_lesson5",
+          "order": 3,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q19",
+              "content": "如何表示"x 大于 0 且小于 10"？",
+              "codeSnippet": ["if x > 0 and x < 10:"],
+              "options": [
+                {"letter": "A", "content": "x > 0 & x < 10", "isCorrect": false},
+                {"letter": "B", "content": "x > 0 and x < 10", "isCorrect": true},
+                {"letter": "C", "content": "x > 0 && x < 10", "isCorrect": false},
+                {"letter": "D", "content": "x > 0, x < 10", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "easy",
+              "explanation": "Python 中逻辑与使用关键字 and，逻辑或使用 or，逻辑非使用 not。",
+              "relatedConcepts": ["logical_operators", "and"],
+              "estimatedSeconds": 20
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson5_level4",
+          "lessonId": "python_l1_lesson5",
+          "order": 4,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "q20",
+              "content": "请写出判断变量 age 是否大于等于 18 的条件语句：",
+              "codeSnippet": ["if age >= 18:", "    print('成年人')"],
+              "options": [],
+              "acceptedAnswers": ["age >= 18", "age>=18"],
+              "difficulty": "medium",
+              "explanation": "使用比较运算符 >= 来判断是否大于等于。",
+              "relatedConcepts": ["comparison_operators", "if_statement"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 15,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_lesson5_level5",
+          "lessonId": "python_l1_lesson5",
+          "order": 5,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "q21",
+              "content": "以下代码的输出是什么？\nscore = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelse:\n    print('C')",
+              "codeSnippet": ["score = 85", "if score >= 90:", "    print('A')", "elif score >= 80:", "    print('B')", "else:", "    print('C')"],
+              "options": [
+                {"letter": "A", "content": "A", "isCorrect": false},
+                {"letter": "B", "content": "B", "isCorrect": true},
+                {"letter": "C", "content": "C", "isCorrect": false},
+                {"letter": "D", "content": "BC", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "score = 85 不满足 >= 90，但满足 >= 80，所以执行第二个分支打印 'B'。",
+              "relatedConcepts": ["elif", "conditional_chain"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": true
+          },
+          "xpReward": 10,
+          "diamondReward": 0
+        }
+      ]
+    },
+    {
+      "id": "python_l1_boss",
+      "courseId": "python",
+      "title": "Python \u57fa\u7840\u5927\u6311\u6218",
+      "level": 1,
+      "order": 6,
+      "isBoss": true,
+      "xpReward": 200,
+      "diamondReward": 5,
+      "levels": [
+        {
+          "id": "python_l1_boss_level1",
+          "lessonId": "python_l1_boss",
+          "order": 1,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "boss_q1",
+              "content": "\u4ee5\u4e0b\u54ea\u4e2a\u8868\u8fbe\u5f0f\u7684\u7ed3\u679c\u662f True\uff1f",
+              "codeSnippet": ["x = 10", "y = '10'"],
+              "options": [
+                {"letter": "A", "content": "x == y", "isCorrect": false},
+                {"letter": "B", "content": "x == int(y)", "isCorrect": true},
+                {"letter": "C", "content": "x is y", "isCorrect": false},
+                {"letter": "D", "content": "type(x) == type(y)", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "x \u662f\u6574\u6570 10\uff0cy \u662f\u5b57\u7b26\u4e32 '10'\u3002\u7528 int(y) \u5c06\u5b57\u7b26\u4e32\u8f6c\u6362\u4e3a\u6574\u6570\u540e\uff0cx == int(y) \u4e3a True\u3002",
+              "relatedConcepts": ["type_conversion", "comparison"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_boss_level2",
+          "lessonId": "python_l1_boss",
+          "order": 2,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "boss_q2",
+              "content": "\u8bf7\u5199\u51fa\u4ee3\u7801\uff1a\u521b\u5efa\u4e00\u4e2a\u5305\u542b 1 \u5230 5 \u7684\u5217\u8868\uff0c\u5e76\u83b7\u53d6\u5176\u957f\u5ea6\uff1a",
+              "codeSnippet": ["nums = [1, 2, 3, 4, 5]", "print(len(nums))"],
+              "options": [],
+              "acceptedAnswers": ["len([1, 2, 3, 4, 5])", "len(nums)"],
+              "difficulty": "medium",
+              "explanation": "len() \u51fd\u6570\u8fd4\u56de\u5217\u8868\u7684\u5143\u7d20\u4e2a\u6570\uff0c[1, 2, 3, 4, 5] \u5305\u542b 5 \u4e2a\u5143\u7d20\u3002",
+              "relatedConcepts": ["list_creation", "len_function"],
+              "estimatedSeconds": 30
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_boss_level3",
+          "lessonId": "python_l1_boss",
+          "order": 3,
+          "type": "sort",
+          "questions": [
+            {
+              "id": "boss_q3",
+              "content": "\u5c06\u4ee5\u4e0b\u4ee3\u7801\u6309\u6b63\u786e\u6267\u884c\u987a\u5e8f\u6392\u5217\uff1a",
+              "codeSnippet": [],
+              "options": [
+                {"letter": "A", "content": "x = 10", "isCorrect": false},
+                {"letter": "B", "content": "print(x)", "isCorrect": false},
+                {"letter": "C", "content": "x = x + 5", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["ACB"],
+              "difficulty": "medium",
+              "explanation": "\u5148\u8d4b\u503c x = 10\uff0c\u7136\u540e\u4fee\u6539 x = x + 5\uff08x \u53d8\u4e3a 15\uff09\uff0c\u6700\u540e\u6253\u5370 print(x) \u8f93\u51fa 15\u3002",
+              "relatedConcepts": ["variable_assignment", "execution_order"],
+              "estimatedSeconds": 40
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_boss_level4",
+          "lessonId": "python_l1_boss",
+          "order": 4,
+          "type": "choice",
+          "questions": [
+            {
+              "id": "boss_q4",
+              "content": "\u4ee5\u4e0b\u4ee3\u7801\u7684\u8f93\u51fa\u662f\u4ec0\u4e48\uff1f\nfruits = ['apple', 'banana', 'cherry']\nfruits.append('date')\nprint(len(fruits))",
+              "codeSnippet": ["fruits = ['apple', 'banana', 'cherry']", "fruits.append('date')", "print(len(fruits))"],
+              "options": [
+                {"letter": "A", "content": "3", "isCorrect": false},
+                {"letter": "B", "content": "4", "isCorrect": true},
+                {"letter": "C", "content": "5", "isCorrect": false},
+                {"letter": "D", "content": "\u62a5\u9519", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["B"],
+              "difficulty": "medium",
+              "explanation": "\u521d\u59cb\u5217\u8868\u6709 3 \u4e2a\u5143\u7d20\uff0cappend('date') \u6dfb\u52a0 1 \u4e2a\uff0c\u603b\u5171 4 \u4e2a\u5143\u7d20\u3002",
+              "relatedConcepts": ["list_methods", "append", "len_function"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 70,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_boss_level5",
+          "lessonId": "python_l1_boss",
+          "order": 5,
+          "type": "sort",
+          "questions": [
+            {
+              "id": "boss_q5",
+              "content": "\u5c06\u4ee5\u4e0b\u4ee3\u7801\u6309\u6b63\u786e\u987a\u5e8f\u6392\u5217\uff0c\u4f7f\u5176\u80fd\u6b63\u786e\u5224\u65ad\u5e76\u8f93\u51fa\u6210\u7ee9\u7b49\u7ea7\uff1a",
+              "codeSnippet": [],
+              "options": [
+                {"letter": "A", "content": "score = 85", "isCorrect": false},
+                {"letter": "B", "content": "if score >= 90:", "isCorrect": false},
+                {"letter": "C", "content": "    print('A')", "isCorrect": false},
+                {"letter": "D", "content": "elif score >= 80:", "isCorrect": false},
+                {"letter": "E", "content": "    print('B')", "isCorrect": false}
+              ],
+              "acceptedAnswers": ["ABDCE", "ABCDE"],
+              "difficulty": "hard",
+              "explanation": "\u5148\u8d4b\u503c score = 85\uff0c\u7136\u540e\u5199 if \u5224\u65ad >= 90 \u53ca\u5176 print('A')\uff0c\u63a5\u7740 elif >= 80 \u53ca\u5176 print('B')\u3002\u7b2c\u4e00\u4e2a\u5206\u652f\u4e0d\u6ee1\u8db3\uff0c\u6267\u884c\u7b2c\u4e8c\u4e2a\u5206\u652f\u8f93\u51fa B\u3002",
+              "relatedConcepts": ["if_statement", "elif", "execution_order"],
+              "estimatedSeconds": 45
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        },
+        {
+          "id": "python_l1_boss_level6",
+          "lessonId": "python_l1_boss",
+          "order": 6,
+          "type": "fillBlank",
+          "questions": [
+            {
+              "id": "boss_q6",
+              "content": "\u8bf7\u5199\u51fa\u8ba1\u7b97 2 \u7684 10 \u6b21\u65b9\u7684 Python \u8868\u8fbe\u5f0f\uff1a",
+              "codeSnippet": ["result = 2 ** 10", "print(result)  # 1024"],
+              "options": [],
+              "acceptedAnswers": ["2 ** 10", "2**10", "2 **10", "2** 10"],
+              "difficulty": "medium",
+              "explanation": "** \u662f Python \u7684\u5e42\u8fd0\u7b97\u7b26\uff0c2 ** 10 \u8868\u793a 2 \u7684 10 \u6b21\u65b9\uff0c\u7ed3\u679c\u4e3a 1024\u3002",
+              "relatedConcepts": ["exponentiation", "power"],
+              "estimatedSeconds": 25
+            }
+          ],
+          "passCondition": {
+            "requiredCorrectRate": 100,
+            "allowSkip": false
+          },
+          "xpReward": 20,
+          "diamondReward": 0
+        }
+      ]
+    }
+  ]
+}

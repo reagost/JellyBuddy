@@ -1,0 +1,22 @@
+{
+  "courses": [
+    {
+      "id": "python",
+      "name": "Python",
+      "icon": "🐍",
+      "description": "Python 编程入门",
+      "difficulty": "beginner",
+      "level": "L1",
+      "estimatedHours": 10
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "icon": "⚡",
+      "description": "JavaScript 编程入门",
+      "difficulty": "beginner",
+      "level": "L1",
+      "estimatedHours": 10
+    }
+  ]
+}

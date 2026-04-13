@@ -1,0 +1,26 @@
+name: jelly_llm
+description: Cross-platform local LLM inference plugin for JellyBuddy
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.19.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.0
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: JellyLlmPlugin
+      macos:
+        pluginClass: JellyLlmPlugin
+      android:
+        package: com.jellybuddy.jelly_llm
+        pluginClass: JellyLlmPlugin
+      windows:
+        pluginClass: JellyLlmPluginCApi
