@@ -18,6 +18,7 @@ import '../../widgets/game/xp_progress_bar.dart';
 import '../../widgets/game/streak_counter.dart';
 import '../../widgets/game/diamond_display.dart';
 import '../../widgets/common/skeleton_loader.dart';
+import '../../widgets/learning_path/learning_path_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundOf(context),
       body: SafeArea(
         child: BlocBuilder<GameBloc, GameState>(
           builder: (context, state) {
@@ -103,12 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 12),
-                                const Text(
+                                Text(
                                   'JellyBuddy',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: AppColors.textPrimary,
+                                    color: AppColors.textPrimaryOf(context),
                                   ),
                                 ),
                               ],
@@ -206,10 +207,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         // Lessons Section
                         Text(
                           '\u{1F4DA} ${AppLocalizations.of(context)!.homePythonLessons}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: AppColors.textPrimaryOf(context),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -229,9 +230,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 )
                               : _course != null
-                                  ? Column(
+                                  ? LearningPathWidget(
                                       key: const ValueKey('lessons'),
-                                      children: _buildLessonList(state),
+                                      lessons: _course!.lessons,
+                                      completedLessonIds: _completedLessonIds,
+                                      lessonResults: _lessonResults,
+                                      onLessonTap: (lesson) async {
+                                        await context.push('/lesson/${lesson.courseId}/${lesson.id}');
+                                        _loadCourseData();
+                                      },
+                                      heartsEmpty: state.progress.hearts == 0,
                                     )
                                   : Text(
                                       AppLocalizations.of(context)!.homeFailedToLoadCourse,
@@ -256,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.cardOf(context),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -286,26 +294,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     '\u{1F4CA} ${AppLocalizations.of(context)!.homeStatsTitle}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimaryOf(context),
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     AppLocalizations.of(context)!.homeStatsSubtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: AppColors.textSecondaryOf(context),
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: AppColors.textHint,
+              color: AppColors.textHintOf(context),
             ),
           ],
         ),
@@ -319,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.cardOf(context),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -349,26 +357,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     '\u{1F4DD} ${AppLocalizations.of(context)!.homeReviewBook}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimaryOf(context),
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     AppLocalizations.of(context)!.homeReviewSubtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: AppColors.textSecondaryOf(context),
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: AppColors.textHint,
+              color: AppColors.textHintOf(context),
             ),
           ],
         ),
@@ -446,16 +454,16 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           '\u{1F3AF} ${AppLocalizations.of(context)!.homeDailyTasks}',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: AppColors.textPrimary,
+            color: AppColors.textPrimaryOf(context),
           ),
         ),
         const SizedBox(height: 12),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.cardOf(context),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -554,150 +562,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> _buildLessonList(GameState state) {
-    final lessons = _course!.lessons;
-    final heartsEmpty = state.progress.hearts == 0;
-    // Sort by order to ensure correct sequence
-    final sorted = List<Lesson>.from(lessons)..sort((a, b) => a.order.compareTo(b.order));
-
-    // Find the first uncompleted lesson index
-    int firstUncompletedIndex = sorted.length; // default: all completed
-    for (int i = 0; i < sorted.length; i++) {
-      if (!_completedLessonIds.contains(sorted[i].id)) {
-        firstUncompletedIndex = i;
-        break;
-      }
-    }
-
-    final widgets = <Widget>[];
-    for (int i = 0; i < sorted.length; i++) {
-      final lesson = sorted[i];
-      _LessonStatus status;
-      if (_completedLessonIds.contains(lesson.id)) {
-        status = _LessonStatus.completed;
-      } else if (i == firstUncompletedIndex) {
-        status = _LessonStatus.active;
-      } else {
-        status = _LessonStatus.locked;
-      }
-      widgets.add(_buildLessonCard(lesson, status, heartsEmpty: heartsEmpty));
-    }
-    return widgets;
-  }
-
-  Widget _buildLessonCard(Lesson lesson, _LessonStatus status, {bool heartsEmpty = false}) {
-    final questionCount = lesson.levels.fold<int>(0, (sum, l) => sum + l.questions.length);
-    final isLocked = status == _LessonStatus.locked;
-    final isCompleted = status == _LessonStatus.completed;
-    // When hearts are empty, disable all non-completed lessons
-    final isDisabledByHearts = heartsEmpty && !isCompleted;
-    final effectivelyLocked = isLocked || isDisabledByHearts;
-    final result = _lessonResults[lesson.id];
-
-    return GestureDetector(
-      onTap: effectivelyLocked
-          ? null
-          : () async {
-              await context.push('/lesson/${lesson.courseId}/${lesson.id}');
-              // Reload progress when returning from a lesson
-              _loadCourseData();
-            },
-      child: Opacity(
-        opacity: effectivelyLocked ? 0.5 : 1.0,
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isCompleted
-                ? AppColors.primary.withValues(alpha: 0.05)
-                : isDisabledByHearts
-                    ? Colors.grey.withValues(alpha: 0.05)
-                    : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
-                blurRadius: 20,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: isCompleted
-                      ? AppColors.primary.withValues(alpha: 0.15)
-                      : effectivelyLocked
-                          ? Colors.grey.withValues(alpha: 0.1)
-                          : AppColors.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Center(
-                  child: isCompleted
-                      ? const Icon(Icons.check_circle, color: AppColors.primary, size: 28)
-                      : Text(
-                          '${lesson.order}',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: effectivelyLocked ? Colors.grey : AppColors.primary,
-                          ),
-                        ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      lesson.title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: effectivelyLocked ? AppColors.textSecondary : AppColors.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    if (isCompleted && result != null)
-                      Text(
-                        AppLocalizations.of(context)!.homeLessonResult(result.score, result.correctCount, result.totalCount, lesson.xpReward),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    else
-                      Text(
-                        AppLocalizations.of(context)!.homeLessonQuestions(questionCount, lesson.xpReward),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              if (isCompleted)
-                const Icon(Icons.check_circle, color: AppColors.primary, size: 36)
-              else if (effectivelyLocked)
-                Icon(
-                  isDisabledByHearts ? Icons.heart_broken : Icons.lock,
-                  color: Colors.grey,
-                  size: 36,
-                )
-              else
-                const Icon(Icons.play_circle_fill, color: AppColors.primary, size: 36),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
-
-enum _LessonStatus { completed, active, locked }

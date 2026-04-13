@@ -9,6 +9,7 @@ import '../../presentation/screens/settings/settings_screen.dart';
 import '../../presentation/screens/ai_tutor/ai_tutor_screen.dart';
 import '../../presentation/screens/review/review_screen.dart';
 import '../../presentation/screens/stats/stats_screen.dart';
+import '../../presentation/screens/leaderboard/leaderboard_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -67,6 +68,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: '/leaderboard',
+      builder: (context, state) => const LeaderboardScreen(),
     ),
   ],
 );

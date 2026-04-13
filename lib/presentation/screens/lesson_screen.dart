@@ -13,6 +13,7 @@ import '../../domain/entities/question.dart';
 import '../../domain/entities/user.dart';
 import '../../data/services/achievement_service.dart';
 import '../../data/services/daily_task_service.dart';
+import '../../data/services/leaderboard_service.dart';
 import '../../data/services/notification_service.dart';
 import '../../domain/repositories/i_learning_repository.dart';
 import '../blocs/game/game_bloc.dart';
@@ -64,9 +65,13 @@ class _LessonScreenState extends State<LessonScreen>
   bool _animateHeartPulse = false;
   bool _showXpPopup = false;
 
+  // Lesson timing
+  late DateTime _lessonStartTime;
+
   @override
   void initState() {
     super.initState();
+    _lessonStartTime = DateTime.now();
     _loadLesson();
   }
 
@@ -148,7 +153,7 @@ class _LessonScreenState extends State<LessonScreen>
     final total = _questions.length;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundOf(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -203,7 +208,7 @@ class _LessonScreenState extends State<LessonScreen>
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         borderRadius: AppDecorations.cardRadius,
         border: Border.all(
           color: _showResult
@@ -446,7 +451,7 @@ class _LessonScreenState extends State<LessonScreen>
           ),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.cardOf(context),
             borderRadius: AppDecorations.cardRadius,
             border: Border.all(
               color: _showResult
@@ -598,7 +603,7 @@ class _LessonScreenState extends State<LessonScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -880,7 +885,7 @@ class _LessonScreenState extends State<LessonScreen>
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -1078,6 +1083,7 @@ class _LessonScreenState extends State<LessonScreen>
     final isPerfect = score >= 80;
     final bossFailed = _isBoss && score < 70;
     final totalXp = _currentXp + GameConstants.xpPerLevelComplete + (isPerfect ? GameConstants.xpPerfectBonus : 0);
+    final timeSpent = DateTime.now().difference(_lessonStartTime);
 
     // Don't reward if BOSS challenge failed
     if (!bossFailed) {
@@ -1109,11 +1115,19 @@ class _LessonScreenState extends State<LessonScreen>
           score: score,
           correctCount: _correctCount,
           totalCount: _questions.length,
-          timeSpent: Duration.zero,
+          timeSpent: timeSpent,
           isPerfect: isPerfect,
           completedAt: DateTime.now(),
           wrongQuestionIds: _wrongQuestionIds,
         ),
+      );
+
+      // Record stats for leaderboard
+      final leaderboardService = GetIt.instance<LeaderboardService>();
+      leaderboardService.recordLessonCompletion(
+        xpEarned: totalXp,
+        isPerfect: isPerfect,
+        timeSpent: timeSpent,
       );
 
       // Check and unlock achievements
@@ -1211,14 +1225,17 @@ class _LessonScreenState extends State<LessonScreen>
         _buildStatItem('\u{1F48E}', '+${_lesson?.diamondReward ?? 1}', l10n.lessonStatDiamond),
     ];
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
         gradient: _isBoss
-            ? const LinearGradient(
-                colors: [Color(0xFFFFF8E1), Colors.white],
+            ? LinearGradient(
+                colors: isDark
+                    ? [const Color(0xFF3E3A20), AppColors.darkSurface]
+                    : [const Color(0xFFFFF8E1), Colors.white],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               )

@@ -40,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _toggleDarkMode(bool value) async {
     await _storage.setString('dark_mode', value.toString());
+    themeModeNotifier.value = value ? ThemeMode.dark : ThemeMode.light;
     setState(() => _darkMode = value);
   }
 
@@ -131,11 +132,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final currentLocale = _currentLocaleCode();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundOf(context),
       appBar: AppBar(
         title: Text(l10n.settingsTitle),
-        backgroundColor: AppColors.background,
-        foregroundColor: AppColors.textPrimary,
+        backgroundColor: AppColors.backgroundOf(context),
+        foregroundColor: AppColors.textPrimaryOf(context),
         elevation: 0,
       ),
       body: ListView(
@@ -232,10 +233,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       padding: const EdgeInsets.only(left: 4, bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: AppColors.textSecondary,
+          color: AppColors.textSecondaryOf(context),
         ),
       ),
     );
@@ -247,7 +248,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         borderRadius: BorderRadius.circular(16),
         border: borderColor != null ? Border.all(color: borderColor) : null,
         boxShadow: [
@@ -277,15 +278,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       title: Text(
         l10n.settingsLanguage,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: AppColors.textPrimaryOf(context),
         ),
       ),
       subtitle: Text(
         l10n.settingsLanguageSubtitle,
-        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+        style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
       ),
       trailing: SegmentedButton<String>(
         segments: [
@@ -317,15 +318,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       title: Text(
         l10n.settingsDarkMode,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: AppColors.textPrimaryOf(context),
         ),
       ),
       subtitle: Text(
         l10n.settingsDarkModeSubtitle,
-        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+        style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
       ),
       trailing: Switch(
         value: _darkMode,
@@ -358,14 +359,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: titleColor ?? AppColors.textPrimary,
+          color: titleColor ?? AppColors.textPrimaryOf(context),
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+        style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
       ),
-      trailing: const Icon(Icons.chevron_right, color: AppColors.textHint),
+      trailing: Icon(Icons.chevron_right, color: AppColors.textHintOf(context)),
       onTap: onTap,
     );
   }
@@ -387,10 +388,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: AppColors.textPrimaryOf(context),
         ),
       ),
       trailing: trailing != null
@@ -398,9 +399,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               constraints: const BoxConstraints(maxWidth: 180),
               child: Text(
                 trailing,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
-                  color: AppColors.textSecondary,
+                  color: AppColors.textSecondaryOf(context),
                 ),
                 textAlign: TextAlign.end,
                 overflow: TextOverflow.ellipsis,

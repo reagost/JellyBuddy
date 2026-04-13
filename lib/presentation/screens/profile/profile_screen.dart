@@ -7,19 +7,104 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../core/constants/game_constants.dart';
 import '../../../data/services/achievement_service.dart';
+import '../../../data/services/storage_service.dart';
 import '../../blocs/game/game_bloc.dart';
+import '../../blocs/game/game_event.dart';
 import '../../blocs/game/game_state.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   /// Default courseId used for achievement progress queries.
   static const _defaultCourseId = 'python';
+
+  static const List<String> _avatarOptions = [
+    '\u{1F9D1}\u{200D}\u{1F4BB}', // person technologist
+    '\u{1F469}\u{200D}\u{1F4BB}', // woman technologist
+    '\u{1F9D1}\u{200D}\u{1F393}', // student
+    '\u{1F468}\u{200D}\u{1F3EB}', // teacher
+    '\u{1F98A}',                   // fox
+    '\u{1F431}',                   // cat
+  ];
+
+  String _selectedAvatar = '\u{1F9D1}\u{200D}\u{1F4BB}';
+
+  @override
+  void initState() {
+    super.initState();
+    final storage = GetIt.instance<StorageService>();
+    final saved = storage.getString('user_avatar');
+    if (saved != null && _avatarOptions.contains(saved)) {
+      _selectedAvatar = saved;
+    }
+  }
+
+  void _showEditNameDialog(BuildContext context, String currentName) {
+    final controller = TextEditingController(text: currentName);
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text('修改用户名'),
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            maxLength: 20,
+            decoration: InputDecoration(
+              hintText: '输入新用户名',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('取消'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final newName = controller.text.trim();
+                if (newName.isNotEmpty) {
+                  context.read<GameBloc>().add(UpdateUserName(newName));
+                }
+                Navigator.of(dialogContext).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text('保存'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _selectAvatar(String avatar) async {
+    final storage = GetIt.instance<StorageService>();
+    await storage.setString('user_avatar', avatar);
+    setState(() {
+      _selectedAvatar = avatar;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundOf(context),
       body: SafeArea(
         child: BlocBuilder<GameBloc, GameState>(
           builder: (context, state) {
@@ -49,17 +134,62 @@ class ProfileScreen extends StatelessWidget {
                             color: Colors.white.withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
-                          child: const Center(
-                            child: Text('🧑‍💻', style: TextStyle(fontSize: 40)),
+                          child: Center(
+                            child: Text(_selectedAvatar,
+                                style: const TextStyle(fontSize: 40)),
                           ),
                         ),
+                        const SizedBox(height: 8),
+                        // Avatar selection row
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _avatarOptions.map((avatar) {
+                            final isSelected = avatar == _selectedAvatar;
+                            return GestureDetector(
+                              onTap: () => _selectAvatar(avatar),
+                              child: Container(
+                                width: 38,
+                                height: 38,
+                                margin: const EdgeInsets.symmetric(horizontal: 3),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? Colors.white.withValues(alpha: 0.35)
+                                      : Colors.white.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                  border: isSelected
+                                      ? Border.all(color: Colors.white, width: 2)
+                                      : null,
+                                ),
+                                child: Center(
+                                  child: Text(avatar,
+                                      style: const TextStyle(fontSize: 18)),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                         const SizedBox(height: 12),
-                        Text(
-                          progress.userName,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        GestureDetector(
+                          onTap: () => _showEditNameDialog(context, progress.userName),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                progress.userName,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              const Icon(
+                                Icons.edit,
+                                color: Colors.white70,
+                                size: 18,
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -85,17 +215,17 @@ class ProfileScreen extends StatelessWidget {
                   // Stats Grid
                   Row(
                     children: [
-                      Expanded(child: _buildStatCard('⚡', '${progress.totalXp}', 'XP')),
+                      Expanded(child: _buildStatCard(context, '⚡', '${progress.totalXp}', 'XP')),
                       const SizedBox(width: 12),
-                      Expanded(child: _buildStatCard('🔥', '${progress.streak}', AppLocalizations.of(context)!.profileStreakDays)),
+                      Expanded(child: _buildStatCard(context, '🔥', '${progress.streak}', AppLocalizations.of(context)!.profileStreakDays)),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Expanded(child: _buildStatCard('💎', '${progress.diamonds}', AppLocalizations.of(context)!.profileDiamonds)),
+                      Expanded(child: _buildStatCard(context, '💎', '${progress.diamonds}', AppLocalizations.of(context)!.profileDiamonds)),
                       const SizedBox(width: 12),
-                      Expanded(child: _buildStatCard('❤️', '${progress.hearts}/5', AppLocalizations.of(context)!.profileHearts)),
+                      Expanded(child: _buildStatCard(context, '❤️', '${progress.hearts}/5', AppLocalizations.of(context)!.profileHearts)),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -105,7 +235,7 @@ class ProfileScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.cardOf(context),
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
@@ -123,17 +253,17 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.profileLevelProgress,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                                color: AppColors.textPrimaryOf(context),
                               ),
                             ),
                             Text(
                               '${progress.totalXp} / $nextLevelXp XP',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 14,
-                                color: AppColors.textSecondary,
+                                color: AppColors.textSecondaryOf(context),
                               ),
                             ),
                           ],
@@ -157,8 +287,17 @@ class ProfileScreen extends StatelessWidget {
 
                   // Achievements Section
                   _buildAchievementsSection(state, progress),
-                  // Settings
+                  // Leaderboard link
                   const SizedBox(height: 24),
+                  _buildSettingsItem(
+                    context,
+                    icon: Icons.leaderboard_outlined,
+                    title: '个人排行榜',
+                    subtitle: '查看个人最佳记录',
+                    onTap: () => context.push('/leaderboard'),
+                  ),
+                  // Settings
+                  const SizedBox(height: 12),
                   _buildSettingsItem(
                     context,
                     icon: Icons.smart_toy_outlined,
@@ -198,7 +337,7 @@ class ProfileScreen extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.cardOf(context),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -213,10 +352,10 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.profileAchievements,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+                  color: AppColors.textPrimaryOf(context),
                 ),
               ),
               const SizedBox(height: 12),
@@ -249,14 +388,14 @@ class ProfileScreen extends StatelessWidget {
                                   achievement.nameZh,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    color: isUnlocked ? AppColors.textPrimary : AppColors.textHint,
+                                    color: isUnlocked ? AppColors.textPrimaryOf(context) : AppColors.textHintOf(context),
                                   ),
                                 ),
                                 Text(
                                   achievement.description,
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isUnlocked ? AppColors.textSecondary : AppColors.textHint,
+                                    color: isUnlocked ? AppColors.textSecondaryOf(context) : AppColors.textHintOf(context),
                                   ),
                                 ),
                               ],
@@ -310,7 +449,7 @@ class ProfileScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.cardOf(context),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -338,34 +477,34 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimaryOf(context),
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: AppColors.textSecondaryOf(context),
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: AppColors.textHint),
+            Icon(Icons.chevron_right, color: AppColors.textHintOf(context)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildStatCard(String emoji, String value, String label) {
+  Widget _buildStatCard(BuildContext context, String emoji, String value, String label) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardOf(context),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -381,17 +520,17 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
+              color: AppColors.textPrimaryOf(context),
             ),
           ),
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
-              color: AppColors.textSecondary,
+              color: AppColors.textSecondaryOf(context),
             ),
           ),
         ],

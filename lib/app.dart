@@ -4,14 +4,16 @@ import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jelly_llm/jelly_llm.dart';
 import 'core/router/app_router.dart';
-import 'core/theme/app_colors.dart';
+import 'core/theme/app_theme_data.dart';
 import 'data/services/storage_service.dart';
 import 'data/services/progress_service.dart';
 import 'data/services/daily_task_service.dart';
 import 'data/services/achievement_service.dart';
 import 'data/services/model_download_service.dart';
 import 'data/services/notification_service.dart';
+import 'data/services/search_service.dart';
 import 'data/services/stats_service.dart';
+import 'data/services/leaderboard_service.dart';
 import 'data/repositories/game_repository_impl.dart';
 import 'data/repositories/learning_repository_impl.dart';
 import 'data/repositories/ai_repository_impl.dart';
@@ -30,6 +32,12 @@ final getIt = GetIt.instance;
 /// Read from StorageService on startup; written when the user switches
 /// language in the Settings screen.
 final ValueNotifier<Locale?> localeNotifier = ValueNotifier<Locale?>(null);
+
+/// Global ValueNotifier that drives dark/light theme changes.
+/// Read from StorageService on startup; written when the user toggles
+/// dark mode in the Settings screen.
+final ValueNotifier<ThemeMode> themeModeNotifier =
+    ValueNotifier<ThemeMode>(ThemeMode.light);
 
 Future<void> setupDependencies() async {
   // Storage
@@ -67,6 +75,11 @@ Future<void> setupDependencies() async {
     ),
   );
 
+  // Search Service
+  getIt.registerLazySingleton<SearchService>(
+    () => SearchService(learningRepo: getIt<ILearningRepository>()),
+  );
+
   // Achievement Service
   getIt.registerLazySingleton<AchievementService>(
     () => AchievementService(
@@ -85,6 +98,14 @@ Future<void> setupDependencies() async {
       learningRepo: getIt<ILearningRepository>(),
       gameRepo: getIt<IGameRepository>(),
       storage: getIt<StorageService>(),
+    ),
+  );
+
+  // Leaderboard Service
+  getIt.registerLazySingleton<LeaderboardService>(
+    () => LeaderboardService(
+      storage: getIt<StorageService>(),
+      statsService: getIt<StatsService>(),
     ),
   );
 
@@ -114,22 +135,33 @@ class _JellyBuddyAppState extends State<JellyBuddyApp> {
   @override
   void initState() {
     super.initState();
-    // Seed the notifier from persisted preference.
-    final stored = getIt<StorageService>().getString('app_locale');
-    if (stored != null) {
-      localeNotifier.value = Locale(stored);
+    final storage = getIt<StorageService>();
+
+    // Seed locale notifier from persisted preference.
+    final storedLocale = storage.getString('app_locale');
+    if (storedLocale != null) {
+      localeNotifier.value = Locale(storedLocale);
     }
-    localeNotifier.addListener(_onLocaleChanged);
+
+    // Seed theme mode notifier from persisted preference.
+    final storedDark = storage.getString('dark_mode');
+    if (storedDark == 'true') {
+      themeModeNotifier.value = ThemeMode.dark;
+    }
+
+    localeNotifier.addListener(_rebuild);
+    themeModeNotifier.addListener(_rebuild);
   }
 
   @override
   void dispose() {
-    localeNotifier.removeListener(_onLocaleChanged);
+    localeNotifier.removeListener(_rebuild);
+    themeModeNotifier.removeListener(_rebuild);
     super.dispose();
   }
 
-  void _onLocaleChanged() {
-    setState(() {}); // rebuild MaterialApp with new locale
+  void _rebuild() {
+    setState(() {}); // rebuild MaterialApp with new locale / theme
   }
 
   @override
@@ -146,13 +178,9 @@ class _JellyBuddyAppState extends State<JellyBuddyApp> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: localeNotifier.value,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: AppColors.primary,
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-        ),
+        theme: AppThemeData.light(),
+        darkTheme: AppThemeData.dark(),
+        themeMode: themeModeNotifier.value,
         routerConfig: appRouter,
       ),
     );

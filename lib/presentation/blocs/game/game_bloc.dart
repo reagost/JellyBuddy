@@ -30,6 +30,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<SpendDiamond>(_onSpendDiamond);
     on<UnlockAchievement>(_onUnlockAchievement);
     on<ClearLevelUpNotification>(_onClearLevelUpNotification);
+    on<UpdateUserName>(_onUpdateUserName);
   }
 
   Future<void> _onLoadUserProgress(
@@ -123,5 +124,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     Emitter<GameState> emit,
   ) {
     emit(state.copyWith(justLeveledUp: false));
+  }
+
+  Future<void> _onUpdateUserName(
+    UpdateUserName event,
+    Emitter<GameState> emit,
+  ) async {
+    final updated = state.progress.copyWith(userName: event.name);
+    await gameRepo.saveUserProgress(updated);
+    emit(state.copyWith(progress: updated));
   }
 }

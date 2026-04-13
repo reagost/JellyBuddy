@@ -52,3 +52,11 @@ class SpendDiamond extends GameEvent {
 }
 
 class ClearLevelUpNotification extends GameEvent {}
+
+class UpdateUserName extends GameEvent {
+  final String name;
+  const UpdateUserName(this.name);
+
+  @override
+  List<Object?> get props => [name];
+}

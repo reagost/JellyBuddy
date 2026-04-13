@@ -33,4 +33,40 @@ class AppColors {
   static const Color easy = Color(0xFF2ED573);
   static const Color medium = Color(0xFFFFA502);
   static const Color hard = Color(0xFFFF4757);
+
+  // Dark mode variants
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
+  static const Color darkSurfaceVariant = Color(0xFF2C2C2C);
+  static const Color darkTextPrimary = Color(0xFFE0E0E0);
+  static const Color darkTextSecondary = Color(0xFF9E9E9E);
+  static const Color darkTextHint = Color(0xFF757575);
+
+  // ---------------------------------------------------------------------------
+  // Context-aware helpers — return the right color for current brightness.
+  // ---------------------------------------------------------------------------
+  static bool _isDark(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark;
+
+  static Color backgroundOf(BuildContext context) =>
+      _isDark(context) ? darkBackground : background;
+
+  static Color surfaceOf(BuildContext context) =>
+      _isDark(context) ? darkSurface : surface;
+
+  static Color surfaceVariantOf(BuildContext context) =>
+      _isDark(context) ? darkSurfaceVariant : surfaceVariant;
+
+  static Color textPrimaryOf(BuildContext context) =>
+      _isDark(context) ? darkTextPrimary : textPrimary;
+
+  static Color textSecondaryOf(BuildContext context) =>
+      _isDark(context) ? darkTextSecondary : textSecondary;
+
+  static Color textHintOf(BuildContext context) =>
+      _isDark(context) ? darkTextHint : textHint;
+
+  /// Card-like surface color (replaces hardcoded `Colors.white`).
+  static Color cardOf(BuildContext context) =>
+      _isDark(context) ? darkSurface : Colors.white;
 }
