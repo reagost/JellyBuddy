@@ -118,11 +118,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 IconButton(
                                   icon: const Icon(Icons.notifications_outlined),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('暂无新通知'),
+                                        duration: Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.settings_outlined),
-                                  onPressed: () {},
+                                  onPressed: () => context.push('/settings'),
                                 ),
                               ],
                             ),
