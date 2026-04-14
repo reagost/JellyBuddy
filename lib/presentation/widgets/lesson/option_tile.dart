@@ -38,7 +38,11 @@ class OptionTile extends StatelessWidget {
         backgroundColor = AppColors.error.withOpacity(0.1);
     }
 
-    return GestureDetector(
+    return Semantics(
+      label: 'Option $optionLetter: $content',
+      button: true,
+      selected: state == OptionState.selected,
+      child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: AppDurations.fast,
@@ -85,6 +89,7 @@ class OptionTile extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }

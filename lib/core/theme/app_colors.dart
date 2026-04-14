@@ -18,7 +18,7 @@ class AppColors {
   // Text
   static const Color textPrimary = Color(0xFF1A1A2E);
   static const Color textSecondary = Color(0xFF6B6B80);
-  static const Color textHint = Color(0xFFA0A0B0);
+  static const Color textHint = Color(0xFF747489);
 
   // Game elements
   static const Color xpGold = Color(0xFFFFD700);
@@ -40,7 +40,7 @@ class AppColors {
   static const Color darkSurfaceVariant = Color(0xFF2C2C2C);
   static const Color darkTextPrimary = Color(0xFFE0E0E0);
   static const Color darkTextSecondary = Color(0xFF9E9E9E);
-  static const Color darkTextHint = Color(0xFF757575);
+  static const Color darkTextHint = Color(0xFF8A8A8A);
 
   // ---------------------------------------------------------------------------
   // Context-aware helpers — return the right color for current brightness.

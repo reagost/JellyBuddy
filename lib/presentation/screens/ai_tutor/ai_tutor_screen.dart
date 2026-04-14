@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -125,8 +127,11 @@ class _AITutorScreenState extends State<AITutorScreen> {
           });
         },
         builder: (context, state) {
+          final aiRepo = GetIt.instance<IAIRepository>();
+          final modelNotLoaded = aiRepo.modelState != ModelState.ready;
           return Column(
             children: [
+              if (modelNotLoaded) _buildModelNotLoadedBanner(),
               Expanded(
                 child: state.messages.isEmpty
                     ? _buildWelcome()
@@ -273,6 +278,44 @@ class _AITutorScreenState extends State<AITutorScreen> {
     );
   }
 
+  Widget _buildModelNotLoadedBanner() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      color: const Color(0xFFFFF9C4), // light yellow
+      child: Row(
+        children: [
+          const Text('\u{1F4A1}', style: TextStyle(fontSize: 16)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '本地 AI 模型未加载，当前使用预设答案。前往「我的 \u{2192} AI 模型管理」下载模型。',
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.brown.shade700,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () => context.push('/model-settings'),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: Text(
+              '去下载',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: AppColors.primary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildInputArea(AITutorState state) {
     return Container(
       padding: EdgeInsets.only(
@@ -327,19 +370,23 @@ class _AITutorScreenState extends State<AITutorScreen> {
             child: InkWell(
               onTap: state.isGenerating ? null : _sendMessage,
               borderRadius: BorderRadius.circular(24),
-              child: Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: state.isGenerating
-                      ? AppColors.primary.withValues(alpha: 0.5)
-                      : AppColors.primary,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.send_rounded,
-                  color: Colors.white,
-                  size: 20,
+              child: Semantics(
+                label: 'Send message',
+                button: true,
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: state.isGenerating
+                        ? AppColors.primary.withValues(alpha: 0.5)
+                        : AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
               ),
             ),

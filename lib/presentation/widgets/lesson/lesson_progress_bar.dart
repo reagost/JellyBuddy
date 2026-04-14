@@ -16,7 +16,9 @@ class LessonProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final progress = total > 0 ? current / total : 0.0;
 
-    return Column(
+    return Semantics(
+      label: 'Question $current of $total',
+      child: Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,6 +59,7 @@ class LessonProgressBar extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }

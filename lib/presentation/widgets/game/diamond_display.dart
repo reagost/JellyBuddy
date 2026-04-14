@@ -11,7 +11,9 @@ class DiamondDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Semantics(
+      label: '$count diamonds',
+      child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text('💎', style: TextStyle(fontSize: 20)),
@@ -31,6 +33,7 @@ class DiamondDisplay extends StatelessWidget {
           },
         ),
       ],
+    ),
     );
   }
 }

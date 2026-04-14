@@ -6,6 +6,8 @@ import 'package:jelly_llm/jelly_llm.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme_data.dart';
 import 'data/services/storage_service.dart';
+import 'data/services/crash_log_service.dart';
+import 'data/services/analytics_service.dart';
 import 'data/services/progress_service.dart';
 import 'data/services/daily_task_service.dart';
 import 'data/services/achievement_service.dart';
@@ -44,6 +46,14 @@ Future<void> setupDependencies() async {
   final storage = StorageService();
   await storage.init();
   getIt.registerSingleton<StorageService>(storage);
+
+  // Crash Log Service
+  final crashLogService = CrashLogService(storage: storage);
+  getIt.registerSingleton<CrashLogService>(crashLogService);
+
+  // Analytics Service
+  final analyticsService = AnalyticsService(storage: storage);
+  getIt.registerSingleton<AnalyticsService>(analyticsService);
 
   // Progress Service
   final progressService = ProgressService(storage: storage);

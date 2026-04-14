@@ -15,7 +15,9 @@ class HeartsDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Semantics(
+      label: '$current of $max lives',
+      child: Row(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(max, (index) {
         final isFilled = index < current;
@@ -34,6 +36,7 @@ class HeartsDisplay extends StatelessWidget {
         }
         return _buildHeart(isFilled);
       }),
+    ),
     );
   }
 

@@ -20,7 +20,9 @@ class StreakCounter extends StatelessWidget {
       emoji = '🔥';
     }
 
-    return TweenAnimationBuilder<int>(
+    return Semantics(
+      label: '$days day streak',
+      child: TweenAnimationBuilder<int>(
       tween: IntTween(begin: 0, end: days),
       duration: const Duration(milliseconds: 500),
       builder: (context, value, child) {
@@ -50,6 +52,7 @@ class StreakCounter extends StatelessWidget {
           ],
         );
       },
+    ),
     );
   }
 }

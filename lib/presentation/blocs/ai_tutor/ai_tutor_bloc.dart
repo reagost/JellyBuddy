@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import '../../../data/services/analytics_service.dart';
 import '../../../domain/repositories/i_ai_repository.dart';
 import 'ai_tutor_event.dart';
 import 'ai_tutor_state.dart';
@@ -18,6 +20,8 @@ class AITutorBloc extends Bloc<AITutorEvent, AITutorState> {
     SendMessage event,
     Emitter<AITutorState> emit,
   ) async {
+    GetIt.instance<AnalyticsService>().trackEvent('ai_query');
+
     // Add user message
     final userMessage = AIMessage(
       id: 'user_${DateTime.now().millisecondsSinceEpoch}',

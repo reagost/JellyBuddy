@@ -145,15 +145,17 @@ class AIRepositoryImpl implements IAIRepository {
     );
   }
 
+  static const _fallbackNote = '\u{1F4DA} 预设解析（本地 AI 模型未加载）\n\n';
+
   String _getFallbackResponse(List<AIMessage> conversationHistory) {
     if (conversationHistory.isEmpty) {
-      return '你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？';
+      return '$_fallbackNote你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？\n\n提示：前往「我的 → AI 模型管理」下载模型，获得更智能的解答。';
     }
 
     if (_currentExplanation != null) {
-      return '让我来帮你分析这道题：\n\n$_currentExplanation';
+      return '$_fallbackNote让我来帮你分析这道题：\n\n$_currentExplanation';
     }
 
-    return '好的，让我来帮你分析。你可以告诉我具体哪道题不太理解，我来为你解释。';
+    return '$_fallbackNote好的，让我来帮你分析。你可以告诉我具体哪道题不太理解，我来为你解释。';
   }
 }

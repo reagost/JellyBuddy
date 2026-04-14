@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../app.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../data/services/crash_log_service.dart';
 import '../../../data/services/storage_service.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -85,13 +87,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  void _exportProgress() {
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.settingsComingSoon)),
-    );
-  }
-
   Future<void> _clearAllData() async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
@@ -120,6 +115,139 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       }
     }
+  }
+
+  void _showCrashLogs() {
+    final crashLogService = GetIt.instance<CrashLogService>();
+    final crashes = crashLogService.getRecentCrashes().reversed.toList();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.bug_report, size: 22),
+            SizedBox(width: 8),
+            Text('错误日志'),
+          ],
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          height: 400,
+          child: crashes.isEmpty
+              ? const Center(child: Text('暂无错误日志'))
+              : ListView.separated(
+                  itemCount: crashes.length,
+                  separatorBuilder: (_, __) => const Divider(height: 1),
+                  itemBuilder: (_, index) {
+                    final entry = crashes[index];
+                    final timestamp = entry['timestamp'] ?? '';
+                    final error = entry['error'] ?? '';
+                    // Format timestamp for display
+                    String displayTime = timestamp;
+                    try {
+                      final dt = DateTime.parse(timestamp);
+                      displayTime =
+                          '${dt.month}/${dt.day} ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+                    } catch (_) {}
+
+                    return ListTile(
+                      dense: true,
+                      title: Text(
+                        error.split('\n').first,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 13),
+                      ),
+                      subtitle: Text(
+                        displayTime,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: AppColors.textSecondaryOf(context),
+                        ),
+                      ),
+                      onTap: () => _showCrashDetail(entry),
+                    );
+                  },
+                ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Copy all logs to clipboard
+              final buffer = StringBuffer();
+              for (final entry in crashes) {
+                buffer.writeln('--- ${entry['timestamp']} ---');
+                buffer.writeln(entry['error']);
+                if (entry['stackTrace']?.isNotEmpty == true) {
+                  buffer.writeln(entry['stackTrace']);
+                }
+                buffer.writeln();
+              }
+              Clipboard.setData(ClipboardData(text: buffer.toString()));
+              Navigator.of(ctx).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('已复制到剪贴板')),
+              );
+            },
+            child: const Text('复制到剪贴板'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final navigator = Navigator.of(ctx);
+              final messenger = ScaffoldMessenger.of(context);
+              await crashLogService.clearLogs();
+              navigator.pop();
+              messenger.showSnackBar(
+                const SnackBar(content: Text('日志已清除')),
+              );
+            },
+            style: TextButton.styleFrom(foregroundColor: AppColors.error),
+            child: const Text('清除日志'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('关闭'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showCrashDetail(Map<String, String> entry) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          entry['timestamp'] ?? '',
+          style: const TextStyle(fontSize: 14),
+        ),
+        content: SingleChildScrollView(
+          child: SelectableText(
+            '${entry['error']}\n\n${entry['stackTrace'] ?? ''}',
+            style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(
+                text: '${entry['error']}\n\n${entry['stackTrace'] ?? ''}',
+              ));
+              Navigator.of(ctx).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('已复制到剪贴板')),
+              );
+            },
+            child: const Text('复制'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text('关闭'),
+          ),
+        ],
+      ),
+    );
   }
 
   // ---------------------------------------------------------------
@@ -161,13 +289,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               subtitle: l10n.settingsResetProgressSubtitle,
               onTap: _resetProgress,
             ),
-            const Divider(height: 1),
-            _actionTile(
-              icon: Icons.upload_file,
-              title: l10n.settingsExportProgress,
-              subtitle: l10n.settingsExportProgressSubtitle,
-              onTap: _exportProgress,
-            ),
           ]),
 
           const SizedBox(height: 24),
@@ -201,6 +322,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: Icons.code,
               title: l10n.settingsGithub,
               trailing: l10n.settingsGithubUrl,
+            ),
+            const Divider(height: 1),
+            _actionTile(
+              icon: Icons.bug_report,
+              title: '错误日志',
+              subtitle: '查看应用错误记录',
+              onTap: _showCrashLogs,
             ),
           ]),
 

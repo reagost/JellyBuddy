@@ -11,6 +11,7 @@ import '../../core/constants/game_constants.dart';
 import '../../domain/entities/course.dart';
 import '../../domain/entities/question.dart';
 import '../../domain/entities/user.dart';
+import '../../data/services/analytics_service.dart';
 import '../../data/services/achievement_service.dart';
 import '../../data/services/daily_task_service.dart';
 import '../../data/services/leaderboard_service.dart';
@@ -83,6 +84,7 @@ class _LessonScreenState extends State<LessonScreen>
   }
 
   Future<void> _loadLesson() async {
+    GetIt.instance<AnalyticsService>().trackEvent('lesson_started');
     try {
       final repo = GetIt.instance<ILearningRepository>();
       final course = await repo.getCourse(widget.courseId);
@@ -220,6 +222,8 @@ class _LessonScreenState extends State<LessonScreen>
       child: TextField(
         controller: _fillBlankController,
         enabled: !_showResult,
+        textInputAction: TextInputAction.done,
+        onSubmitted: (_) => _submitAnswer(),
         decoration: InputDecoration(
           hintText: AppLocalizations.of(context)!.lessonInputHint,
           hintStyle: const TextStyle(color: AppColors.textHint),
@@ -1079,6 +1083,7 @@ class _LessonScreenState extends State<LessonScreen>
   }
 
   void _showCompletionScreen() {
+    GetIt.instance<AnalyticsService>().trackEvent('lesson_completed');
     final score = (_correctCount / _questions.length * 100).round();
     final isPerfect = score >= 80;
     final bossFailed = _isBoss && score < 70;
@@ -1347,14 +1352,18 @@ class _LessonScreenState extends State<LessonScreen>
 
   Widget _buildAIHelpButton() {
     return Center(
-      child: TextButton.icon(
-        onPressed: _showAIHelp,
-        icon: const Icon(Icons.lightbulb_outline, color: AppColors.primary),
-        label: Text(
-          AppLocalizations.of(context)!.lessonAskAI,
-          style: const TextStyle(
-            color: AppColors.primary,
-            fontWeight: FontWeight.w600,
+      child: Semantics(
+        label: 'Ask AI for help',
+        button: true,
+        child: TextButton.icon(
+          onPressed: _showAIHelp,
+          icon: const Icon(Icons.lightbulb_outline, color: AppColors.primary),
+          label: Text(
+            AppLocalizations.of(context)!.lessonAskAI,
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

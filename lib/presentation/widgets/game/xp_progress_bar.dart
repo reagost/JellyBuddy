@@ -24,7 +24,9 @@ class XpProgressBar extends StatelessWidget {
     final xpIntoLevel = currentXp - xpForCurrentLevel;
     final xpNeeded = nextLevelXp - xpForCurrentLevel;
 
-    return Column(
+    return Semantics(
+      label: 'Level $level, $currentXp of $nextLevelXp XP',
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
@@ -76,6 +78,7 @@ class XpProgressBar extends StatelessWidget {
           ),
         ],
       ],
+    ),
     );
   }
 }

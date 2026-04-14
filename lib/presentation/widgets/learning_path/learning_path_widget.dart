@@ -97,21 +97,25 @@ class LearningPathWidget extends StatelessWidget {
                 Positioned(
                   left: centers[i].dx - nodeRadius,
                   top: centers[i].dy - nodeRadius,
-                  child: _LessonNode(
-                    nodeData: nodes[i],
-                    radius: nodeRadius,
-                    index: i,
-                    heartsEmpty: heartsEmpty,
-                    onTap: () {
-                      final nd = nodes[i];
-                      final isCompleted =
-                          nd.status == LessonNodeStatus.completed;
-                      final isLocked = nd.status == LessonNodeStatus.locked;
-                      final disabledByHearts = heartsEmpty && !isCompleted;
-                      if (!isLocked && !disabledByHearts) {
-                        onLessonTap(nd.lesson);
-                      }
-                    },
+                  child: Semantics(
+                    label: 'Lesson ${nodes[i].lesson.order}: ${nodes[i].lesson.title}, ${nodes[i].status.name}',
+                    button: true,
+                    child: _LessonNode(
+                      nodeData: nodes[i],
+                      radius: nodeRadius,
+                      index: i,
+                      heartsEmpty: heartsEmpty,
+                      onTap: () {
+                        final nd = nodes[i];
+                        final isCompleted =
+                            nd.status == LessonNodeStatus.completed;
+                        final isLocked = nd.status == LessonNodeStatus.locked;
+                        final disabledByHearts = heartsEmpty && !isCompleted;
+                        if (!isLocked && !disabledByHearts) {
+                          onLessonTap(nd.lesson);
+                        }
+                      },
+                    ),
                   ),
                 ),
               // Labels below each node.
