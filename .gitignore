@@ -72,6 +72,11 @@ ios/Flutter/Generated.xcconfig
 macos/Flutter/GeneratedPluginRegistrant.swift
 macos/Flutter/ephemeral/
 
+# Android release signing
+android/key.properties
+android/app/jellybuddy-release.jks
+*.jks
+
 # Claude/GSD workspace files
 .claude/
 .gsd/
