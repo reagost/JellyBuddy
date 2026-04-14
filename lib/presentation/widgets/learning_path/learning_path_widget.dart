@@ -65,7 +65,8 @@ class LearningPathWidget extends StatelessWidget {
     final double totalHeight =
         (nodes.length - 1) * verticalSpacing + nodeRadius * 2 + 60;
 
-    return SizedBox(
+    return ClipRect(
+      child: SizedBox(
       height: totalHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -170,6 +171,7 @@ class LearningPathWidget extends StatelessWidget {
           );
         },
       ),
+    ),
     );
   }
 }
