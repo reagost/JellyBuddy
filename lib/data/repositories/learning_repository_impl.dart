@@ -4,20 +4,34 @@ import '../../domain/entities/course.dart';
 import '../../domain/entities/question.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/i_learning_repository.dart';
+import '../services/custom_course_service.dart';
 import '../services/progress_service.dart';
 
 class LearningRepositoryImpl implements ILearningRepository {
   final ProgressService _progressService;
+  final CustomCourseService? _customCourseService;
   Course? _cachedCourse;
 
-  LearningRepositoryImpl({required ProgressService progressService})
-      : _progressService = progressService;
+  LearningRepositoryImpl({
+    required ProgressService progressService,
+    CustomCourseService? customCourseService,
+  })  : _progressService = progressService,
+        _customCourseService = customCourseService;
 
   @override
   Future<Course> getCourse(String courseId) async {
     if (_cachedCourse != null && _cachedCourse!.id == courseId) {
       return _cachedCourse!;
     }
+
+    // Check custom (imported) courses first
+    final customCourses = _customCourseService?.getCustomCourses() ?? [];
+    final custom = customCourses.where((c) => c.id == courseId).firstOrNull;
+    if (custom != null) {
+      _cachedCourse = custom;
+      return custom;
+    }
+
     final jsonStr = await rootBundle.loadString('assets/courses/${courseId}_l1.json');
     final json = jsonDecode(jsonStr) as Map<String, dynamic>;
     _cachedCourse = _parseCourse(json);
@@ -51,6 +65,11 @@ class LearningRepositoryImpl implements ILearningRepository {
         ));
       }
     }
+
+    // Append custom (imported) courses
+    final customCourses = _customCourseService?.getCustomCourses() ?? [];
+    courses.addAll(customCourses);
+
     return courses;
   }
 

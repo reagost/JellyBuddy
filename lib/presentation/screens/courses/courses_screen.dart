@@ -98,6 +98,17 @@ class _CoursesScreenState extends State<CoursesScreen> {
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.file_upload_outlined),
+            tooltip: '导入题库',
+            onPressed: () async {
+              await context.push('/import-course');
+              // Reload courses after returning from import
+              _loadCourses();
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

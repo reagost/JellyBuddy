@@ -16,6 +16,7 @@ import 'data/services/notification_service.dart';
 import 'data/services/search_service.dart';
 import 'data/services/stats_service.dart';
 import 'data/services/leaderboard_service.dart';
+import 'data/services/custom_course_service.dart';
 import 'data/repositories/game_repository_impl.dart';
 import 'data/repositories/learning_repository_impl.dart';
 import 'data/repositories/ai_repository_impl.dart';
@@ -71,12 +72,20 @@ Future<void> setupDependencies() async {
   final modelDownloadService = ModelDownloadService();
   getIt.registerSingleton<ModelDownloadService>(modelDownloadService);
 
+  // Custom Course Service (for MD-imported courses)
+  getIt.registerSingleton<CustomCourseService>(
+    CustomCourseService(storage: storage),
+  );
+
   // Repositories
   getIt.registerLazySingleton<IGameRepository>(
     () => GameRepositoryImpl(storage: getIt<StorageService>()),
   );
   getIt.registerLazySingleton<ILearningRepository>(
-    () => LearningRepositoryImpl(progressService: getIt<ProgressService>()),
+    () => LearningRepositoryImpl(
+      progressService: getIt<ProgressService>(),
+      customCourseService: getIt<CustomCourseService>(),
+    ),
   );
   getIt.registerLazySingleton<IAIRepository>(
     () => AIRepositoryImpl(

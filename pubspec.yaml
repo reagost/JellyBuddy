@@ -51,6 +51,9 @@ dependencies:
   jelly_llm:
     path: packages/jelly_llm
 
+  # File picker for course import
+  file_picker: ^8.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
