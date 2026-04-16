@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import '../../domain/entities/course.dart';
 import '../../domain/entities/question.dart';
 import 'storage_service.dart';
@@ -7,8 +8,15 @@ import 'markdown_course_parser.dart';
 /// Service for importing and persisting user-created custom courses.
 class CustomCourseService {
   final StorageService _storage;
+  final Dio _dio;
 
-  CustomCourseService({required StorageService storage}) : _storage = storage;
+  CustomCourseService({required StorageService storage, Dio? dio})
+      : _storage = storage,
+        _dio = dio ??
+            Dio(BaseOptions(
+              connectTimeout: const Duration(seconds: 15),
+              receiveTimeout: const Duration(seconds: 30),
+            ));
 
   static const _storageKey = 'custom_courses';
 
@@ -25,6 +33,43 @@ class CustomCourseService {
     ];
     await _saveCourses(updated);
     return course;
+  }
+
+  /// Download and import a course from a URL.
+  /// Supports GitHub raw URLs, gists, or any plain-text MD endpoint.
+  Future<Course> importFromUrl(String url) async {
+    // Auto-convert GitHub blob URLs to raw URLs
+    final resolvedUrl = _resolveGitHubUrl(url);
+
+    final response = await _dio.get<String>(
+      resolvedUrl,
+      options: Options(responseType: ResponseType.plain),
+    );
+
+    if (response.statusCode != 200 || response.data == null) {
+      throw FormatException('Download failed (HTTP ${response.statusCode})');
+    }
+
+    final content = response.data!;
+    if (!content.contains('---') || !content.contains('##')) {
+      throw const FormatException('Content does not look like a valid course template');
+    }
+
+    return importFromMarkdown(content);
+  }
+
+  /// Convert GitHub blob/tree URLs to raw URLs automatically.
+  String _resolveGitHubUrl(String url) {
+    // https://github.com/user/repo/blob/main/file.md
+    //   → https://raw.githubusercontent.com/user/repo/main/file.md
+    final githubBlob = RegExp(
+      r'^https?://github\.com/([^/]+)/([^/]+)/blob/(.+)$',
+    );
+    final match = githubBlob.firstMatch(url);
+    if (match != null) {
+      return 'https://raw.githubusercontent.com/${match.group(1)}/${match.group(2)}/${match.group(3)}';
+    }
+    return url;
   }
 
   /// Get all custom courses stored locally.
