@@ -166,12 +166,12 @@
   "reviewDifficultyMedium": "中等",
   "reviewDifficultyHard": "困难",
 
-  "aiTutorTitle": "Code Buddy",
+  "aiTutorTitle": "JellyBuddy",
   "aiTutorClearChat": "清空对话",
   "aiTutorClearConfirm": "确定要清空所有聊天记录吗？",
   "aiTutorCancel": "取消",
   "aiTutorClear": "清空",
-  "aiTutorWelcome": "你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？",
+  "aiTutorWelcome": "你好！我是 JellyBuddy，你的编程学习助手。有什么问题想问我吗？",
   "aiTutorInputHint": "输入你的问题...",
 
   "onboardingSkip": "跳过",
@@ -179,7 +179,7 @@
   "onboardingStart": "开始学习",
   "onboardingTitle1": "像玩游戏一样学编程",
   "onboardingSubtitle1": "闯关、答题、赚经验值，让学习变得有趣",
-  "onboardingTitle2": "Code Buddy 随时帮你",
+  "onboardingTitle2": "JellyBuddy 随时帮你",
   "onboardingSubtitle2": "遇到难题？AI 助手为你分步讲解",
   "onboardingTitle3": "随时随地，无需网络",
   "onboardingSubtitle3": "本地 AI 模型，保护隐私，离线学习",

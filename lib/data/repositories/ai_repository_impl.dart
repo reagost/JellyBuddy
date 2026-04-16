@@ -149,7 +149,7 @@ class AIRepositoryImpl implements IAIRepository {
 
   String _getFallbackResponse(List<AIMessage> conversationHistory) {
     if (conversationHistory.isEmpty) {
-      return '$_fallbackNote你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？\n\n提示：前往「我的 → AI 模型管理」下载模型，获得更智能的解答。';
+      return '$_fallbackNote你好！我是 JellyBuddy，你的编程学习助手。有什么问题想问我吗？\n\n提示：前往「我的 → AI 模型管理」下载模型，获得更智能的解答。';
     }
 
     if (_currentExplanation != null) {

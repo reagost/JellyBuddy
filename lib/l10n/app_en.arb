@@ -166,12 +166,12 @@
   "reviewDifficultyMedium": "Medium",
   "reviewDifficultyHard": "Hard",
 
-  "aiTutorTitle": "Code Buddy",
+  "aiTutorTitle": "JellyBuddy",
   "aiTutorClearChat": "Clear Chat",
   "aiTutorClearConfirm": "Are you sure you want to clear all chat history?",
   "aiTutorCancel": "Cancel",
   "aiTutorClear": "Clear",
-  "aiTutorWelcome": "Hi! I'm Code Buddy, your programming tutor. What would you like to ask?",
+  "aiTutorWelcome": "Hi! I'm JellyBuddy, your programming tutor. What would you like to ask?",
   "aiTutorInputHint": "Type your question...",
 
   "onboardingSkip": "Skip",
@@ -179,7 +179,7 @@
   "onboardingStart": "Get Started",
   "onboardingTitle1": "Learn to Code Like Playing a Game",
   "onboardingSubtitle1": "Complete levels, solve problems, earn XP — make learning fun",
-  "onboardingTitle2": "Code Buddy is Always Here",
+  "onboardingTitle2": "JellyBuddy is Always Here",
   "onboardingSubtitle2": "Stuck? Your AI tutor explains step by step",
   "onboardingTitle3": "Anytime, Anywhere, Offline",
   "onboardingSubtitle3": "Local AI model, privacy-first, learn without internet",

@@ -605,7 +605,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiTutorTitle.
   ///
   /// In zh, this message translates to:
-  /// **'Code Buddy'**
+  /// **'JellyBuddy'**
   String get aiTutorTitle;
 
   /// No description provided for @aiTutorClearChat.
@@ -635,7 +635,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiTutorWelcome.
   ///
   /// In zh, this message translates to:
-  /// **'你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？'**
+  /// **'你好！我是 JellyBuddy，你的编程学习助手。有什么问题想问我吗？'**
   String get aiTutorWelcome;
 
   /// No description provided for @aiTutorInputHint.
@@ -677,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle2.
   ///
   /// In zh, this message translates to:
-  /// **'Code Buddy 随时帮你'**
+  /// **'JellyBuddy 随时帮你'**
   String get onboardingTitle2;
 
   /// No description provided for @onboardingSubtitle2.

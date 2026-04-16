@@ -290,7 +290,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reviewDifficultyHard => 'Hard';
 
   @override
-  String get aiTutorTitle => 'Code Buddy';
+  String get aiTutorTitle => 'JellyBuddy';
 
   @override
   String get aiTutorClearChat => 'Clear Chat';
@@ -307,7 +307,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiTutorWelcome =>
-      'Hi! I\'m Code Buddy, your programming tutor. What would you like to ask?';
+      'Hi! I\'m JellyBuddy, your programming tutor. What would you like to ask?';
 
   @override
   String get aiTutorInputHint => 'Type your question...';
@@ -329,7 +329,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Complete levels, solve problems, earn XP — make learning fun';
 
   @override
-  String get onboardingTitle2 => 'Code Buddy is Always Here';
+  String get onboardingTitle2 => 'JellyBuddy is Always Here';
 
   @override
   String get onboardingSubtitle2 =>

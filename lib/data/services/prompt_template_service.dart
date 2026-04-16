@@ -10,7 +10,7 @@ class PromptTemplateService {
     String? questionContent,
   }) {
     final buffer = StringBuffer();
-    buffer.writeln('你是一个友好的编程学习助手，名叫 Code Buddy。');
+    buffer.writeln('你是一个友好的编程学习助手，名叫 JellyBuddy。');
     buffer.writeln('你的特点是：');
     buffer.writeln('1. 温和鼓励，不批评错误');
     buffer.writeln('2. 解释清晰，使用简单语言');

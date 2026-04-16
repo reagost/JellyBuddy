@@ -287,7 +287,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get reviewDifficultyHard => '困难';
 
   @override
-  String get aiTutorTitle => 'Code Buddy';
+  String get aiTutorTitle => 'JellyBuddy';
 
   @override
   String get aiTutorClearChat => '清空对话';
@@ -302,7 +302,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiTutorClear => '清空';
 
   @override
-  String get aiTutorWelcome => '你好！我是 Code Buddy，你的编程学习助手。有什么问题想问我吗？';
+  String get aiTutorWelcome => '你好！我是 JellyBuddy，你的编程学习助手。有什么问题想问我吗？';
 
   @override
   String get aiTutorInputHint => '输入你的问题...';
@@ -323,7 +323,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingSubtitle1 => '闯关、答题、赚经验值，让学习变得有趣';
 
   @override
-  String get onboardingTitle2 => 'Code Buddy 随时帮你';
+  String get onboardingTitle2 => 'JellyBuddy 随时帮你';
 
   @override
   String get onboardingSubtitle2 => '遇到难题？AI 助手为你分步讲解';
