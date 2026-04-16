@@ -12,6 +12,7 @@ import '../../presentation/screens/stats/stats_screen.dart';
 import '../../presentation/screens/leaderboard/leaderboard_screen.dart';
 import '../../presentation/screens/import/import_course_screen.dart';
 import '../../presentation/screens/settings/cloud_ai_settings_screen.dart';
+import '../../presentation/screens/settings/legal_doc_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -82,6 +83,20 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/cloud-ai-settings',
       builder: (context, state) => const CloudAiSettingsScreen(),
+    ),
+    GoRoute(
+      path: '/legal/privacy',
+      builder: (context, state) => const LegalDocScreen(
+        title: '隐私政策',
+        assetPath: 'assets/legal/privacy_policy.md',
+      ),
+    ),
+    GoRoute(
+      path: '/legal/terms',
+      builder: (context, state) => const LegalDocScreen(
+        title: '用户服务协议',
+        assetPath: 'assets/legal/terms_of_service.md',
+      ),
     ),
   ],
 );

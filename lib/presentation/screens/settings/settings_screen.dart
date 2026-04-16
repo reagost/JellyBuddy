@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../app.dart';
@@ -115,6 +116,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       }
     }
+  }
+
+  void _showModelSettingsSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Row(
+                  children: [
+                    Icon(Icons.smart_toy, color: AppColors.primary),
+                    SizedBox(width: 8),
+                    Text('模型设置',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              const Divider(height: 1),
+              ListTile(
+                leading: const Icon(Icons.phone_android, color: AppColors.primary),
+                title: const Text('本地 AI 模型'),
+                subtitle: const Text('离线推理 · 隐私优先 · 免费'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  context.push('/model-settings');
+                },
+              ),
+              const Divider(height: 1, indent: 16, endIndent: 16),
+              ListTile(
+                leading: const Icon(Icons.cloud, color: AppColors.primary),
+                title: const Text('云端 AI 模型'),
+                subtitle: const Text('MiniMax · OpenRouter · OpenAI · Claude · DeepSeek'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  context.push('/cloud-ai-settings');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   void _showCrashLogs() {
@@ -276,6 +326,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _languageTile(l10n, currentLocale),
             const Divider(height: 1),
             _darkModeTile(l10n),
+            const Divider(height: 1),
+            _actionTile(
+              icon: Icons.smart_toy_outlined,
+              title: '模型设置',
+              subtitle: '本地模型 · 云端 AI (MiniMax / OpenRouter / Claude)',
+              onTap: _showModelSettingsSheet,
+            ),
           ]),
 
           const SizedBox(height: 24),
@@ -302,20 +359,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               trailing: 'JellyBuddy v1.0.0',
             ),
             const Divider(height: 1),
-            _infoTile(
-              icon: Icons.lightbulb_outline,
-              title: l10n.settingsSlogan,
+            _actionTile(
+              icon: Icons.privacy_tip_outlined,
+              title: '隐私政策',
+              subtitle: '了解我们如何保护你的数据',
+              onTap: () => context.push('/legal/privacy'),
             ),
             const Divider(height: 1),
             _actionTile(
-              icon: Icons.description_outlined,
-              title: l10n.settingsLicenses,
-              subtitle: l10n.settingsLicensesSubtitle,
-              onTap: () => showLicensePage(
-                context: context,
-                applicationName: 'JellyBuddy',
-                applicationVersion: 'v1.0.0',
-              ),
+              icon: Icons.gavel_outlined,
+              title: '用户服务协议',
+              subtitle: '使用条款和服务协议',
+              onTap: () => context.push('/legal/terms'),
             ),
             const Divider(height: 1),
             _infoTile(
