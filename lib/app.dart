@@ -17,6 +17,7 @@ import 'data/services/search_service.dart';
 import 'data/services/stats_service.dart';
 import 'data/services/leaderboard_service.dart';
 import 'data/services/custom_course_service.dart';
+import 'data/services/cloud_ai_service.dart';
 import 'data/repositories/game_repository_impl.dart';
 import 'data/repositories/learning_repository_impl.dart';
 import 'data/repositories/ai_repository_impl.dart';
@@ -77,6 +78,11 @@ Future<void> setupDependencies() async {
     CustomCourseService(storage: storage),
   );
 
+  // Cloud AI Service (MiniMax/OpenRouter/OpenAI/Claude/DeepSeek)
+  getIt.registerSingleton<CloudAiService>(
+    CloudAiService(storage: storage),
+  );
+
   // Repositories
   getIt.registerLazySingleton<IGameRepository>(
     () => GameRepositoryImpl(storage: getIt<StorageService>()),
@@ -91,6 +97,7 @@ Future<void> setupDependencies() async {
     () => AIRepositoryImpl(
       llm: getIt<JellyLlm>(),
       downloadService: getIt<ModelDownloadService>(),
+      cloudAiService: getIt<CloudAiService>(),
     ),
   );
 

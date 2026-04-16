@@ -11,6 +11,7 @@ import '../../presentation/screens/review/review_screen.dart';
 import '../../presentation/screens/stats/stats_screen.dart';
 import '../../presentation/screens/leaderboard/leaderboard_screen.dart';
 import '../../presentation/screens/import/import_course_screen.dart';
+import '../../presentation/screens/settings/cloud_ai_settings_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -77,6 +78,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/import-course',
       builder: (context, state) => const ImportCourseScreen(),
+    ),
+    GoRoute(
+      path: '/cloud-ai-settings',
+      builder: (context, state) => const CloudAiSettingsScreen(),
     ),
   ],
 );

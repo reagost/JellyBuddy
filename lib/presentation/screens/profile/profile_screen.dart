@@ -308,6 +308,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 12),
                   _buildSettingsItem(
                     context,
+                    icon: Icons.cloud_outlined,
+                    title: '云端 AI 模型',
+                    subtitle: 'MiniMax · OpenRouter · OpenAI · Claude',
+                    onTap: () => context.push('/cloud-ai-settings'),
+                  ),
+                  const SizedBox(height: 12),
+                  _buildSettingsItem(
+                    context,
                     icon: Icons.settings_outlined,
                     title: AppLocalizations.of(context)!.profileSettings,
                     subtitle: AppLocalizations.of(context)!.profileSettingsSubtitle,

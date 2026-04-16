@@ -1,21 +1,29 @@
 import 'package:jelly_llm/jelly_llm.dart';
 import '../../domain/repositories/i_ai_repository.dart';
+import '../services/cloud_ai_service.dart';
 import '../services/model_download_service.dart';
 import '../services/prompt_template_service.dart';
 
-/// AI repository that uses JellyLlm for local inference
-/// with fallback to pre-cached answers when model is not available.
+/// AI repository with 3-tier priority:
+/// 1. Cloud AI (if configured and active) — MiniMax/OpenRouter/OpenAI/Anthropic/DeepSeek
+/// 2. Local LLM (JellyLlm — Gemma 4 on iOS MLX / Android llama.cpp)
+/// 3. Pre-cached answers from question.explanation
 class AIRepositoryImpl implements IAIRepository {
   final JellyLlm _llm;
   final ModelDownloadService? _downloadService;
+  final CloudAiService? _cloudAiService;
   String? _currentExplanation;
   String? _currentCourseName;
   String? _currentLessonName;
   String? _currentQuestionContent;
 
-  AIRepositoryImpl({JellyLlm? llm, ModelDownloadService? downloadService})
-      : _llm = llm ?? JellyLlm(),
-        _downloadService = downloadService;
+  AIRepositoryImpl({
+    JellyLlm? llm,
+    ModelDownloadService? downloadService,
+    CloudAiService? cloudAiService,
+  })  : _llm = llm ?? JellyLlm(),
+        _downloadService = downloadService,
+        _cloudAiService = cloudAiService;
 
   /// Check if any model is downloaded and available for inference.
   Future<bool> isAnyModelAvailable() async {
@@ -43,7 +51,21 @@ class AIRepositoryImpl implements IAIRepository {
     required List<AIMessage> conversationHistory,
     required AIConfig config,
   }) async {
-    // Try real LLM first
+    // 1. Try cloud AI first (if configured)
+    final cloudProvider = await _cloudAiService?.getActiveProvider();
+    if (cloudProvider != null) {
+      try {
+        return await cloudProvider.generateResponse(
+          history: conversationHistory,
+          aiConfig: config,
+          systemPrompt: _buildSystemPrompt(),
+        );
+      } catch (_) {
+        // Fall through to local LLM
+      }
+    }
+
+    // 2. Try local LLM
     if (_llm.currentState == LlmEngineState.ready) {
       try {
         final prompt = _buildPrompt(conversationHistory);
@@ -60,11 +82,11 @@ class AIRepositoryImpl implements IAIRepository {
         }
         return buffer.toString();
       } catch (_) {
-        // Fall through to pre-cached answer
+        // Fall through to pre-cached
       }
     }
 
-    // Fallback: pre-cached answer from question data
+    // 3. Fallback: pre-cached answer
     return _getFallbackResponse(conversationHistory);
   }
 
@@ -73,7 +95,23 @@ class AIRepositoryImpl implements IAIRepository {
     required List<AIMessage> conversationHistory,
     required AIConfig config,
   }) async* {
-    // Try real LLM first
+    // 1. Try cloud AI first (if configured)
+    final cloudProvider = await _cloudAiService?.getActiveProvider();
+    if (cloudProvider != null) {
+      try {
+        yield* cloudProvider.streamResponse(
+          history: conversationHistory,
+          aiConfig: config,
+          systemPrompt: _buildSystemPrompt(),
+        );
+        return;
+      } catch (e) {
+        // Yield error message and fall through
+        yield '\n⚠️ 云端 AI 出错，降级到本地模型...\n';
+      }
+    }
+
+    // 2. Try local LLM
     if (_llm.currentState == LlmEngineState.ready) {
       try {
         final prompt = _buildPrompt(conversationHistory);
@@ -87,16 +125,25 @@ class AIRepositoryImpl implements IAIRepository {
         );
         return;
       } catch (_) {
-        // Fall through to pre-cached answer
+        // Fall through to pre-cached
       }
     }
 
-    // Fallback: simulate streaming with pre-cached answer (yield individual characters)
+    // 3. Fallback: simulate streaming with pre-cached answer
     final response = _getFallbackResponse(conversationHistory);
     for (var i = 0; i < response.length; i++) {
       await Future.delayed(const Duration(milliseconds: 20));
       yield response[i];
     }
+  }
+
+  /// Build the system prompt used by cloud providers.
+  String _buildSystemPrompt() {
+    return PromptTemplateService.buildSystemPrompt(
+      courseName: _currentCourseName,
+      lessonName: _currentLessonName,
+      questionContent: _currentQuestionContent,
+    );
   }
 
   @override
