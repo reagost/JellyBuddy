@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_theme.dart';
 
 class ConceptChip extends StatelessWidget {
   final String conceptName;
@@ -28,7 +27,7 @@ class ConceptChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: AppColors.primaryLight.withOpacity(0.2),
+            color: AppColors.primaryLight.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(

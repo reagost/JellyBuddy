@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_theme.dart';
 
 enum AvatarState { idle, thinking, speaking }
 
@@ -101,7 +100,7 @@ class _AIAvatarState extends State<AIAvatar> with SingleTickerProviderStateMixin
                     width: 6,
                     height: 6,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.3 + (value * 0.7)),
+                      color: AppColors.primary.withValues(alpha: 0.3 + (value * 0.7)),
                       shape: BoxShape.circle,
                     ),
                   );

@@ -103,8 +103,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Second page title
-      expect(find.text('Code Buddy \u968F\u65F6\u5E2E\u4F60'),
-          findsOneWidget); // Code Buddy 随时帮你
+      expect(find.text('JellyBuddy \u968F\u65F6\u5E2E\u4F60'),
+          findsOneWidget); // JellyBuddy 随时帮你
     });
 
     testWidgets('skip button navigates away from onboarding', (tester) async {

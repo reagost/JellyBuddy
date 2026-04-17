@@ -9,7 +9,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   final IGameRepository gameRepo;
 
   GameBloc({required this.gameRepo})
-      : super(GameState(
+      : super(const GameState(
           progress: UserProgress(
             userId: '',
             userName: 'Learner',
@@ -18,8 +18,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             hearts: GameConstants.maxHearts,
             diamonds: 0,
             streak: 0,
-            courseProgress: const {},
-            unlockedAchievements: const [],
+            courseProgress: {},
+            unlockedAchievements: [],
           ),
         )) {
     on<LoadUserProgress>(_onLoadUserProgress);

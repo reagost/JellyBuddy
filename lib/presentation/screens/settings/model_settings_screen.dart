@@ -160,11 +160,11 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
         ),
-        child: Row(
+        child: const Row(
           children: [
-            const Icon(Icons.info_outline, color: AppColors.warning, size: 20),
-            const SizedBox(width: 10),
-            const Expanded(
+            Icon(Icons.info_outline, color: AppColors.warning, size: 20),
+            SizedBox(width: 10),
+            Expanded(
               child: Text(
                 'AI 助手当前使用预设答案，加载本地模型或配置云端 AI 获得智能回答',
                 style: TextStyle(fontSize: 13),

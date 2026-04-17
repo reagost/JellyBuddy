@@ -54,24 +54,24 @@ class AppButton extends StatelessWidget {
 
     switch (variant) {
       case AppButtonVariant.primary:
-        backgroundColor = isDisabled ? AppColors.primary.withOpacity(0.5) : AppColors.primary;
+        backgroundColor = isDisabled ? AppColors.primary.withValues(alpha: 0.5) : AppColors.primary;
         textColor = Colors.white;
         shadow = isDisabled ? null : AppDecorations.buttonShadow;
       case AppButtonVariant.secondary:
-        backgroundColor = isDisabled ? AppColors.secondary.withOpacity(0.5) : AppColors.secondary;
+        backgroundColor = isDisabled ? AppColors.secondary.withValues(alpha: 0.5) : AppColors.secondary;
         textColor = Colors.white;
         shadow = null;
       case AppButtonVariant.outline:
         backgroundColor = Colors.transparent;
-        textColor = isDisabled ? AppColors.primary.withOpacity(0.5) : AppColors.primary;
+        textColor = isDisabled ? AppColors.primary.withValues(alpha: 0.5) : AppColors.primary;
         shadow = null;
         border = Border.all(
-          color: isDisabled ? AppColors.primary.withOpacity(0.5) : AppColors.primary,
+          color: isDisabled ? AppColors.primary.withValues(alpha: 0.5) : AppColors.primary,
           width: 2,
         );
       case AppButtonVariant.text:
         backgroundColor = Colors.transparent;
-        textColor = isDisabled ? AppColors.primary.withOpacity(0.5) : AppColors.primary;
+        textColor = isDisabled ? AppColors.primary.withValues(alpha: 0.5) : AppColors.primary;
         shadow = null;
     }
 
@@ -203,7 +203,7 @@ class LoadingIndicator extends StatelessWidget {
                   width: size / 4,
                   height: size / 4,
                   decoration: BoxDecoration(
-                    color: (color ?? AppColors.primary).withOpacity(0.3 + (value * 0.7)),
+                    color: (color ?? AppColors.primary).withValues(alpha: 0.3 + (value * 0.7)),
                     shape: BoxShape.circle,
                   ),
                 );
@@ -224,7 +224,7 @@ class LoadingIndicator extends StatelessWidget {
                 width: size,
                 height: size,
                 decoration: BoxDecoration(
-                  color: (color ?? AppColors.primary).withOpacity(0.3),
+                  color: (color ?? AppColors.primary).withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
               ),

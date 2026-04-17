@@ -68,8 +68,6 @@ class MarkdownCourseParser {
 
   static List<Lesson> _parseLessons(List<String> lines, String courseId) {
     final lessons = <Lesson>[];
-    final lessonRegex = RegExp(r'^##\s+(?:Lesson\s+\d+:|🎯|.*)\s*(.+)$');
-
     int? currentLessonStart;
     int order = 0;
 
@@ -130,7 +128,7 @@ class MarkdownCourseParser {
     final levels = <LessonLevel>[];
     for (int i = 0; i < questions.length; i++) {
       final q = questions[i];
-      final lessonId = '${courseId}_lesson${order}';
+      final lessonId = '${courseId}_lesson$order';
       levels.add(LessonLevel(
         id: '${lessonId}_level${i + 1}',
         lessonId: lessonId,
@@ -144,7 +142,7 @@ class MarkdownCourseParser {
     }
 
     return Lesson(
-      id: '${courseId}_lesson${order}',
+      id: '${courseId}_lesson$order',
       courseId: courseId,
       title: title,
       level: 1,

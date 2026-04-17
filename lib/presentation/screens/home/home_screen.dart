@@ -397,7 +397,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final lastLost = state.progress.lastHeartLostAt;
     if (lastLost != null) {
       final recoveryTime = lastLost.add(
-        Duration(hours: GameConstants.heartsRecoveryHours),
+        const Duration(hours: GameConstants.heartsRecoveryHours),
       );
       final remaining = recoveryTime.difference(DateTime.now());
       if (remaining.isNegative) {
@@ -485,7 +485,7 @@ class _HomeScreenState extends State<HomeScreen> {
               for (int i = 0; i < _dailyTasks.length; i++) ...[
                 _buildDailyTaskRow(_dailyTasks[i]),
                 if (i < _dailyTasks.length - 1)
-                  Divider(
+                  const Divider(
                     height: 1,
                     indent: 16,
                     endIndent: 16,
@@ -519,7 +519,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: isCompleted
                   ? const Icon(Icons.check, color: AppColors.success, size: 18)
-                  : Icon(Icons.circle_outlined,
+                  : const Icon(Icons.circle_outlined,
                       color: AppColors.textHint, size: 18),
             ),
           ),

@@ -82,7 +82,7 @@ class _MarkdownRenderer extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16, bottom: 8),
           child: Text(
             trimmed.substring(3),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AppColors.primary,
@@ -112,7 +112,7 @@ class _MarkdownRenderer extends StatelessWidget {
                 child: Container(
                   width: 5,
                   height: 5,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.primary,
                     shape: BoxShape.circle,
                   ),

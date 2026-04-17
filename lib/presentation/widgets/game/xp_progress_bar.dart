@@ -22,7 +22,6 @@ class XpProgressBar extends StatelessWidget {
         ? GameConstants.xpToLevel[level - 1]
         : 0;
     final xpIntoLevel = currentXp - xpForCurrentLevel;
-    final xpNeeded = nextLevelXp - xpForCurrentLevel;
 
     return Semantics(
       label: 'Level $level, $currentXp of $nextLevelXp XP',

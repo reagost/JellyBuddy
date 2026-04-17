@@ -65,7 +65,7 @@ class AppButton extends StatelessWidget {
     }
 
     if (isDisabled) {
-      backgroundColor = backgroundColor.withOpacity(0.5);
+      backgroundColor = backgroundColor.withValues(alpha: 0.5);
     }
 
     Widget child = Row(

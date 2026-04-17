@@ -42,7 +42,7 @@ class StreakCounter extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            Text(
+            const Text(
               '天',
               style: TextStyle(
                 fontSize: 14,

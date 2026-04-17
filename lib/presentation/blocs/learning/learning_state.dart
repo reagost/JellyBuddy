@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import '../../../domain/entities/course.dart';
-import '../../../domain/entities/question.dart';
 import '../../../domain/entities/user.dart';
 
 enum QuestionState { unanswered, answered, correct, incorrect }

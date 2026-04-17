@@ -47,7 +47,7 @@ class LearningBloc extends Bloc<LearningEvent, LearningState> {
         title: '',
         level: 1,
         order: 0,
-        levels: [],
+        levels: const [],
         isBoss: false,
         xpReward: 50,
         diamondReward: 1,
@@ -108,7 +108,7 @@ class LearningBloc extends Bloc<LearningEvent, LearningState> {
         timeSpent: Duration.zero,
         isPerfect: current.questionState == QuestionState.correct,
         completedAt: DateTime.now(),
-        wrongQuestionIds: [],
+        wrongQuestionIds: const [],
       ),
     ));
   }

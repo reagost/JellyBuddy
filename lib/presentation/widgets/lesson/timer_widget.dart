@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_theme.dart';
 
 class TimerWidget extends StatefulWidget {
   final int seconds;
@@ -52,7 +51,7 @@ class _TimerWidgetState extends State<TimerWidget> {
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: _isWarning ? AppColors.error.withOpacity(0.1) : AppColors.surfaceVariant,
+        color: _isWarning ? AppColors.error.withValues(alpha: 0.1) : AppColors.surfaceVariant,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

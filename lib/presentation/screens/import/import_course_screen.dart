@@ -496,7 +496,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
   Widget _buildImportedSection() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           top: BorderSide(color: AppColors.surfaceVariant, width: 1),

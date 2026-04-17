@@ -302,7 +302,7 @@ class _AITutorScreenState extends State<AITutorScreen> {
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            child: Text(
+            child: const Text(
               '去下载',
               style: TextStyle(
                 fontSize: 12,

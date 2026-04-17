@@ -27,7 +27,7 @@ class CloudAiService {
   // --- Config Management ---
 
   /// Get all saved configurations.
-  List<_StoredConfig> getConfigs() {
+  List<_StoredConfig> _getConfigs() {
     final jsonStr = _storage.getString(_configsKey);
     if (jsonStr == null || jsonStr.isEmpty) return [];
 
@@ -52,7 +52,7 @@ class CloudAiService {
     await _secureStorage.write(key: '$_apiKeyPrefix$id', value: apiKey);
 
     // Save config
-    final configs = getConfigs();
+    final configs = _getConfigs();
     final updated = [
       ...configs.where((c) => c.id != id),
       _StoredConfig(id: id, config: config),
@@ -65,7 +65,7 @@ class CloudAiService {
   /// Delete a configuration and its API key.
   Future<void> deleteConfig(String id) async {
     await _secureStorage.delete(key: '$_apiKeyPrefix$id');
-    final configs = getConfigs();
+    final configs = _getConfigs();
     await _persistConfigs(configs.where((c) => c.id != id).toList());
 
     // Clear active if deleted
@@ -96,7 +96,7 @@ class CloudAiService {
     final id = getActiveConfigId();
     if (id == null) return null;
 
-    final stored = getConfigs().where((c) => c.id == id).firstOrNull;
+    final stored = _getConfigs().where((c) => c.id == id).firstOrNull;
     if (stored == null) return null;
 
     final apiKey = await _secureStorage.read(key: '$_apiKeyPrefix$id');
@@ -107,7 +107,7 @@ class CloudAiService {
 
   /// Get provider for a specific config (used for testing).
   Future<CloudAiProvider?> getProvider(String id) async {
-    final stored = getConfigs().where((c) => c.id == id).firstOrNull;
+    final stored = _getConfigs().where((c) => c.id == id).firstOrNull;
     if (stored == null) return null;
 
     final apiKey = await _secureStorage.read(key: '$_apiKeyPrefix$id');

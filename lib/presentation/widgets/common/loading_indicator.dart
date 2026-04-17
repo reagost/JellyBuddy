@@ -40,7 +40,7 @@ class LoadingIndicator extends StatelessWidget {
                   width: size / 4,
                   height: size / 4,
                   decoration: BoxDecoration(
-                    color: (color ?? AppColors.primary).withOpacity(0.3 + (value * 0.7)),
+                    color: (color ?? AppColors.primary).withValues(alpha: 0.3 + (value * 0.7)),
                     shape: BoxShape.circle,
                   ),
                 );
@@ -59,7 +59,7 @@ class LoadingIndicator extends StatelessWidget {
                 width: size,
                 height: size,
                 decoration: BoxDecoration(
-                  color: (color ?? AppColors.primary).withOpacity(0.3),
+                  color: (color ?? AppColors.primary).withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
               ),

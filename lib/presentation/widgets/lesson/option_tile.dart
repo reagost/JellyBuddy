@@ -29,13 +29,13 @@ class OptionTile extends StatelessWidget {
         backgroundColor = Colors.white;
       case OptionState.selected:
         borderColor = AppColors.primary;
-        backgroundColor = AppColors.primary.withOpacity(0.05);
+        backgroundColor = AppColors.primary.withValues(alpha: 0.05);
       case OptionState.correct:
         borderColor = AppColors.success;
-        backgroundColor = AppColors.success.withOpacity(0.1);
+        backgroundColor = AppColors.success.withValues(alpha: 0.1);
       case OptionState.incorrect:
         borderColor = AppColors.error;
-        backgroundColor = AppColors.error.withOpacity(0.1);
+        backgroundColor = AppColors.error.withValues(alpha: 0.1);
     }
 
     return Semantics(
@@ -58,7 +58,7 @@ class OptionTile extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: borderColor.withOpacity(0.2),
+                color: borderColor.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: Center(
