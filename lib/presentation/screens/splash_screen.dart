@@ -67,19 +67,28 @@ class _SplashScreenState extends State<SplashScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  'assets/icon/app_icon.png',
+                  width: 120,
+                  height: 120,
+                ),
+              ),
+              const SizedBox(height: 20),
               ShaderMask(
                 shaderCallback: (bounds) =>
                     AppGradients.primaryGradient.createShader(bounds),
                 child: const Text(
-                  '🧪 JellyBuddy',
+                  'JellyBuddy',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               Text(
                 AppLocalizations.of(context)!.splashSubtitle,
                 style: const TextStyle(

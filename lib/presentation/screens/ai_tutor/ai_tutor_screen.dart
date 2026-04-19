@@ -80,22 +80,12 @@ class _AITutorScreenState extends State<AITutorScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [AppColors.primary, AppColors.primaryLight],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Text(
-                  '\u{1F916}',
-                  style: TextStyle(fontSize: 16),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/icon/app_icon.png',
+                width: 32,
+                height: 32,
               ),
             ),
             const SizedBox(width: 8),
@@ -159,11 +149,6 @@ class _AITutorScreenState extends State<AITutorScreen> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [AppColors.primary, AppColors.primaryLight],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
@@ -173,10 +158,12 @@ class _AITutorScreenState extends State<AITutorScreen> {
                   ),
                 ],
               ),
-              child: const Center(
-                child: Text(
-                  '\u{1F916}',
-                  style: TextStyle(fontSize: 40),
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/icon/app_icon.png',
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

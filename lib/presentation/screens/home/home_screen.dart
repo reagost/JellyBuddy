@@ -92,15 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Row(
                               children: [
-                                Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: const BoxDecoration(
-                                    color: AppColors.primary,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Center(
-                                    child: Text('🧪', style: TextStyle(fontSize: 20)),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    'assets/icon/app_icon.png',
+                                    width: 40,
+                                    height: 40,
                                   ),
                                 ),
                                 const SizedBox(width: 12),
