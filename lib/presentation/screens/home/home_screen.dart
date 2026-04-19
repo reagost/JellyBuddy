@@ -183,8 +183,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 24),
 
                         // Stats Row
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Wrap(
+                          alignment: WrapAlignment.spaceAround,
+                          spacing: 12,
+                          runSpacing: 8,
                           children: [
                             HeartsDisplay(
                               current: state.progress.hearts,
@@ -236,14 +238,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               : _course != null
                                   ? LearningPathWidget(
                                       key: const ValueKey('lessons'),
-                                      lessons: _course!.lessons,
-                                      completedLessonIds: _completedLessonIds,
-                                      lessonResults: _lessonResults,
-                                      onLessonTap: (lesson) async {
-                                        await context.push('/lesson/${lesson.courseId}/${lesson.id}');
-                                        _loadCourseData();
-                                      },
-                                      heartsEmpty: state.progress.hearts == 0,
+                                        lessons: _course!.lessons,
+                                        completedLessonIds: _completedLessonIds,
+                                        lessonResults: _lessonResults,
+                                        onLessonTap: (lesson) async {
+                                          await context.push('/lesson/${lesson.courseId}/${lesson.id}');
+                                          _loadCourseData();
+                                        },
+                                        heartsEmpty: state.progress.hearts == 0,
                                     )
                                   : Text(
                                       AppLocalizations.of(context)!.homeFailedToLoadCourse,

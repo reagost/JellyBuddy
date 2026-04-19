@@ -71,8 +71,8 @@ class LearningPathWidget extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-          final leftX = width * 0.30;
-          final rightX = width * 0.70;
+          final leftX = width * 0.25;
+          final rightX = (width * 0.70).clamp(0.0, width - nodeRadius - 60);
 
           // Compute center positions for each node.
           final centers = <Offset>[];
@@ -83,7 +83,7 @@ class LearningPathWidget extends StatelessWidget {
           }
 
           return Stack(
-            clipBehavior: Clip.none,
+            clipBehavior: Clip.hardEdge,
             children: [
               // Connector lines painted behind nodes.
               CustomPaint(
@@ -96,9 +96,12 @@ class LearningPathWidget extends StatelessWidget {
               // Node widgets positioned on top.
               for (int i = 0; i < nodes.length; i++)
                 Positioned(
-                  left: centers[i].dx - nodeRadius,
+                  left: (centers[i].dx - nodeRadius).clamp(0.0, width - nodeRadius * 2),
                   top: centers[i].dy - nodeRadius,
-                  child: Semantics(
+                  child: SizedBox(
+                    width: nodeRadius * 2,
+                    height: nodeRadius * 2,
+                    child: Semantics(
                     label: 'Lesson ${nodes[i].lesson.order}: ${nodes[i].lesson.title}, ${nodes[i].status.name}',
                     button: true,
                     child: _LessonNode(
@@ -118,11 +121,12 @@ class LearningPathWidget extends StatelessWidget {
                       },
                     ),
                   ),
+                  ),
                 ),
               // Labels below each node.
               for (int i = 0; i < nodes.length; i++)
                 Positioned(
-                  left: centers[i].dx - 60,
+                  left: (centers[i].dx - 60).clamp(0, width - 120),
                   top: centers[i].dy + nodeRadius + 6,
                   child: SizedBox(
                     width: 120,
