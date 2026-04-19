@@ -91,8 +91,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
 
               // Active Provider Banner
               _buildActiveProviderBanner(state),
-              if (_activeCloudId != null || state.loadedModelId != null)
-                const SizedBox(height: 24),
+              const SizedBox(height: 28),
 
               // ===== Local Models Section =====
               _buildSectionHeader(
@@ -154,20 +153,19 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
 
     if (!hasCloud && !hasLocal) {
       return Container(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: AppColors.warning.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
+          color: AppColors.warning.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: const Row(
+        child: Row(
           children: [
-            Icon(Icons.info_outline, color: AppColors.warning, size: 20),
-            SizedBox(width: 10),
+            const Icon(Icons.lightbulb_outline, color: AppColors.warning, size: 18),
+            const SizedBox(width: 10),
             Expanded(
               child: Text(
-                'AI 助手当前使用预设答案，加载本地模型或配置云端 AI 获得智能回答',
-                style: TextStyle(fontSize: 13),
+                '加载模型或配置云端 AI 获得智能回答',
+                style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
               ),
             ),
           ],
