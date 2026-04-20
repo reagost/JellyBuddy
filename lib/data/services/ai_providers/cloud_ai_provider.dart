@@ -48,7 +48,7 @@ extension CloudAiProviderTypeInfo on CloudAiProviderType {
   String get defaultBaseUrl {
     switch (this) {
       case CloudAiProviderType.minimax:
-        return 'https://api.minimax.chat/v1';
+        return 'https://api.minimaxi.com/v1';
       case CloudAiProviderType.openRouter:
         return 'https://openrouter.ai/api/v1';
       case CloudAiProviderType.openAi:
