@@ -48,6 +48,40 @@ class MLXBridge: NSObject {
         switch call.method {
         case "loadModel":
             let modelId = args?["modelId"] as? String ?? "gemma-4-e2b-it-4bit"
+            print("[MLXBridge] loadModel: \(modelId)")
+
+            // Check if model files exist
+            if let model = MLXLocalLLMService.availableModels.first(where: { $0.id == modelId }) {
+                let path = ModelPaths.resolve(for: model)
+                let exists = ModelPaths.hasRequiredFiles(model, at: path)
+                print("[MLXBridge] Model path: \(path.path)")
+                print("[MLXBridge] Files exist: \(exists)")
+                if !exists {
+                    // List what's actually in the directory
+                    let fm = FileManager.default
+                    if let files = try? fm.contentsOfDirectory(at: path, includingPropertiesForKeys: [.fileSizeKey]) {
+                        for f in files {
+                            let size = (try? f.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
+                            print("[MLXBridge]   \(f.lastPathComponent): \(size / 1_048_576) MB")
+                        }
+                    } else {
+                        print("[MLXBridge]   Directory does not exist or is empty")
+                        // Also check Documents/models/
+                        let docsModels = ModelPaths.documentsRoot()
+                        print("[MLXBridge]   Documents/models/ path: \(docsModels.path)")
+                        let docsExists = fm.fileExists(atPath: docsModels.path)
+                        print("[MLXBridge]   Documents/models/ exists: \(docsExists)")
+                        if docsExists {
+                            if let items = try? fm.contentsOfDirectory(atPath: docsModels.path) {
+                                print("[MLXBridge]   Contents: \(items)")
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("[MLXBridge] Unknown model ID: \(modelId)")
+            }
+
             emitState("loading")
             Task {
                 do {
@@ -55,12 +89,14 @@ class MLXBridge: NSObject {
                         llmService = MLXLocalLLMService(selectedModelID: modelId)
                     }
                     try await llmService!.load()
+                    print("[MLXBridge] Model loaded successfully!")
                     self.emitState("ready")
                     DispatchQueue.main.async { result(nil) }
                 } catch {
+                    print("[MLXBridge] Load error: \(error)")
                     self.emitState("error")
                     DispatchQueue.main.async {
-                        result(FlutterError(code: "LOAD_ERROR", message: error.localizedDescription, details: nil))
+                        result(FlutterError(code: "LOAD_ERROR", message: "\(error)", details: nil))
                     }
                 }
             }
