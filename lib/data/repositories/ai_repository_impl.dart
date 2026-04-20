@@ -192,17 +192,18 @@ class AIRepositoryImpl implements IAIRepository {
     );
   }
 
-  static const _fallbackNote = '\u{1F4DA} 预设解析（本地 AI 模型未加载）\n\n';
-
   String _getFallbackResponse(List<AIMessage> conversationHistory) {
     if (conversationHistory.isEmpty) {
-      return '$_fallbackNote你好！我是 JellyBuddy，你的编程学习助手。有什么问题想问我吗？\n\n提示：前往「我的 → AI 模型管理」下载模型，获得更智能的解答。';
+      return '你好！我是 JellyBuddy，你的学习助手 🪼\n\n'
+          '目前使用预设解析模式。\n'
+          '前往「设置 → 模型设置 → 云端 AI」配置在线模型（如 OpenRouter 免费模型），即可获得智能对话！';
     }
 
     if (_currentExplanation != null) {
-      return '$_fallbackNote让我来帮你分析这道题：\n\n$_currentExplanation';
+      return '让我来帮你分析这道题：\n\n$_currentExplanation';
     }
 
-    return '$_fallbackNote好的，让我来帮你分析。你可以告诉我具体哪道题不太理解，我来为你解释。';
+    return '你可以告诉我具体哪道题不太理解，我来为你解释。\n\n'
+        '💡 配置云端 AI 模型可获得更智能的回答。';
   }
 }

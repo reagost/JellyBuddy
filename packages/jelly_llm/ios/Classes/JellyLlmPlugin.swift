@@ -122,13 +122,13 @@ public class JellyLlmPlugin: NSObject, FlutterPlugin {
             }
         }
         #else
-        // Stub mode
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-            self?.stubModelLoaded = true
-            self?.stubLoadedModelId = modelId
-            self?.emitState("ready")
-            result(nil)
-        }
+        // Stub mode — local inference not available, guide to cloud AI
+        emitState("error")
+        result(FlutterError(
+            code: "LOCAL_NOT_AVAILABLE",
+            message: "本地模型暂不可用，请配置云端 AI 模型（设置 → 模型设置 → 云端 AI）",
+            details: nil
+        ))
         #endif
     }
 
@@ -277,18 +277,9 @@ public class JellyLlmPlugin: NSObject, FlutterPlugin {
             }
         }
         #else
-        // Stub: return placeholder
-        generationTask = Task {
-            let response = "[Stub] 本地推理需启用 SPM 构建。Dart 层将自动降级到预存答案。"
-            for char in response {
-                DispatchQueue.main.async { sink(String(char)) }
-                try? await Task.sleep(nanoseconds: 15_000_000)
-            }
-            DispatchQueue.main.async { [weak self] in
-                sink(FlutterEndOfEventStream)
-                self?.emitState("ready")
-            }
-        }
+        // Local inference not available — return error so Dart falls back to cloud/pre-cached
+        sink(FlutterError(code: "NOT_AVAILABLE", message: "本地推理不可用，请使用云端 AI", details: nil))
+        emitState("uninitialized")
         #endif
     }
 
