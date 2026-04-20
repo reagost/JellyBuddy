@@ -47,7 +47,10 @@ class JellyLlmPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        appFilesDir = binding.applicationContext.filesDir.absolutePath
+        // Match Flutter's getApplicationDocumentsDirectory() which uses app_flutter/
+        val flutterDir = java.io.File(binding.applicationContext.filesDir.parentFile, "app_flutter")
+        appFilesDir = if (flutterDir.exists()) flutterDir.absolutePath
+                      else binding.applicationContext.filesDir.absolutePath
 
         methodChannel = MethodChannel(binding.binaryMessenger, "com.jellybuddy/jelly_llm")
         methodChannel.setMethodCallHandler(this)
