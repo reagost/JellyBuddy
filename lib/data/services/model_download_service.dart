@@ -72,12 +72,12 @@ class ModelDownloadService {
     ModelDefinition(
       id: 'gemma-4-e2b-it-gguf',
       displayName: 'Gemma 4 E2B (GGUF Q4)',
-      repoId: 'google/gemma-4-e2b-it-gguf',
+      repoId: 'unsloth/gemma-4-E2B-it-GGUF',
       files: [
-        'gemma-4-e2b-it-q4_k_m.gguf',
+        'gemma-4-E2B-it-Q4_K_M.gguf',
       ],
       format: 'gguf',
-      approximateSizeBytes: 2500000000, // ~2.5 GB
+      approximateSizeBytes: 2900000000, // ~2.9 GB
     ),
   ];
 
