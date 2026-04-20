@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/services/custom_course_service.dart';
 import '../../../domain/entities/course.dart';
@@ -69,7 +70,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
       final course = await _service.importFromMarkdown(content);
       _onImportSuccess(course);
     } catch (e) {
-      setState(() => _errorMessage = '文件导入失败: $e');
+      setState(() => _errorMessage = AppLocalizations.of(context)!.importFileFailed(e.toString()));
     } finally {
       setState(() => _isImporting = false);
     }
@@ -77,12 +78,13 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
 
   Future<void> _importFromUrl() async {
     final url = _urlController.text.trim();
+    final l10n = AppLocalizations.of(context)!;
     if (url.isEmpty) {
-      setState(() => _errorMessage = '请输入有效的 URL');
+      setState(() => _errorMessage = l10n.importInvalidUrl);
       return;
     }
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      setState(() => _errorMessage = 'URL 必须以 http:// 或 https:// 开头');
+      setState(() => _errorMessage = l10n.importUrlMustStartWithHttp);
       return;
     }
 
@@ -96,7 +98,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
       _urlController.clear();
       _onImportSuccess(course);
     } catch (e) {
-      setState(() => _errorMessage = 'URL 导入失败: ${e.toString().replaceFirst('FormatException: ', '')}');
+      setState(() => _errorMessage = l10n.importUrlFailed(e.toString().replaceFirst('FormatException: ', '')));
     } finally {
       setState(() => _isImporting = false);
     }
@@ -107,7 +109,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ 导入成功: ${course.name}（${course.lessons.length} 课）'),
+          content: Text('✅ ${AppLocalizations.of(context)!.importSuccess(course.name, course.lessons.length)}'),
           backgroundColor: AppColors.success,
         ),
       );
@@ -115,16 +117,17 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
   }
 
   Future<void> _deleteCourse(Course course) async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('删除课程'),
-        content: Text('确定删除「${course.name}」？此操作不可恢复。'),
+        title: Text(l10n.importDeleteCourse),
+        content: Text(l10n.importDeleteConfirm(course.name)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.importCancel)),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('删除', style: TextStyle(color: AppColors.error)),
+            child: Text(l10n.importDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -149,8 +152,8 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
         ),
         child: ListView(
           children: [
-            const Text('📝 题库模版格式',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text('📝 ${AppLocalizations.of(context)!.importTemplateFormat}',
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
@@ -169,12 +172,12 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
                 await Clipboard.setData(const ClipboardData(text: _sampleTemplate));
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('模版已复制到剪贴板')),
+                    SnackBar(content: Text(AppLocalizations.of(context)!.importTemplateCopied)),
                   );
                 }
               },
               icon: const Icon(Icons.copy, size: 18),
-              label: const Text('复制模版'),
+              label: Text(AppLocalizations.of(context)!.importCopyTemplate),
             ),
             const SizedBox(height: 12),
             const Text(
@@ -192,7 +195,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('添加课程'),
+        title: Text(AppLocalizations.of(context)!.importAddCourse),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -201,16 +204,16 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textSecondary,
           indicatorColor: AppColors.primary,
-          tabs: const [
-            Tab(icon: Icon(Icons.folder_open), text: '本地文件'),
-            Tab(icon: Icon(Icons.cloud_download), text: 'URL 导入'),
+          tabs: [
+            Tab(icon: const Icon(Icons.folder_open), text: AppLocalizations.of(context)!.importLocalFile),
+            Tab(icon: const Icon(Icons.cloud_download), text: AppLocalizations.of(context)!.importUrlImport),
           ],
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline),
             onPressed: _showTemplateHelp,
-            tooltip: '模版格式',
+            tooltip: AppLocalizations.of(context)!.importTemplateTooltip,
           ),
         ],
       ),
@@ -271,14 +274,14 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
             children: [
               const Icon(Icons.description, size: 56, color: AppColors.primary),
               const SizedBox(height: 12),
-              const Text(
-                '从本地文件导入',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.importFromLocalFile,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
-              const Text(
-                '选择一个 .md / .markdown / .txt 文件',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+              Text(
+                AppLocalizations.of(context)!.importFileHint,
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
@@ -293,7 +296,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
                           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                         )
                       : const Icon(Icons.folder_open),
-                  label: Text(_isImporting ? '导入中...' : '选择文件'),
+                  label: Text(_isImporting ? AppLocalizations.of(context)!.importImporting : AppLocalizations.of(context)!.importSelectFile),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
@@ -321,14 +324,14 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
             children: [
               const Icon(Icons.cloud_download, size: 56, color: AppColors.primary),
               const SizedBox(height: 12),
-              const Text(
-                '从 URL 导入',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.importFromUrl,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
-              const Text(
-                '粘贴一个 Markdown 文档的 URL',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+              Text(
+                AppLocalizations.of(context)!.importUrlHint,
+                style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
@@ -358,9 +361,9 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
                 onSubmitted: (_) => _importFromUrl(),
               ),
               const SizedBox(height: 8),
-              const Text(
-                '💡 支持 GitHub blob URL 自动转换为 raw',
-                style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+              Text(
+                '💡 ${AppLocalizations.of(context)!.importGithubAutoConvert}',
+                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
               ),
               const SizedBox(height: 16),
               SizedBox(
@@ -376,7 +379,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
                           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                         )
                       : const Icon(Icons.download),
-                  label: Text(_isImporting ? '下载中...' : '下载并导入'),
+                  label: Text(_isImporting ? AppLocalizations.of(context)!.importDownloading : AppLocalizations.of(context)!.importDownloadAndImport),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
@@ -394,11 +397,11 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.info_outline, size: 18, color: AppColors.primary),
-                  SizedBox(width: 8),
-                  Text('示例 URL', style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Icon(Icons.info_outline, size: 18, color: AppColors.primary),
+                  const SizedBox(width: 8),
+                  Text(AppLocalizations.of(context)!.importExampleUrl, style: const TextStyle(fontWeight: FontWeight.w600)),
                 ],
               ),
               const SizedBox(height: 8),
@@ -467,26 +470,26 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 20),
-              SizedBox(width: 8),
+              const Icon(Icons.lightbulb_outline, color: AppColors.primary, size: 20),
+              const SizedBox(width: 8),
               Text(
-                '如何制作题库？',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                AppLocalizations.of(context)!.importHowToMake,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          const Text(
-            '按照 Markdown 模版格式编写题目，支持选择题、填空题、排序题、编程题 4 种类型。',
-            style: TextStyle(fontSize: 13, height: 1.5),
+          Text(
+            AppLocalizations.of(context)!.importHowToMakeDesc,
+            style: const TextStyle(fontSize: 13, height: 1.5),
           ),
           const SizedBox(height: 8),
           TextButton.icon(
             onPressed: _showTemplateHelp,
             icon: const Icon(Icons.description, size: 16),
-            label: const Text('查看模版格式'),
+            label: Text(AppLocalizations.of(context)!.importViewTemplate),
           ),
         ],
       ),
@@ -506,7 +509,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '已导入 (${_customCourses.length})',
+            '${AppLocalizations.of(context)!.importImported} (${_customCourses.length})',
             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 8),
@@ -559,7 +562,7 @@ class _ImportCourseScreenState extends State<ImportCourseScreen>
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${course.lessons.length} 课',
+                    AppLocalizations.of(context)!.importLessonCount(course.lessons.length),
                     style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
                   ),
                 ],

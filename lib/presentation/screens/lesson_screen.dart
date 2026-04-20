@@ -341,15 +341,15 @@ class _LessonScreenState extends State<LessonScreen>
                   enabled: !_showResult,
                   maxLines: 12,
                   minLines: 5,
-                  decoration: const InputDecoration(
-                    hintText: '// 在这里写代码...',
-                    hintStyle: TextStyle(
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.lessonCodeHint,
+                    hintStyle: const TextStyle(
                       color: Color(0xFF6C7086),
                       fontFamily: 'JetBrains Mono',
                     ),
                     border: InputBorder.none,
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                        const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                   ),
                   style: const TextStyle(
                     fontFamily: 'JetBrains Mono',
@@ -382,9 +382,9 @@ class _LessonScreenState extends State<LessonScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '正确答案：',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.lessonCorrectAnswerLabel,
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: AppColors.success,

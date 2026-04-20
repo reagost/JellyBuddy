@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/services/ai_providers/cloud_ai_provider.dart';
 import '../../../data/services/cloud_ai_service.dart';
@@ -56,7 +57,7 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(id == null ? '✅ 已禁用云端 AI' : '✅ 已切换到云端 AI'),
+          content: Text(id == null ? '✅ ${AppLocalizations.of(context)!.modelCloudDisabled}' : '✅ ${AppLocalizations.of(context)!.modelCloudSwitched}'),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -64,16 +65,17 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
   }
 
   Future<void> _delete(String id) async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('删除配置'),
-        content: const Text('确认删除此 AI 配置？API Key 也会一并删除。'),
+        title: Text(l10n.cloudAIDeleteTitle),
+        content: Text(l10n.cloudAIDeleteConfirm),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cloudAICancel)),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('删除', style: TextStyle(color: AppColors.error)),
+            child: Text(l10n.cloudAIDelete, style: const TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -98,7 +100,7 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('云端 AI 模型'),
+        title: Text(AppLocalizations.of(context)!.cloudAITitle),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -106,7 +108,7 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _addOrEdit(),
         icon: const Icon(Icons.add),
-        label: const Text('添加模型'),
+        label: Text(AppLocalizations.of(context)!.cloudAIAddModel),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
       ),
@@ -118,11 +120,11 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
           if (_configs.isEmpty)
             _buildEmptyState()
           else ...[
-            const Padding(
-              padding: EdgeInsets.only(left: 4, bottom: 8),
+            Padding(
+              padding: const EdgeInsets.only(left: 4, bottom: 8),
               child: Text(
-                '已配置的模型',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                AppLocalizations.of(context)!.cloudAIConfigured,
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
             ..._configs.map(_buildConfigCard),
@@ -144,16 +146,16 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
         ),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.cloud, color: Colors.white, size: 24),
-              SizedBox(width: 8),
+              const Icon(Icons.cloud, color: Colors.white, size: 24),
+              const SizedBox(width: 8),
               Text(
-                '云端 AI 模型',
-                style: TextStyle(
+                AppLocalizations.of(context)!.cloudAITitle,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -161,11 +163,10 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            '使用 MiniMax、OpenRouter、OpenAI、Claude 等在线模型\n'
-            '需要你自己的 API Key，密钥加密存储在设备本地',
-            style: TextStyle(color: Colors.white, fontSize: 13, height: 1.5),
+            AppLocalizations.of(context)!.cloudAIIntroDesc,
+            style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.5),
           ),
         ],
       ),
@@ -183,13 +184,13 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
         children: [
           const Icon(Icons.smart_toy_outlined, size: 60, color: AppColors.textHint),
           const SizedBox(height: 12),
-          const Text(
-            '暂无配置的云端模型',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          Text(
+            AppLocalizations.of(context)!.cloudAIEmptyTitle,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 4),
           Text(
-            '点击右下角 + 添加你的第一个 AI 模型',
+            AppLocalizations.of(context)!.cloudAIEmptyHint,
             style: TextStyle(fontSize: 13, color: AppColors.textHint.withValues(alpha: 0.8)),
           ),
         ],
@@ -241,9 +242,9 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
                               color: AppColors.success.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Text(
-                              '使用中',
-                              style: TextStyle(fontSize: 11, color: AppColors.success, fontWeight: FontWeight.w600),
+                            child: Text(
+                              AppLocalizations.of(context)!.modelInUse,
+                              style: const TextStyle(fontSize: 11, color: AppColors.success, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],
@@ -268,8 +269,8 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
                   }
                 },
                 itemBuilder: (_) => [
-                  const PopupMenuItem(value: 'edit', child: Text('编辑')),
-                  const PopupMenuItem(value: 'delete', child: Text('删除', style: TextStyle(color: AppColors.error))),
+                  PopupMenuItem(value: 'edit', child: Text(AppLocalizations.of(context)!.cloudAIEdit)),
+                  PopupMenuItem(value: 'delete', child: Text(AppLocalizations.of(context)!.cloudAIDelete, style: const TextStyle(color: AppColors.error))),
                 ],
               ),
             ],
@@ -282,12 +283,12 @@ class _CloudAiSettingsScreenState extends State<CloudAiSettingsScreen> {
                     ? OutlinedButton.icon(
                         onPressed: () => _setActive(null),
                         icon: const Icon(Icons.pause_circle_outline, size: 16),
-                        label: const Text('停用'),
+                        label: Text(AppLocalizations.of(context)!.modelDisable),
                       )
                     : ElevatedButton.icon(
                         onPressed: () => _setActive(row.id),
                         icon: const Icon(Icons.play_circle_outline, size: 16, color: Colors.white),
-                        label: const Text('启用', style: TextStyle(color: Colors.white)),
+                        label: Text(AppLocalizations.of(context)!.modelEnable, style: const TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
                       ),
               ),
@@ -372,6 +373,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
   }
 
   Future<void> _test() async {
+    final l10n = AppLocalizations.of(context)!;
     setState(() {
       _testing = true;
       _testResult = null;
@@ -392,18 +394,19 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
       final ok = await provider?.testConnection() ?? false;
       // Delete temp config
       await widget.service.deleteConfig(tempId);
-      setState(() => _testResult = ok ? '✅ 连接成功' : '❌ 连接失败，请检查 API Key 和模型 ID');
+      setState(() => _testResult = ok ? '✅ ${l10n.cloudAIConnectionSuccess}' : '❌ ${l10n.cloudAIConnectionFailed}');
     } catch (e) {
       await widget.service.deleteConfig(tempId);
-      setState(() => _testResult = '❌ 测试失败: $e');
+      setState(() => _testResult = '❌ ${l10n.cloudAITestFailed(e.toString())}');
     } finally {
       setState(() => _testing = false);
     }
   }
 
   Future<void> _save() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_modelController.text.trim().isEmpty || _apiKeyController.text.trim().isEmpty) {
-      setState(() => _testResult = '❌ 模型 ID 和 API Key 不能为空');
+      setState(() => _testResult = '❌ ${l10n.cloudAIEmptyFields}');
       return;
     }
 
@@ -420,7 +423,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
       );
       if (mounted) Navigator.pop(context, true);
     } catch (e) {
-      setState(() => _testResult = '❌ 保存失败: $e');
+      setState(() => _testResult = '❌ ${l10n.cloudAISaveFailed(e.toString())}');
     } finally {
       setState(() => _saving = false);
     }
@@ -459,13 +462,13 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
             ),
             const SizedBox(height: 16),
             Text(
-              widget.existing == null ? '添加云端 AI 模型' : '编辑云端 AI 模型',
+              widget.existing == null ? AppLocalizations.of(context)!.cloudAIAddTitle : AppLocalizations.of(context)!.cloudAIEditTitle,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
 
             // Provider type
-            const Text('提供商', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context)!.cloudAIProvider, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -502,7 +505,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
             const SizedBox(height: 20),
 
             // Model ID
-            const Text('模型 ID', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            Text(AppLocalizations.of(context)!.cloudAIModelId, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
             const SizedBox(height: 6),
             TextField(
               controller: _modelController,
@@ -558,7 +561,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
 
             // Base URL (advanced)
             ExpansionTile(
-              title: const Text('高级选项', style: TextStyle(fontSize: 13)),
+              title: Text(AppLocalizations.of(context)!.cloudAIAdvancedOptions, style: const TextStyle(fontSize: 13)),
               tilePadding: EdgeInsets.zero,
               childrenPadding: EdgeInsets.zero,
               children: [
@@ -601,7 +604,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
                     icon: _testing
                         ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2))
                         : const Icon(Icons.wifi_tethering, size: 16),
-                    label: Text(_testing ? '测试中...' : '测试连接'),
+                    label: Text(_testing ? AppLocalizations.of(context)!.cloudAITesting : AppLocalizations.of(context)!.cloudAITestConnection),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -609,7 +612,7 @@ class _AddEditProviderSheetState extends State<_AddEditProviderSheet> {
                   child: ElevatedButton.icon(
                     onPressed: _saving ? null : _save,
                     icon: const Icon(Icons.save, size: 16, color: Colors.white),
-                    label: Text(_saving ? '保存中...' : '保存', style: const TextStyle(color: Colors.white)),
+                    label: Text(_saving ? AppLocalizations.of(context)!.cloudAISaving : AppLocalizations.of(context)!.cloudAISave, style: const TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
                   ),
                 ),

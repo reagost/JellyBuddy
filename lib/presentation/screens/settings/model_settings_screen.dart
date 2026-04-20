@@ -63,7 +63,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(id == null ? '已禁用云端 AI' : '已切换到云端 AI'),
+          content: Text(id == null ? AppLocalizations.of(context)!.modelCloudDisabled : AppLocalizations.of(context)!.modelCloudSwitched),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -96,8 +96,8 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
               // ===== Local Models Section =====
               _buildSectionHeader(
                 icon: Icons.phone_android,
-                title: '本地 AI 模型',
-                subtitle: '离线推理 · 隐私优先',
+                title: AppLocalizations.of(context)!.modelLocalAI,
+                subtitle: AppLocalizations.of(context)!.modelLocalAISubtitle,
               ),
               const SizedBox(height: 12),
 
@@ -117,15 +117,15 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
               // ===== Cloud Models Section =====
               _buildSectionHeader(
                 icon: Icons.cloud,
-                title: '云端 AI 模型',
-                subtitle: 'MiniMax · OpenRouter · OpenAI · Claude · DeepSeek',
+                title: AppLocalizations.of(context)!.modelCloudAI,
+                subtitle: AppLocalizations.of(context)!.modelCloudAIProviders,
                 action: OutlinedButton.icon(
                   onPressed: () async {
                     await context.push('/cloud-ai-settings');
                     _reloadCloud();
                   },
                   icon: const Icon(Icons.settings, size: 14),
-                  label: const Text('管理', style: TextStyle(fontSize: 12)),
+                  label: Text(AppLocalizations.of(context)!.modelManage, style: const TextStyle(fontSize: 12)),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     visualDensity: VisualDensity.compact,
@@ -164,7 +164,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                '加载模型或配置云端 AI 获得智能回答',
+                AppLocalizations.of(context)!.modelLoadHint,
                 style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
               ),
             ),
@@ -182,11 +182,11 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
         (c) => c.id == _activeCloudId,
         orElse: () => _cloudConfigs.first,
       );
-      title = '使用中: ${active.config.type.displayName}';
+      title = AppLocalizations.of(context)!.modelInUseCloud(active.config.type.displayName);
       subtitle = active.config.modelId;
       icon = Icons.cloud_done;
     } else {
-      title = '使用中: 本地模型';
+      title = AppLocalizations.of(context)!.modelInUseLocal;
       subtitle = state.loadedModelId ?? '';
       icon = Icons.check_circle;
     }
@@ -274,10 +274,10 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
         children: [
           const Icon(Icons.cloud_outlined, size: 40, color: AppColors.textHint),
           const SizedBox(height: 10),
-          const Text('还没有配置云端模型', style: TextStyle(fontWeight: FontWeight.w600)),
+          Text(AppLocalizations.of(context)!.modelNoCloudConfig, style: const TextStyle(fontWeight: FontWeight.w600)),
           const SizedBox(height: 4),
           Text(
-            '添加你自己的 API Key，使用 MiniMax / OpenRouter 等在线模型',
+            AppLocalizations.of(context)!.modelNoCloudConfigHint,
             style: TextStyle(fontSize: 12, color: AppColors.textSecondaryOf(context)),
             textAlign: TextAlign.center,
           ),
@@ -288,7 +288,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
               _reloadCloud();
             },
             icon: const Icon(Icons.add, size: 16),
-            label: const Text('添加云端模型'),
+            label: Text(AppLocalizations.of(context)!.modelAddCloud),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
@@ -345,8 +345,8 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
                               color: AppColors.success.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Text('使用中',
-                                style: TextStyle(
+                            child: Text(AppLocalizations.of(context)!.modelInUse,
+                                style: const TextStyle(
                                     fontSize: 11,
                                     color: AppColors.success,
                                     fontWeight: FontWeight.w600)),
@@ -372,14 +372,14 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
                 ? OutlinedButton.icon(
                     onPressed: () => _setActiveCloud(null),
                     icon: const Icon(Icons.pause_circle_outline, size: 16),
-                    label: const Text('停用'),
+                    label: Text(AppLocalizations.of(context)!.modelDisable),
                   )
                 : ElevatedButton.icon(
                     onPressed: () => _setActiveCloud(row.id),
                     icon: const Icon(Icons.play_circle_outline,
                         size: 16, color: Colors.white),
-                    label: const Text('设为 AI 助手使用',
-                        style: TextStyle(color: Colors.white)),
+                    label: Text(AppLocalizations.of(context)!.modelSetAsAssistant,
+                        style: const TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary),
                   ),
@@ -696,7 +696,7 @@ class _ModelSettingsScreenState extends State<ModelSettingsScreen> {
             child: ElevatedButton.icon(
               onPressed: () => context.read<ModelBloc>().add(CheckModels()),
               icon: const Icon(Icons.refresh, size: 18),
-              label: const Text('重试'),
+              label: Text(AppLocalizations.of(context)!.modelRetry),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.error,
                 foregroundColor: Colors.white,

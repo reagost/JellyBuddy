@@ -275,7 +275,7 @@ class _AITutorScreenState extends State<AITutorScreen> {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '本地 AI 模型未加载，当前使用预设答案。前往「我的 \u{2192} AI 模型管理」下载模型。',
+              AppLocalizations.of(context)!.aiModelNotLoaded,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.brown.shade700,
@@ -289,9 +289,9 @@ class _AITutorScreenState extends State<AITutorScreen> {
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            child: const Text(
-              '去下载',
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)!.aiGoDownload,
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,

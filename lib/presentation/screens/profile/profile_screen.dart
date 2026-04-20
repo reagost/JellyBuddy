@@ -53,13 +53,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          title: const Text('修改用户名'),
+          title: Text(AppLocalizations.of(context)!.profileEditName),
           content: TextField(
             controller: controller,
             autofocus: true,
             maxLength: 20,
             decoration: InputDecoration(
-              hintText: '输入新用户名',
+              hintText: AppLocalizations.of(context)!.profileEditNameHint,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('取消'),
+              child: Text(AppLocalizations.of(context)!.profileCancel),
             ),
             ElevatedButton(
               onPressed: () {
@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text('保存'),
+              child: Text(AppLocalizations.of(context)!.profileSave),
             ),
           ],
         );
@@ -292,8 +292,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _buildSettingsItem(
                     context,
                     icon: Icons.leaderboard_outlined,
-                    title: '个人排行榜',
-                    subtitle: '查看个人最佳记录',
+                    title: AppLocalizations.of(context)!.profileLeaderboard,
+                    subtitle: AppLocalizations.of(context)!.profileLeaderboardSubtitle,
                     onTap: () => context.push('/leaderboard'),
                   ),
                   // Settings

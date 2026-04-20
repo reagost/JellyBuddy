@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_gradients.dart';
 import '../../../data/services/leaderboard_service.dart';
@@ -38,9 +39,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
-          '个人排行榜',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.leaderboardTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
           ),
@@ -64,25 +65,25 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       gradient: AppGradients.xpGradient,
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Text(
+                        const Text(
                           '🏆',
                           style: TextStyle(fontSize: 48),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
-                          '个人最佳记录',
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.leaderboardPersonalBest,
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
-                          '挑战自己，刷新记录！',
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.leaderboardChallengeSelf,
+                          style: const TextStyle(
                             fontSize: 14,
                             color: Colors.white70,
                           ),
@@ -93,9 +94,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   const SizedBox(height: 24),
 
                   // Personal Records section
-                  const Text(
-                    'Personal Records',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.leaderboardPersonalRecords,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -109,9 +110,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   const SizedBox(height: 24),
 
                   // Hall of Fame section
-                  const Text(
-                    'Hall of Fame',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.leaderboardHallOfFame,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
@@ -138,13 +139,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                           ),
                         ],
                       ),
-                      child: const Column(
+                      child: Column(
                         children: [
-                          Text('📝', style: TextStyle(fontSize: 36)),
-                          SizedBox(height: 8),
+                          const Text('📝', style: TextStyle(fontSize: 36)),
+                          const SizedBox(height: 8),
                           Text(
-                            '完成课程来解锁记录！',
-                            style: TextStyle(
+                            AppLocalizations.of(context)!.leaderboardUnlockHint,
+                            style: const TextStyle(
                               fontSize: 16,
                               color: AppColors.textSecondary,
                             ),

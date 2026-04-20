@@ -53,6 +53,7 @@
       "xp": { "type": "int" }
     }
   },
+  "homeNoNotifications": "No new notifications",
 
   "lessonConfirmAnswer": "Confirm",
   "lessonNextQuestion": "Next",
@@ -106,6 +107,12 @@
       "name": { "type": "String" }
     }
   },
+  "lessonCodeHint": "// Write code here...",
+  "lessonCorrectAnswerLabel": "Correct answer:",
+  "lessonProgress": "Progress",
+  "lessonDifficultyEasy": "Easy",
+  "lessonDifficultyMedium": "Medium",
+  "lessonDifficultyHard": "Hard",
 
   "profileLevelProgress": "Level Progress",
   "profileAchievements": "Achievements",
@@ -114,40 +121,12 @@
   "profileStreakDays": "Streak Days",
   "profileDiamonds": "Diamonds",
   "profileHearts": "Hearts",
-
-  "modelManagementTitle": "AI Model Management",
-  "modelAvailable": "Available Models",
-  "modelNoModels": "No models available",
-  "modelInferenceEngine": "AI Inference Engine",
-  "modelReady": "Model ready",
-  "modelLoading": "Loading model...",
-  "modelDownloading": "Downloading model...",
-  "modelGenerating": "Generating response...",
-  "modelError": "Model loading failed",
-  "modelUninitialized": "No model loaded",
-  "modelDownloadProgress": "Downloading: {percent}",
-  "@modelDownloadProgress": {
-    "placeholders": {
-      "percent": { "type": "String" }
-    }
-  },
-  "modelCurrentFile": "Current file: {file}",
-  "@modelCurrentFile": {
-    "placeholders": {
-      "file": { "type": "String" }
-    }
-  },
-  "modelDownloadSource": "Source: {source}",
-  "@modelDownloadSource": {
-    "placeholders": {
-      "source": { "type": "String" }
-    }
-  },
-  "modelCancelDownload": "Cancel Download",
-  "modelDownloadButton": "Download",
-  "modelLoadButton": "Load",
-  "modelUnloadButton": "Unload",
-  "modelLoaded": "Loaded",
+  "profileEditName": "Edit Username",
+  "profileEditNameHint": "Enter new username",
+  "profileSave": "Save",
+  "profileCancel": "Cancel",
+  "profileLeaderboard": "Personal Leaderboard",
+  "profileLeaderboardSubtitle": "View personal best records",
 
   "coursesTitle": "All Courses",
   "coursesNoCourses": "No courses available",
@@ -184,6 +163,102 @@
   "onboardingTitle3": "Anytime, Anywhere, Offline",
   "onboardingSubtitle3": "Local AI model, privacy-first, learn without internet",
 
+  "modelManagementTitle": "AI Model Management",
+  "modelAvailable": "Available Models",
+  "modelNoModels": "No models available",
+  "modelInferenceEngine": "AI Inference Engine",
+  "modelReady": "Model ready",
+  "modelLoading": "Loading model...",
+  "modelDownloading": "Downloading model...",
+  "modelGenerating": "Generating response...",
+  "modelError": "Model loading failed",
+  "modelUninitialized": "No model loaded",
+  "modelDownloadProgress": "Downloading: {percent}",
+  "@modelDownloadProgress": {
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+  "modelCurrentFile": "Current file: {file}",
+  "@modelCurrentFile": {
+    "placeholders": {
+      "file": { "type": "String" }
+    }
+  },
+  "modelDownloadSource": "Source: {source}",
+  "@modelDownloadSource": {
+    "placeholders": {
+      "source": { "type": "String" }
+    }
+  },
+  "modelCancelDownload": "Cancel Download",
+  "modelDownloadButton": "Download",
+  "modelLoadButton": "Load",
+  "modelUnloadButton": "Unload",
+  "modelLoaded": "Loaded",
+  "modelRetry": "Retry",
+  "modelSettingsTitle": "Model Settings",
+  "modelLocalAI": "Local AI Model",
+  "modelLocalAISubtitle": "Offline inference · Privacy first",
+  "modelLocalAIFree": "Offline inference · Privacy first · Free",
+  "modelCloudAI": "Cloud AI Model",
+  "modelCloudAIProviders": "MiniMax · OpenRouter · OpenAI · Claude · DeepSeek",
+  "modelManage": "Manage",
+  "modelCloudDisabled": "Cloud AI disabled",
+  "modelCloudSwitched": "Switched to cloud AI",
+  "modelInUse": "In Use",
+  "modelDisable": "Disable",
+  "modelEnable": "Enable",
+  "modelSetAsAssistant": "Set as AI assistant",
+  "modelLoadHint": "Load a model or configure cloud AI for smart answers",
+  "modelInUseCloud": "In Use: {provider}",
+  "@modelInUseCloud": {
+    "placeholders": {
+      "provider": { "type": "String" }
+    }
+  },
+  "modelInUseLocal": "In Use: Local Model",
+  "modelNoCloudConfig": "No cloud models configured",
+  "modelNoCloudConfigHint": "Add your own API Key to use MiniMax / OpenRouter and other online models",
+  "modelAddCloud": "Add Cloud Model",
+  "modelSettingsSubtitle": "Local model · Cloud AI (MiniMax / OpenRouter / Claude)",
+
+  "cloudAITitle": "Cloud AI Models",
+  "cloudAIAddModel": "Add Model",
+  "cloudAIConfigured": "Configured Models",
+  "cloudAIIntroDesc": "Use MiniMax, OpenRouter, OpenAI, Claude, and other online models\nRequires your own API Key — encrypted and stored locally",
+  "cloudAIEmptyTitle": "No cloud models configured",
+  "cloudAIEmptyHint": "Tap the + button to add your first AI model",
+  "cloudAIDeleteTitle": "Delete Configuration",
+  "cloudAIDeleteConfirm": "Delete this AI configuration? The API Key will also be removed.",
+  "cloudAIEdit": "Edit",
+  "cloudAIDelete": "Delete",
+  "cloudAICancel": "Cancel",
+  "cloudAIAddTitle": "Add Cloud AI Model",
+  "cloudAIEditTitle": "Edit Cloud AI Model",
+  "cloudAIProvider": "Provider",
+  "cloudAIModelId": "Model ID",
+  "cloudAIAdvancedOptions": "Advanced Options",
+  "cloudAITestConnection": "Test Connection",
+  "cloudAITesting": "Testing...",
+  "cloudAISave": "Save",
+  "cloudAISaving": "Saving...",
+  "cloudAIConnectionSuccess": "Connection successful",
+  "cloudAIConnectionFailed": "Connection failed. Check your API Key and Model ID",
+  "cloudAITestFailed": "Test failed: {error}",
+  "@cloudAITestFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "cloudAISaveFailed": "Save failed: {error}",
+  "@cloudAISaveFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "cloudAIEmptyFields": "Model ID and API Key cannot be empty",
+
   "settingsTitle": "Settings",
   "settingsGeneral": "General",
   "settingsLanguage": "Language",
@@ -216,9 +291,147 @@
   "settingsClearAll": "Clear All",
   "settingsLanguageZh": "Chinese",
   "settingsLanguageEn": "English",
+  "settingsPrivacyPolicy": "Privacy Policy",
+  "settingsPrivacyPolicySubtitle": "Learn how we protect your data",
+  "settingsTermsOfService": "Terms of Service",
+  "settingsTermsOfServiceSubtitle": "Usage terms and service agreement",
+  "settingsCrashLogs": "Error Logs",
+  "settingsCrashLogsSubtitle": "View app error records",
+  "settingsNoCrashLogs": "No error logs",
+  "settingsCopiedToClipboard": "Copied to clipboard",
+  "settingsCopyToClipboard": "Copy to clipboard",
+  "settingsCopy": "Copy",
+  "settingsClose": "Close",
+  "settingsClearLogs": "Clear Logs",
+  "settingsLogsCleared": "Logs cleared",
   "profileSettings": "Settings",
   "profileSettingsSubtitle": "Language, data management, etc.",
 
   "homeStatsTitle": "Learning Stats",
-  "homeStatsSubtitle": "View your learning progress and scores"
+  "homeStatsSubtitle": "View your learning progress and scores",
+
+  "importAddCourse": "Add Course",
+  "importLocalFile": "Local File",
+  "importUrlImport": "URL Import",
+  "importFromLocalFile": "Import from Local File",
+  "importFileHint": "Select a .md / .markdown / .txt file",
+  "importSelectFile": "Select File",
+  "importImporting": "Importing...",
+  "importDownloadAndImport": "Download & Import",
+  "importDownloading": "Downloading...",
+  "importSuccess": "Import successful: {name} ({count} lessons)",
+  "@importSuccess": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "count": { "type": "int" }
+    }
+  },
+  "importFileFailed": "File import failed: {error}",
+  "@importFileFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importInvalidUrl": "Please enter a valid URL",
+  "importUrlMustStartWithHttp": "URL must start with http:// or https://",
+  "importUrlFailed": "URL import failed: {error}",
+  "@importUrlFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importDeleteCourse": "Delete Course",
+  "importDeleteConfirm": "Delete \"{name}\"? This cannot be undone.",
+  "@importDeleteConfirm": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "importCancel": "Cancel",
+  "importDelete": "Delete",
+  "importTemplateFormat": "Question Bank Template",
+  "importCopyTemplate": "Copy Template",
+  "importTemplateCopied": "Template copied to clipboard",
+  "importHowToMake": "How to create a question bank?",
+  "importHowToMakeDesc": "Write questions in Markdown template format. Supports 4 types: multiple choice, fill-in-the-blank, sorting, and coding.",
+  "importViewTemplate": "View Template",
+  "importImported": "Imported",
+  "importLessonCount": "{count} lessons",
+  "@importLessonCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "importFromUrl": "Import from URL",
+  "importUrlHint": "Paste a Markdown document URL",
+  "importGithubAutoConvert": "Supports auto-conversion of GitHub blob URLs to raw",
+  "importExampleUrl": "Example URLs",
+  "importTemplateTooltip": "Template Format",
+
+  "leaderboardTitle": "Personal Leaderboard",
+  "leaderboardPersonalBest": "Personal Best Records",
+  "leaderboardChallengeSelf": "Challenge yourself, break records!",
+  "leaderboardPersonalRecords": "Personal Records",
+  "leaderboardHallOfFame": "Hall of Fame",
+  "leaderboardHighestXP": "Highest Session XP",
+  "leaderboardLongestStreak": "Longest Streak",
+  "leaderboardPerfectStreak": "Consecutive Perfect Lessons",
+  "leaderboardFastestLesson": "Fastest Lesson",
+  "leaderboardUnlockHint": "Complete lessons to unlock records!",
+  "leaderboardDays": "{count} days",
+  "@leaderboardDays": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "leaderboardLessons": "{count} lessons",
+  "@leaderboardLessons": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "leaderboardMinSec": "{min}m {sec}s",
+  "@leaderboardMinSec": {
+    "placeholders": {
+      "min": { "type": "int" },
+      "sec": { "type": "int" }
+    }
+  },
+  "leaderboardSec": "{sec}s",
+  "@leaderboardSec": {
+    "placeholders": {
+      "sec": { "type": "int" }
+    }
+  },
+
+  "achievementFirstStep": "First Step",
+  "achievementFirstStepDesc": "Complete your first lesson",
+  "achievementStreakMaster": "Streak Master",
+  "achievementStreakMasterDesc": "7-day learning streak",
+  "achievementPerfectionist": "Perfectionist",
+  "achievementPerfectionistDesc": "Complete 10 Perfect lessons",
+  "achievementQuickLearner": "Quick Learner",
+  "achievementQuickLearnerDesc": "Answer 5 questions correctly in a row",
+
+  "dailyTaskLesson": "Daily Lessons",
+  "dailyTaskLessonReward": "+30 XP + 1 Diamond",
+  "dailyTaskPerfect": "Perfect",
+  "dailyTaskPerfectReward": "+20 XP",
+  "dailyTaskReview": "Review",
+  "dailyTaskReviewReward": "+25 XP",
+  "dailyTaskEarlyBird": "Early Bird",
+  "dailyTaskEarlyBirdReward": "XP x1.5",
+
+  "aiModelNotLoaded": "Local AI model not loaded. Using preset answers. Go to \"Profile → AI Model Management\" to download.",
+  "aiGoDownload": "Download",
+
+  "notificationDailyTitle": "Time to study!",
+  "notificationDailyBody": "Keep your learning streak going 🔥",
+  "notificationStreakTitle": "⚠️ Streak about to break!",
+  "notificationStreakBody": "{hours} hours left to recover. Come study now!",
+  "@notificationStreakBody": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  }
 }

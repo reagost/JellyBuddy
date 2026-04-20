@@ -117,9 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   icon: const Icon(Icons.notifications_outlined),
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('暂无新通知'),
-                                        duration: Duration(seconds: 1),
+                                      SnackBar(
+                                        content: Text(AppLocalizations.of(context)!.homeNoNotifications),
+                                        duration: const Duration(seconds: 1),
                                       ),
                                     );
                                   },

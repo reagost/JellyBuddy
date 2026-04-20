@@ -119,6 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _showModelSettingsSheet() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       builder: (ctx) => SafeArea(
@@ -127,22 +128,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 child: Row(
                   children: [
-                    Icon(Icons.smart_toy, color: AppColors.primary),
-                    SizedBox(width: 8),
-                    Text('模型设置',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const Icon(Icons.smart_toy, color: AppColors.primary),
+                    const SizedBox(width: 8),
+                    Text(l10n.modelSettingsTitle,
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
               const Divider(height: 1),
               ListTile(
                 leading: const Icon(Icons.phone_android, color: AppColors.primary),
-                title: const Text('本地 AI 模型'),
-                subtitle: const Text('离线推理 · 隐私优先 · 免费'),
+                title: Text(l10n.modelLocalAI),
+                subtitle: Text(l10n.modelLocalAIFree),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.pop(ctx);
@@ -152,8 +153,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const Divider(height: 1, indent: 16, endIndent: 16),
               ListTile(
                 leading: const Icon(Icons.cloud, color: AppColors.primary),
-                title: const Text('云端 AI 模型'),
-                subtitle: const Text('MiniMax · OpenRouter · OpenAI · Claude · DeepSeek'),
+                title: Text(l10n.modelCloudAI),
+                subtitle: Text(l10n.modelCloudAIProviders),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.pop(ctx);
@@ -168,24 +169,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _showCrashLogs() {
+    final l10n = AppLocalizations.of(context)!;
     final crashLogService = GetIt.instance<CrashLogService>();
     final crashes = crashLogService.getRecentCrashes().reversed.toList();
 
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.bug_report, size: 22),
-            SizedBox(width: 8),
-            Text('错误日志'),
+            const Icon(Icons.bug_report, size: 22),
+            const SizedBox(width: 8),
+            Text(l10n.settingsCrashLogs),
           ],
         ),
         content: SizedBox(
           width: double.maxFinite,
           height: 400,
           child: crashes.isEmpty
-              ? const Center(child: Text('暂无错误日志'))
+              ? Center(child: Text(l10n.settingsNoCrashLogs))
               : ListView.separated(
                   itemCount: crashes.length,
                   separatorBuilder: (_, __) => const Divider(height: 1),
@@ -237,10 +239,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Clipboard.setData(ClipboardData(text: buffer.toString()));
               Navigator.of(ctx).pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('已复制到剪贴板')),
+                SnackBar(content: Text(l10n.settingsCopiedToClipboard)),
               );
             },
-            child: const Text('复制到剪贴板'),
+            child: Text(l10n.settingsCopyToClipboard),
           ),
           TextButton(
             onPressed: () async {
@@ -249,15 +251,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               await crashLogService.clearLogs();
               navigator.pop();
               messenger.showSnackBar(
-                const SnackBar(content: Text('日志已清除')),
+                SnackBar(content: Text(l10n.settingsLogsCleared)),
               );
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: const Text('清除日志'),
+            child: Text(l10n.settingsClearLogs),
           ),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('关闭'),
+            child: Text(l10n.settingsClose),
           ),
         ],
       ),
@@ -265,6 +267,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _showCrashDetail(Map<String, String> entry) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -286,14 +289,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ));
               Navigator.of(ctx).pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('已复制到剪贴板')),
+                SnackBar(content: Text(l10n.settingsCopiedToClipboard)),
               );
             },
-            child: const Text('复制'),
+            child: Text(l10n.settingsCopy),
           ),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('关闭'),
+            child: Text(l10n.settingsClose),
           ),
         ],
       ),
@@ -329,8 +332,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Divider(height: 1),
             _actionTile(
               icon: Icons.smart_toy_outlined,
-              title: '模型设置',
-              subtitle: '本地模型 · 云端 AI (MiniMax / OpenRouter / Claude)',
+              title: l10n.modelSettingsTitle,
+              subtitle: l10n.modelSettingsSubtitle,
               onTap: _showModelSettingsSheet,
             ),
           ]),
@@ -361,15 +364,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Divider(height: 1),
             _actionTile(
               icon: Icons.privacy_tip_outlined,
-              title: '隐私政策',
-              subtitle: '了解我们如何保护你的数据',
+              title: l10n.settingsPrivacyPolicy,
+              subtitle: l10n.settingsPrivacyPolicySubtitle,
               onTap: () => context.push('/legal/privacy'),
             ),
             const Divider(height: 1),
             _actionTile(
               icon: Icons.gavel_outlined,
-              title: '用户服务协议',
-              subtitle: '使用条款和服务协议',
+              title: l10n.settingsTermsOfService,
+              subtitle: l10n.settingsTermsOfServiceSubtitle,
               onTap: () => context.push('/legal/terms'),
             ),
             const Divider(height: 1),
@@ -381,8 +384,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Divider(height: 1),
             _actionTile(
               icon: Icons.bug_report,
-              title: '错误日志',
-              subtitle: '查看应用错误记录',
+              title: l10n.settingsCrashLogs,
+              subtitle: l10n.settingsCrashLogsSubtitle,
               onTap: _showCrashLogs,
             ),
           ]),

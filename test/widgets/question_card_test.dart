@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import 'package:jelly_buddy/domain/entities/course.dart';
 import 'package:jelly_buddy/domain/entities/question.dart';
 import 'package:jelly_buddy/presentation/widgets/lesson/question_card.dart';
@@ -25,6 +27,14 @@ void main() {
 
   Widget buildTestWidget(Question question) {
     return MaterialApp(
+      locale: const Locale('zh'),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: SingleChildScrollView(
           child: QuestionCard(question: question),

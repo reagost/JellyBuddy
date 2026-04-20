@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
 class LessonProgressBar extends StatelessWidget {
@@ -22,9 +23,9 @@ class LessonProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              '进度',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.lessonProgress,
+              style: const TextStyle(
                 fontSize: 12,
                 color: AppColors.textSecondary,
               ),

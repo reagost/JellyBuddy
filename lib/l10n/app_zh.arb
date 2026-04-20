@@ -53,6 +53,7 @@
       "xp": { "type": "int" }
     }
   },
+  "homeNoNotifications": "暂无新通知",
 
   "lessonConfirmAnswer": "确认答案",
   "lessonNextQuestion": "下一题",
@@ -106,6 +107,12 @@
       "name": { "type": "String" }
     }
   },
+  "lessonCodeHint": "// 在这里写代码...",
+  "lessonCorrectAnswerLabel": "正确答案：",
+  "lessonProgress": "进度",
+  "lessonDifficultyEasy": "简单",
+  "lessonDifficultyMedium": "中等",
+  "lessonDifficultyHard": "困难",
 
   "profileLevelProgress": "升级进度",
   "profileAchievements": "成就",
@@ -114,40 +121,12 @@
   "profileStreakDays": "连击天数",
   "profileDiamonds": "钻石",
   "profileHearts": "生命值",
-
-  "modelManagementTitle": "AI 模型管理",
-  "modelAvailable": "可用模型",
-  "modelNoModels": "暂无可用模型",
-  "modelInferenceEngine": "AI 推理引擎",
-  "modelReady": "模型已就绪",
-  "modelLoading": "正在加载模型...",
-  "modelDownloading": "正在下载模型...",
-  "modelGenerating": "正在生成回答...",
-  "modelError": "模型加载失败",
-  "modelUninitialized": "未加载模型",
-  "modelDownloadProgress": "下载中: {percent}",
-  "@modelDownloadProgress": {
-    "placeholders": {
-      "percent": { "type": "String" }
-    }
-  },
-  "modelCurrentFile": "当前文件: {file}",
-  "@modelCurrentFile": {
-    "placeholders": {
-      "file": { "type": "String" }
-    }
-  },
-  "modelDownloadSource": "下载源: {source}",
-  "@modelDownloadSource": {
-    "placeholders": {
-      "source": { "type": "String" }
-    }
-  },
-  "modelCancelDownload": "取消下载",
-  "modelDownloadButton": "下载",
-  "modelLoadButton": "加载",
-  "modelUnloadButton": "卸载",
-  "modelLoaded": "已加载",
+  "profileEditName": "修改用户名",
+  "profileEditNameHint": "输入新用户名",
+  "profileSave": "保存",
+  "profileCancel": "取消",
+  "profileLeaderboard": "个人排行榜",
+  "profileLeaderboardSubtitle": "查看个人最佳记录",
 
   "coursesTitle": "全部课程",
   "coursesNoCourses": "暂无课程",
@@ -184,6 +163,102 @@
   "onboardingTitle3": "随时随地，无需网络",
   "onboardingSubtitle3": "本地 AI 模型，保护隐私，离线学习",
 
+  "modelManagementTitle": "AI 模型管理",
+  "modelAvailable": "可用模型",
+  "modelNoModels": "暂无可用模型",
+  "modelInferenceEngine": "AI 推理引擎",
+  "modelReady": "模型已就绪",
+  "modelLoading": "正在加载模型...",
+  "modelDownloading": "正在下载模型...",
+  "modelGenerating": "正在生成回答...",
+  "modelError": "模型加载失败",
+  "modelUninitialized": "未加载模型",
+  "modelDownloadProgress": "下载中: {percent}",
+  "@modelDownloadProgress": {
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+  "modelCurrentFile": "当前文件: {file}",
+  "@modelCurrentFile": {
+    "placeholders": {
+      "file": { "type": "String" }
+    }
+  },
+  "modelDownloadSource": "下载源: {source}",
+  "@modelDownloadSource": {
+    "placeholders": {
+      "source": { "type": "String" }
+    }
+  },
+  "modelCancelDownload": "取消下载",
+  "modelDownloadButton": "下载",
+  "modelLoadButton": "加载",
+  "modelUnloadButton": "卸载",
+  "modelLoaded": "已加载",
+  "modelRetry": "重试",
+  "modelSettingsTitle": "模型设置",
+  "modelLocalAI": "本地 AI 模型",
+  "modelLocalAISubtitle": "离线推理 · 隐私优先",
+  "modelLocalAIFree": "离线推理 · 隐私优先 · 免费",
+  "modelCloudAI": "云端 AI 模型",
+  "modelCloudAIProviders": "MiniMax · OpenRouter · OpenAI · Claude · DeepSeek",
+  "modelManage": "管理",
+  "modelCloudDisabled": "已禁用云端 AI",
+  "modelCloudSwitched": "已切换到云端 AI",
+  "modelInUse": "使用中",
+  "modelDisable": "停用",
+  "modelEnable": "启用",
+  "modelSetAsAssistant": "设为 AI 助手使用",
+  "modelLoadHint": "加载模型或配置云端 AI 获得智能回答",
+  "modelInUseCloud": "使用中: {provider}",
+  "@modelInUseCloud": {
+    "placeholders": {
+      "provider": { "type": "String" }
+    }
+  },
+  "modelInUseLocal": "使用中: 本地模型",
+  "modelNoCloudConfig": "还没有配置云端模型",
+  "modelNoCloudConfigHint": "添加你自己的 API Key，使用 MiniMax / OpenRouter 等在线模型",
+  "modelAddCloud": "添加云端模型",
+  "modelSettingsSubtitle": "本地模型 · 云端 AI (MiniMax / OpenRouter / Claude)",
+
+  "cloudAITitle": "云端 AI 模型",
+  "cloudAIAddModel": "添加模型",
+  "cloudAIConfigured": "已配置的模型",
+  "cloudAIIntroDesc": "使用 MiniMax、OpenRouter、OpenAI、Claude 等在线模型\n需要你自己的 API Key，密钥加密存储在设备本地",
+  "cloudAIEmptyTitle": "暂无配置的云端模型",
+  "cloudAIEmptyHint": "点击右下角 + 添加你的第一个 AI 模型",
+  "cloudAIDeleteTitle": "删除配置",
+  "cloudAIDeleteConfirm": "确认删除此 AI 配置？API Key 也会一并删除。",
+  "cloudAIEdit": "编辑",
+  "cloudAIDelete": "删除",
+  "cloudAICancel": "取消",
+  "cloudAIAddTitle": "添加云端 AI 模型",
+  "cloudAIEditTitle": "编辑云端 AI 模型",
+  "cloudAIProvider": "提供商",
+  "cloudAIModelId": "模型 ID",
+  "cloudAIAdvancedOptions": "高级选项",
+  "cloudAITestConnection": "测试连接",
+  "cloudAITesting": "测试中...",
+  "cloudAISave": "保存",
+  "cloudAISaving": "保存中...",
+  "cloudAIConnectionSuccess": "连接成功",
+  "cloudAIConnectionFailed": "连接失败，请检查 API Key 和模型 ID",
+  "cloudAITestFailed": "测试失败: {error}",
+  "@cloudAITestFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "cloudAISaveFailed": "保存失败: {error}",
+  "@cloudAISaveFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "cloudAIEmptyFields": "模型 ID 和 API Key 不能为空",
+
   "settingsTitle": "设置",
   "settingsGeneral": "通用",
   "settingsLanguage": "语言",
@@ -216,9 +291,147 @@
   "settingsClearAll": "清除全部",
   "settingsLanguageZh": "中文",
   "settingsLanguageEn": "English",
+  "settingsPrivacyPolicy": "隐私政策",
+  "settingsPrivacyPolicySubtitle": "了解我们如何保护你的数据",
+  "settingsTermsOfService": "用户服务协议",
+  "settingsTermsOfServiceSubtitle": "使用条款和服务协议",
+  "settingsCrashLogs": "错误日志",
+  "settingsCrashLogsSubtitle": "查看应用错误记录",
+  "settingsNoCrashLogs": "暂无错误日志",
+  "settingsCopiedToClipboard": "已复制到剪贴板",
+  "settingsCopyToClipboard": "复制到剪贴板",
+  "settingsCopy": "复制",
+  "settingsClose": "关闭",
+  "settingsClearLogs": "清除日志",
+  "settingsLogsCleared": "日志已清除",
   "profileSettings": "设置",
   "profileSettingsSubtitle": "语言、数据管理等",
 
   "homeStatsTitle": "学习统计",
-  "homeStatsSubtitle": "查看你的学习进度和成绩"
+  "homeStatsSubtitle": "查看你的学习进度和成绩",
+
+  "importAddCourse": "添加课程",
+  "importLocalFile": "本地文件",
+  "importUrlImport": "URL 导入",
+  "importFromLocalFile": "从本地文件导入",
+  "importFileHint": "选择一个 .md / .markdown / .txt 文件",
+  "importSelectFile": "选择文件",
+  "importImporting": "导入中...",
+  "importDownloadAndImport": "下载并导入",
+  "importDownloading": "下载中...",
+  "importSuccess": "导入成功: {name}（{count} 课）",
+  "@importSuccess": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "count": { "type": "int" }
+    }
+  },
+  "importFileFailed": "文件导入失败: {error}",
+  "@importFileFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importInvalidUrl": "请输入有效的 URL",
+  "importUrlMustStartWithHttp": "URL 必须以 http:// 或 https:// 开头",
+  "importUrlFailed": "URL 导入失败: {error}",
+  "@importUrlFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "importDeleteCourse": "删除课程",
+  "importDeleteConfirm": "确定删除「{name}」？此操作不可恢复。",
+  "@importDeleteConfirm": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "importCancel": "取消",
+  "importDelete": "删除",
+  "importTemplateFormat": "题库模版格式",
+  "importCopyTemplate": "复制模版",
+  "importTemplateCopied": "模版已复制到剪贴板",
+  "importHowToMake": "如何制作题库？",
+  "importHowToMakeDesc": "按照 Markdown 模版格式编写题目，支持选择题、填空题、排序题、编程题 4 种类型。",
+  "importViewTemplate": "查看模版格式",
+  "importImported": "已导入",
+  "importLessonCount": "{count} 课",
+  "@importLessonCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "importFromUrl": "从 URL 导入",
+  "importUrlHint": "粘贴一个 Markdown 文档的 URL",
+  "importGithubAutoConvert": "支持 GitHub blob URL 自动转换为 raw",
+  "importExampleUrl": "示例 URL",
+  "importTemplateTooltip": "模版格式",
+
+  "leaderboardTitle": "个人排行榜",
+  "leaderboardPersonalBest": "个人最佳记录",
+  "leaderboardChallengeSelf": "挑战自己，刷新记录！",
+  "leaderboardPersonalRecords": "Personal Records",
+  "leaderboardHallOfFame": "Hall of Fame",
+  "leaderboardHighestXP": "单次最高XP",
+  "leaderboardLongestStreak": "最长连续天数",
+  "leaderboardPerfectStreak": "连续满分课程",
+  "leaderboardFastestLesson": "最快完成课程",
+  "leaderboardUnlockHint": "完成课程来解锁记录！",
+  "leaderboardDays": "{count} 天",
+  "@leaderboardDays": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "leaderboardLessons": "{count} 课",
+  "@leaderboardLessons": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "leaderboardMinSec": "{min}分{sec}秒",
+  "@leaderboardMinSec": {
+    "placeholders": {
+      "min": { "type": "int" },
+      "sec": { "type": "int" }
+    }
+  },
+  "leaderboardSec": "{sec}秒",
+  "@leaderboardSec": {
+    "placeholders": {
+      "sec": { "type": "int" }
+    }
+  },
+
+  "achievementFirstStep": "第一步",
+  "achievementFirstStepDesc": "完成第一个关卡",
+  "achievementStreakMaster": "连续大师",
+  "achievementStreakMasterDesc": "7天连续学习",
+  "achievementPerfectionist": "完美主义者",
+  "achievementPerfectionistDesc": "完成10个 Perfect 关卡",
+  "achievementQuickLearner": "快速学习者",
+  "achievementQuickLearnerDesc": "连续答对5题",
+
+  "dailyTaskLesson": "日课",
+  "dailyTaskLessonReward": "+30 XP + 1 钻石",
+  "dailyTaskPerfect": "完美",
+  "dailyTaskPerfectReward": "+20 XP",
+  "dailyTaskReview": "复习",
+  "dailyTaskReviewReward": "+25 XP",
+  "dailyTaskEarlyBird": "晨鸟",
+  "dailyTaskEarlyBirdReward": "XP x1.5",
+
+  "aiModelNotLoaded": "本地 AI 模型未加载，当前使用预设答案。前往「我的 → AI 模型管理」下载模型。",
+  "aiGoDownload": "去下载",
+
+  "notificationDailyTitle": "该学习啦！",
+  "notificationDailyBody": "保持你的连续学习记录 🔥",
+  "notificationStreakTitle": "⚠️ 连击即将断裂！",
+  "notificationStreakBody": "还有 {hours} 小时恢复时间，快来学习吧",
+  "@notificationStreakBody": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  }
 }

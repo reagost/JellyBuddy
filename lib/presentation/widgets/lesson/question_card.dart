@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jelly_buddy/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/course.dart';
@@ -59,19 +60,32 @@ class QuestionCard extends StatelessWidget {
   }
 
   Widget _buildDifficultyBadge() {
+    // Note: label will be set in the build method using context
+    // Since this is a StatelessWidget, we get context from the build method
+    return _DifficultyBadgeWidget(difficulty: question.difficulty);
+  }
+}
+
+class _DifficultyBadgeWidget extends StatelessWidget {
+  final Difficulty difficulty;
+  const _DifficultyBadgeWidget({required this.difficulty});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     Color color;
     String label;
 
-    switch (question.difficulty) {
+    switch (difficulty) {
       case Difficulty.easy:
         color = AppColors.easy;
-        label = '简单';
+        label = l10n.lessonDifficultyEasy;
       case Difficulty.medium:
         color = AppColors.medium;
-        label = '中等';
+        label = l10n.lessonDifficultyMedium;
       case Difficulty.hard:
         color = AppColors.hard;
-        label = '困难';
+        label = l10n.lessonDifficultyHard;
     }
 
     return Container(
